@@ -19,7 +19,14 @@ const slides = [
   { key: "dev", title: "DEV / UI / UX", desc: "Interactive systems." },
 ];
 
-/* 🧠 RANDOM */
+/* 🧩 PRODUCTS */
+const products = [
+  { name: "Vehicle System UE5", desc: "Chaos vehicle setup ready for production.", price: "FREE" },
+  { name: "Niagara FX Pack", desc: "Real-time effects for cinematics.", price: "FREE" },
+  { name: "Procedural Materials", desc: "Substance-based materials.", price: "FREE" },
+];
+
+/* 🎲 RANDOM */
 function getRandom(arr: string[]) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -36,67 +43,104 @@ export default function Home() {
   const current = slides[index];
 
   return (
-    <main className="relative w-screen h-screen bg-black text-white overflow-hidden">
+    <main className="relative w-screen min-h-screen bg-black text-white scroll-smooth">
 
-      {/* 🎬 VIDEO (controlado) */}
-      {video && (
-        <video
-          key={video}
-          src={video}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
-        />
-      )}
+      {/* 🎬 HERO */}
+      <section className="relative h-screen w-full overflow-hidden">
 
-      {/* 🎯 CONTENIDO (SIEMPRE ENCIMA) */}
-      <div className="relative z-10 flex flex-col justify-center h-full px-24">
+        {/* VIDEO */}
+        {video && (
+          <video
+            key={video}
+            src={video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
+          />
+        )}
 
-        <h1 className="text-7xl font-bold leading-[0.9] drop-shadow-xl">
-          {current.title}
-        </h1>
+        {/* CONTENIDO */}
+        <div className="relative z-10 flex flex-col justify-center h-full px-24">
 
-        <p className="mt-4 text-lg text-white/90 max-w-md">
-          {current.desc}
-        </p>
+          <h1 className="text-7xl font-bold leading-[0.9] drop-shadow-xl">
+            {current.title}
+          </h1>
 
-        {/* BOTONES */}
-        <div className="flex gap-4 mt-6">
-          <a
-            href="https://www.youtube.com/@TheAssetHero"
-            target="_blank"
-            className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-zinc-200 transition"
-          >
-            VIEW CHANNEL
-          </a>
+          <p className="mt-4 text-lg text-white/90 max-w-md">
+            {current.desc}
+          </p>
 
-          <a
-            href="mailto:nolo.blancas@gmail.com"
-            className="px-8 py-3 border border-white rounded-full hover:bg-white hover:text-black transition"
-          >
-            CONTACT
-          </a>
-        </div>
-      </div>
+          {/* BOTONES */}
+          <div className="flex gap-4 mt-6">
+            <a
+              href="https://www.youtube.com/@TheAssetHero"
+              target="_blank"
+              className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-zinc-200 transition"
+            >
+              VIEW CHANNEL
+            </a>
 
-      {/* NAV */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-6 z-20">
-        {slides.map((s, i) => (
-          <div
-            key={i}
-            onClick={() => setIndex(i)}
-            className={`cursor-pointer transition ${
-              i === index
-                ? "opacity-100 scale-110"
-                : "opacity-50 hover:opacity-100"
-            }`}
-          >
-            {s.key.toUpperCase()}
+            <a
+              href="mailto:nolo.blancas@gmail.com"
+              className="px-8 py-3 border border-white rounded-full hover:bg-white hover:text-black transition"
+            >
+              CONTACT
+            </a>
           </div>
-        ))}
-      </div>
+        </div>
+
+        {/* NAV */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-6 z-20">
+          {slides.map((s, i) => (
+            <div
+              key={i}
+              onClick={() => setIndex(i)}
+              className={`cursor-pointer transition ${
+                i === index
+                  ? "opacity-100 scale-110"
+                  : "opacity-50 hover:opacity-100"
+              }`}
+            >
+              {s.key.toUpperCase()}
+            </div>
+          ))}
+        </div>
+
+      </section>
+
+      {/* 🧩 ASSETS */}
+      <section className="bg-black px-24 py-32">
+
+        <h2 className="text-4xl font-bold mb-12">
+          ASSETS / PLUGINS
+        </h2>
+
+        <div className="grid grid-cols-3 gap-10">
+          {products.map((p, i) => (
+            <div
+              key={i}
+              className="p-6 border border-white/10 rounded-xl hover:border-white/40 transition"
+            >
+              <h3 className="text-lg font-semibold">{p.name}</h3>
+
+              <p className="text-zinc-400 mt-2 text-sm">
+                {p.desc}
+              </p>
+
+              <div className="flex justify-between items-center mt-6">
+                <span>{p.price}</span>
+
+                <button className="px-4 py-2 border rounded-full hover:bg-white hover:text-black transition">
+                  ADD
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </section>
 
     </main>
   );
