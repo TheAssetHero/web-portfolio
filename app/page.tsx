@@ -11,30 +11,32 @@ const videoBank: any = {
 };
 
 const slides = [
+  { key: "ai", title: "AI PRODUCTION", desc: "AI-assisted workflows for content generation and automation." },
+  { key: "vp", title: "VIRTUAL PRODUCTION", desc: "Real-time environments and Unreal Engine pipelines." },
+  { key: "3d", title: "3D PRODUCTION", desc: "Full pipeline from modelling to cinematic output." },
+  { key: "vfx", title: "VFX", desc: "Real-time and cinematic effects." },
+  { key: "dev", title: "DEV / UI / UX", desc: "Interactive systems and tools." },
+];
+
+/* 🧩 ASSETS */
+const products = [
   {
-    key: "ai",
-    title: "AI PRODUCTION",
-    desc: "AI-assisted workflows for content generation and automation.",
+    name: "Vehicle System UE5",
+    desc: "Chaos vehicle setup ready for production.",
+    price: "FREE",
+    link: "#",
   },
   {
-    key: "vp",
-    title: "VIRTUAL PRODUCTION",
-    desc: "Real-time environments and Unreal Engine pipelines.",
+    name: "Niagara FX Pack",
+    desc: "Real-time effects for cinematics and games.",
+    price: "FREE",
+    link: "#",
   },
   {
-    key: "3d",
-    title: "3D PRODUCTION",
-    desc: "Full pipeline from modelling to cinematic output.",
-  },
-  {
-    key: "vfx",
-    title: "VFX",
-    desc: "Real-time and cinematic effects.",
-  },
-  {
-    key: "dev",
-    title: "DEV / UI / UX",
-    desc: "Interactive systems and tools.",
+    name: "Procedural Materials",
+    desc: "Substance-based materials for environments.",
+    price: "FREE",
+    link: "#",
   },
 ];
 
@@ -61,7 +63,7 @@ export default function Home() {
   const currentVideo = videoMap[current.key];
 
   return (
-    <main className="w-screen h-screen relative overflow-hidden bg-black text-white">
+    <main className="w-screen min-h-screen bg-black text-white relative overflow-hidden">
 
       {/* 🎬 VIDEO */}
       {currentVideo && (
@@ -72,22 +74,21 @@ export default function Home() {
           muted
           loop
           playsInline
-          className="absolute w-full h-full object-cover"
+          className="absolute w-full h-screen object-cover"
         />
       )}
 
-      {/* 🌑 OVERLAY MÁS FUERTE */}
+      {/* 🌑 OVERLAY */}
       <div className="absolute inset-0 bg-black/70" />
 
-      {/* 🎨 CONTENIDO */}
-      <div className="absolute bottom-40 left-24 max-w-xl">
+      {/* 🎯 HERO */}
+      <div className="absolute bottom-40 left-24 max-w-xl z-10">
         <h1 className="text-7xl font-bold tracking-tight leading-[0.9]">
           {current.title}
         </h1>
 
         <p className="mt-4 text-zinc-300">{current.desc}</p>
 
-        {/* 🔘 BOTONES */}
         <div className="flex gap-4 mt-6">
           <a
             href="https://www.youtube.com/@TheAssetHero"
@@ -106,8 +107,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 🎯 NAV */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-6 text-sm">
+      {/* 🧭 NAV */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-6 text-sm z-10">
         {slides.map((s, i) => (
           <div
             key={i}
@@ -122,6 +123,39 @@ export default function Home() {
           </div>
         ))}
       </div>
+
+      {/* 🧩 PRODUCTS */}
+      <section className="relative z-20 mt-[100vh] px-24 py-32 bg-black">
+        <h2 className="text-4xl font-bold mb-12">ASSETS / PLUGINS</h2>
+
+        <div className="grid grid-cols-3 gap-10">
+          {products.map((p, i) => (
+            <div
+              key={i}
+              className="p-6 border border-white/10 rounded-2xl backdrop-blur-md hover:border-white/40 transition"
+            >
+              <h3 className="text-lg font-semibold">{p.name}</h3>
+
+              <p className="text-zinc-400 mt-2 text-sm">
+                {p.desc}
+              </p>
+
+              <div className="flex justify-between items-center mt-6">
+                <span className="text-lg">{p.price}</span>
+
+                <a
+                  href={p.link}
+                  target="_blank"
+                  className="px-5 py-2 text-xs tracking-wider border border-white rounded-full hover:bg-white hover:text-black transition"
+                >
+                  ADD
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
     </main>
   );
 }
