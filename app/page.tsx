@@ -10,15 +10,36 @@ const videoBank: any = {
   dev: ["/videos/dev1.mp4", "/videos/dev2.mp4"],
 };
 
+/* 🎞 SLIDES */
 const slides = [
-  { key: "ai", title: "AI PRODUCTION", desc: "AI-assisted workflows for content generation and automation." },
-  { key: "vp", title: "VIRTUAL PRODUCTION", desc: "Real-time environments and Unreal Engine pipelines." },
-  { key: "3d", title: "3D PRODUCTION", desc: "Full pipeline from modelling to cinematic output." },
-  { key: "vfx", title: "VFX", desc: "Real-time and cinematic effects." },
-  { key: "dev", title: "DEV / UI / UX", desc: "Interactive systems and tools." },
+  {
+    key: "ai",
+    title: "AI PRODUCTION",
+    desc: "AI-assisted workflows for content generation and automation.",
+  },
+  {
+    key: "vp",
+    title: "VIRTUAL PRODUCTION",
+    desc: "Real-time environments and Unreal Engine pipelines.",
+  },
+  {
+    key: "3d",
+    title: "3D PRODUCTION",
+    desc: "Full pipeline from modelling to cinematic output.",
+  },
+  {
+    key: "vfx",
+    title: "VFX",
+    desc: "Real-time and cinematic effects.",
+  },
+  {
+    key: "dev",
+    title: "DEV / UI / UX",
+    desc: "Interactive systems and tools.",
+  },
 ];
 
-/* 🧩 ASSETS */
+/* 🧩 PRODUCTS */
 const products = [
   {
     name: "Vehicle System UE5",
@@ -74,15 +95,15 @@ export default function Home() {
           muted
           loop
           playsInline
-          className="absolute w-full h-screen object-cover"
+          className="absolute w-full h-screen object-cover z-0"
         />
       )}
 
       {/* 🌑 OVERLAY */}
-      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-black/70 z-10" />
 
-      {/* 🎯 HERO */}
-      <div className="absolute bottom-40 left-24 max-w-xl z-10">
+      {/* 🎯 HERO TEXT */}
+      <div className="absolute bottom-40 left-24 max-w-xl z-20">
         <h1 className="text-7xl font-bold tracking-tight leading-[0.9]">
           {current.title}
         </h1>
@@ -108,7 +129,7 @@ export default function Home() {
       </div>
 
       {/* 🧭 NAV */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-6 text-sm z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-6 text-sm z-20">
         {slides.map((s, i) => (
           <div
             key={i}
