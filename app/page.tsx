@@ -12,53 +12,18 @@ const videoBank: any = {
 
 /* 🎞 SLIDES */
 const slides = [
-  {
-    key: "ai",
-    title: "AI PRODUCTION",
-    desc: "AI-assisted workflows for content generation and automation.",
-  },
-  {
-    key: "vp",
-    title: "VIRTUAL PRODUCTION",
-    desc: "Real-time environments and Unreal Engine pipelines.",
-  },
-  {
-    key: "3d",
-    title: "3D PRODUCTION",
-    desc: "Full pipeline from modelling to cinematic output.",
-  },
-  {
-    key: "vfx",
-    title: "VFX",
-    desc: "Real-time and cinematic effects.",
-  },
-  {
-    key: "dev",
-    title: "DEV / UI / UX",
-    desc: "Interactive systems and tools.",
-  },
+  { key: "ai", title: "AI PRODUCTION", desc: "AI-assisted workflows for content generation." },
+  { key: "vp", title: "VIRTUAL PRODUCTION", desc: "Unreal Engine real-time pipelines." },
+  { key: "3d", title: "3D PRODUCTION", desc: "Full pipeline from modelling to cinematic output." },
+  { key: "vfx", title: "VFX", desc: "Cinematic and real-time effects." },
+  { key: "dev", title: "DEV / UI / UX", desc: "Interactive systems and tools." },
 ];
 
 /* 🧩 PRODUCTS */
 const products = [
-  {
-    name: "Vehicle System UE5",
-    desc: "Chaos vehicle setup ready for production.",
-    price: "FREE",
-    link: "#",
-  },
-  {
-    name: "Niagara FX Pack",
-    desc: "Real-time effects for cinematics and games.",
-    price: "FREE",
-    link: "#",
-  },
-  {
-    name: "Procedural Materials",
-    desc: "Substance-based materials for environments.",
-    price: "FREE",
-    link: "#",
-  },
+  { name: "Vehicle System UE5", desc: "Chaos vehicle setup.", price: "FREE" },
+  { name: "Niagara FX Pack", desc: "Real-time FX.", price: "FREE" },
+  { name: "Procedural Materials", desc: "Substance materials.", price: "FREE" },
 ];
 
 function getRandom(arr: string[], current?: string) {
@@ -86,7 +51,7 @@ export default function Home() {
   return (
     <main className="w-screen min-h-screen bg-black text-white relative overflow-hidden">
 
-      {/* 🎬 VIDEO */}
+      {/* VIDEO */}
       {currentVideo && (
         <video
           key={currentVideo}
@@ -99,45 +64,45 @@ export default function Home() {
         />
       )}
 
-      {/* 🌑 OVERLAY */}
+      {/* OVERLAY */}
       <div className="absolute inset-0 bg-black/70 z-10" />
 
-      {/* 🎯 HERO TEXT */}
-      <div className="absolute bottom-40 left-24 max-w-xl z-20">
+      {/* HERO */}
+      <div className="absolute bottom-40 left-24 z-20 max-w-xl">
         <h1 className="text-7xl font-bold tracking-tight leading-[0.9]">
           {current.title}
         </h1>
 
-        <p className="mt-4 text-zinc-300">{current.desc}</p>
+        <p className="mt-4 text-zinc-300">
+          {current.desc}
+        </p>
 
         <div className="flex gap-4 mt-6">
           <a
             href="https://www.youtube.com/@TheAssetHero"
             target="_blank"
-            className="px-8 py-3 rounded-full font-semibold bg-white/90 text-black hover:bg-white transition backdrop-blur-md"
+            className="px-8 py-3 rounded-full bg-white text-black font-semibold hover:bg-zinc-200 transition"
           >
             VIEW CHANNEL
           </a>
 
           <a
             href="mailto:nolo.blancas@gmail.com"
-            className="px-8 py-3 rounded-full font-semibold border border-white/50 hover:bg-white hover:text-black transition backdrop-blur-md"
+            className="px-8 py-3 rounded-full border border-white hover:bg-white hover:text-black transition"
           >
             CONTACT
           </a>
         </div>
       </div>
 
-      {/* 🧭 NAV */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-6 text-sm z-20">
+      {/* NAV */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-6 z-20">
         {slides.map((s, i) => (
           <div
             key={i}
             onClick={() => setIndex(i)}
             className={`cursor-pointer transition ${
-              i === index
-                ? "opacity-100 scale-110"
-                : "opacity-60 hover:opacity-100"
+              i === index ? "opacity-100 scale-110" : "opacity-50 hover:opacity-100"
             }`}
           >
             {s.key.toUpperCase()}
@@ -145,32 +110,21 @@ export default function Home() {
         ))}
       </div>
 
-      {/* 🧩 PRODUCTS */}
+      {/* PRODUCTS */}
       <section className="relative z-20 mt-[100vh] px-24 py-32 bg-black">
         <h2 className="text-4xl font-bold mb-12">ASSETS / PLUGINS</h2>
 
         <div className="grid grid-cols-3 gap-10">
           {products.map((p, i) => (
-            <div
-              key={i}
-              className="p-6 border border-white/10 rounded-2xl backdrop-blur-md hover:border-white/40 transition"
-            >
+            <div key={i} className="p-6 border border-white/10 rounded-xl">
               <h3 className="text-lg font-semibold">{p.name}</h3>
+              <p className="text-zinc-400 mt-2 text-sm">{p.desc}</p>
 
-              <p className="text-zinc-400 mt-2 text-sm">
-                {p.desc}
-              </p>
-
-              <div className="flex justify-between items-center mt-6">
-                <span className="text-lg">{p.price}</span>
-
-                <a
-                  href={p.link}
-                  target="_blank"
-                  className="px-5 py-2 text-xs tracking-wider border border-white rounded-full hover:bg-white hover:text-black transition"
-                >
+              <div className="flex justify-between mt-6">
+                <span>{p.price}</span>
+                <button className="px-4 py-2 border rounded-full hover:bg-white hover:text-black transition">
                   ADD
-                </a>
+                </button>
               </div>
             </div>
           ))}
