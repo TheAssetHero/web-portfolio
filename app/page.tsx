@@ -51,7 +51,28 @@ export default function Home() {
     }));
   }, [index]);
 
+  useEffect(() => {
+     const interval = setInterval(() => {
+     setIndex((prev) => (prev + 1) % slides.length);
+     }, 7000);
+
+     return () => clearInterval(interval);
+  }, []);
+
   const current = slides[index];
+  const handleEnd = () => {
+  setVideoMap((prev: any) => {
+    const key = slides[index].key;
+    const arr = videoBank[key];
+
+    return {
+      ...prev,
+      [key]: getRandom(arr, prev[key]),
+    };
+  });
+};
+
+  
   const currentVideo = videoMap[current.key];
 
   return (
@@ -63,13 +84,14 @@ export default function Home() {
         {/* VIDEO */}
         {currentVideo && (
           <video
-            key={currentVideo}
+            key={current.key + currentVideo}
             src={currentVideo}
             autoPlay
             muted
-            loop
             playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-60"
+            onEnded={handleEnd} //
+            className="absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-700"
+
           />
         )}
 
