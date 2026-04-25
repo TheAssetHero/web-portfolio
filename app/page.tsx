@@ -26,33 +26,45 @@ const products = [
   { name: "Procedural Materials", desc: "Substance-based materials.", price: "FREE" },
 ];
 
-/* 🎲 RANDOM */
-function getRandom(arr: string[]) {
-  return arr[Math.floor(Math.random() * arr.length)];
+/* 🎲 RANDOM SIN REPETIR */
+function getRandom(arr: string[], current?: string) {
+  const filtered = arr.filter((v) => v !== current);
+  return filtered[Math.floor(Math.random() * filtered.length)];
 }
 
 export default function Home() {
-  const [index, setIndex] = useState(0);
-  const [video, setVideo] = useState("");
+
+  // 🔥 RANDOM START
+  const [index, setIndex] = useState(() =>
+    Math.floor(Math.random() * slides.length)
+  );
+
+  const [videoMap, setVideoMap] = useState<any>({});
 
   useEffect(() => {
     const key = slides[index].key;
-    setVideo(getRandom(videoBank[key]));
+    const arr = videoBank[key];
+
+    setVideoMap((prev: any) => ({
+      ...prev,
+      [key]: getRandom(arr, prev[key]),
+    }));
   }, [index]);
 
   const current = slides[index];
+  const currentVideo = videoMap[current.key];
 
   return (
     <main className="relative w-screen min-h-screen bg-black text-white scroll-smooth">
 
-      {/* 🎬 HERO */}
+      {/* HERO */}
       <section className="relative h-screen w-full overflow-hidden">
 
         {/* VIDEO */}
-        {video && (
+        {currentVideo && (
           <video
-            key={video}
-            src={video}
+            key={currentVideo}
+            src={currentVideo}
             autoPlay
             muted
             loop
@@ -91,26 +103,31 @@ export default function Home() {
           </div>
         </div>
 
-        {/* NAV */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-6 z-20">
+        {/* NAV PRO */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-10 z-20">
           {slides.map((s, i) => (
             <div
               key={i}
               onClick={() => setIndex(i)}
-              className={`cursor-pointer transition ${
+              className={`relative cursor-pointer transition-all duration-300 ${
                 i === index
-                  ? "opacity-100 scale-110"
-                  : "opacity-50 hover:opacity-100"
+                  ? "text-white text-lg scale-125 tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]"
+                  : "text-white/40 text-sm hover:text-white/80"
               }`}
             >
               {s.key.toUpperCase()}
+
+              {/* underline activo */}
+              {i === index && (
+                <div className="absolute left-0 -bottom-2 w-full h-[2px] bg-white rounded-full" />
+              )}
             </div>
           ))}
         </div>
 
       </section>
 
-      {/* 🧩 ASSETS */}
+      {/* ASSETS */}
       <section className="bg-black px-24 py-32">
 
         <h2 className="text-4xl font-bold mb-12">
