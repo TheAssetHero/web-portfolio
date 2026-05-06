@@ -198,7 +198,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         title: "Material study launcher",
         description:
           "Surfaces, paint systems, and lighting direction arranged like a cinematic product configurator.",
-        href: "/#assets",
+        href: "/#profile-journal",
         cta: "Open preview",
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-zinc-300/10",
@@ -265,7 +265,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         title: "FX pack preview",
         description:
           "Reusable effect systems, cinematic atmospherics, and layered implementation details for premium shot work.",
-        href: "/#assets",
+        href: "/#profile-journal",
         cta: "Open preview",
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-fuchsia-300/10",
@@ -332,8 +332,8 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         title: "Plugin shelf",
         description:
           "A clean launch surface for Unreal tools, plugin systems, and future technical product drops.",
-        href: "/#assets",
-        cta: "Open assets",
+        href: "/#profile-journal",
+        cta: "Open journal",
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-emerald-300/10",
         thumbnail: {
