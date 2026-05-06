@@ -80,7 +80,6 @@ export default function Showcase() {
       currentVideo={currentVideo}
       title={currentCategory.heroTitle}
       description={currentCategory.heroDescription}
-      activeCategory={currentCategory.key}
       onVideoEnd={handleVideoEnd}
     >
       <div className="absolute bottom-12 left-1/2 z-20 flex -translate-x-1/2 gap-10">

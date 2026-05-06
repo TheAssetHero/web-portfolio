@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <main className="relative min-h-screen w-screen scroll-smooth bg-black text-white">
       <Showcase />
-      <ProfileSection />
       <Plugins />
+      <ProfileSection />
       <Footer />
     </main>
   );

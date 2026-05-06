@@ -2,8 +2,6 @@
 
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
-import { CategoryKey, portfolioCategories } from "@/lib/portfolio-categories";
-
 type ModalState = "closed" | "opening" | "open" | "closing";
 
 const modalTransitionMs = 220;
@@ -20,17 +18,12 @@ const initialFields: FormFields = {
   message: "",
 };
 
-export default function ContactModal({
-  activeCategory,
-}: {
-  activeCategory: CategoryKey;
-}) {
+export default function ContactModal() {
   const [fields, setFields] = useState<FormFields>(initialFields);
   const [modalState, setModalState] = useState<ModalState>("closed");
 
   const isMounted = modalState !== "closed";
   const isVisible = modalState === "opening" || modalState === "open";
-  const currentCategory = portfolioCategories[activeCategory];
 
   useEffect(() => {
     if (modalState === "opening") {
@@ -100,9 +93,8 @@ export default function ContactModal({
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const subject = `${currentCategory.label} inquiry from ${fields.name}`;
+    const subject = `Portfolio inquiry from ${fields.name}`;
     const body = [
-      `Category: ${currentCategory.heroTitle}`,
       `Name: ${fields.name}`,
       `Email: ${fields.email}`,
       "",
@@ -206,18 +198,14 @@ export default function ContactModal({
                       name="message"
                       value={fields.message}
                       onChange={handleChange}
-                      placeholder={currentCategory.textareaPlaceholder}
+                      placeholder="Tell me about the world you want to build"
                       required
                       rows={6}
                       className="w-full resize-none rounded-[1.6rem] border border-white/10 bg-white/[0.04] px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
                     />
                   </label>
 
-                  <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-[0.58rem] uppercase tracking-[0.2em] text-white/18">
-                      Direct and discreet
-                    </p>
-
+                  <div className="flex justify-end pt-2">
                     <button
                       type="submit"
                       className="rounded-full border border-white/12 bg-zinc-200 px-7 py-3 text-sm font-semibold text-black shadow-[0_0_22px_rgba(255,255,255,0.06)] transition duration-300 hover:scale-[1.01] hover:border-white/18 hover:bg-zinc-100 hover:shadow-[0_0_28px_rgba(255,255,255,0.11)]"
