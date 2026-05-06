@@ -1,11 +1,11 @@
 import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
 import Plugins from "@/components/Plugins";
+import Showcase from "@/components/Showcase";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen w-screen scroll-smooth bg-black text-white">
-      <Hero />
+      <Showcase />
       <Plugins />
       <Footer />
     </main>
