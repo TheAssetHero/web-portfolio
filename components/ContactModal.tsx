@@ -2,6 +2,13 @@
 
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
+import CategoryPanel from "@/components/CategoryPanel";
+import {
+  categoryOrder,
+  CategoryKey,
+  portfolioCategories,
+} from "@/lib/portfolio-categories";
+
 type ModalState = "closed" | "opening" | "open" | "closing";
 
 const modalTransitionMs = 220;
@@ -18,12 +25,19 @@ const initialFields: FormFields = {
   message: "",
 };
 
-export default function ContactModal() {
+export default function ContactModal({
+  activeCategory,
+}: {
+  activeCategory: CategoryKey;
+}) {
   const [fields, setFields] = useState<FormFields>(initialFields);
   const [modalState, setModalState] = useState<ModalState>("closed");
+  const [selectedCategory, setSelectedCategory] =
+    useState<CategoryKey>(activeCategory);
 
   const isMounted = modalState !== "closed";
   const isVisible = modalState === "opening" || modalState === "open";
+  const currentCategory = portfolioCategories[selectedCategory];
 
   useEffect(() => {
     if (modalState === "opening") {
@@ -68,6 +82,7 @@ export default function ContactModal() {
   }, [isMounted]);
 
   const openModal = () => {
+    setSelectedCategory(activeCategory);
     setModalState((currentState) =>
       currentState === "closed" ? "opening" : currentState
     );
@@ -93,8 +108,9 @@ export default function ContactModal() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const subject = `Portfolio inquiry from ${fields.name}`;
+    const subject = `${currentCategory.label} inquiry from ${fields.name}`;
     const body = [
+      `Category: ${currentCategory.heroTitle}`,
       `Name: ${fields.name}`,
       `Email: ${fields.email}`,
       "",
@@ -125,92 +141,125 @@ export default function ContactModal() {
           onClick={closeModal}
         >
           <div
-            className={`relative w-full max-w-2xl overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04))] p-5 shadow-[0_0_80px_rgba(255,255,255,0.08)] transition duration-200 sm:p-6 md:p-8 ${
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-modal-title"
+            className={`cinematic-chromatic relative max-h-[88vh] w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04))] shadow-[0_0_80px_rgba(255,255,255,0.08)] transition duration-200 ${
               isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
             }`}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/8" />
-            <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-            <div className="pointer-events-none absolute -left-12 top-10 h-36 w-36 rounded-full bg-white/10 blur-3xl" />
-            <div className="pointer-events-none absolute -right-12 bottom-8 h-40 w-40 rounded-full bg-white/6 blur-3xl" />
+            <div className="max-h-[88vh] overflow-y-auto p-5 sm:p-6 md:p-8">
+              <div className="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/8" />
+              <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+              <div className="pointer-events-none absolute -left-12 top-10 h-36 w-36 rounded-full bg-white/10 blur-3xl motion-safe:animate-[breatheGlow_7s_ease-in-out_infinite]" />
+              <div className="pointer-events-none absolute -right-12 bottom-8 h-40 w-40 rounded-full bg-white/6 blur-3xl motion-safe:animate-[breatheGlow_9s_ease-in-out_infinite]" />
+              <div className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-screen bg-[radial-gradient(circle_at_24%_18%,rgba(86,150,255,0.85)_0.7px,transparent_1px),radial-gradient(circle_at_78%_22%,rgba(255,95,95,0.55)_0.6px,transparent_1px)] bg-[length:120%_120%,120%_120%]" />
+              <div className="pointer-events-none absolute inset-0 opacity-[0.04] mix-blend-soft-light bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.9)_0.5px,transparent_0.9px),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.55)_0.4px,transparent_0.85px),radial-gradient(circle_at_35%_78%,rgba(255,255,255,0.4)_0.45px,transparent_0.9px)] bg-[length:18px_18px,24px_24px,30px_30px]" />
 
-            <button
-              type="button"
-              onClick={closeModal}
-              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm text-white/70 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
-              aria-label="Close contact modal"
-            >
-              ✕
-            </button>
+              <button
+                type="button"
+                onClick={closeModal}
+                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm text-white/70 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
+                aria-label="Close contact modal"
+              >
+                X
+              </button>
 
-            <div className="relative z-10">
-              <p className="text-[0.7rem] uppercase tracking-[0.35em] text-white/45">
-                Contact
-              </p>
-              <h2 className="mt-3 max-w-lg text-3xl font-semibold leading-tight text-white sm:text-4xl">
-                Start a cinematic collaboration.
-              </h2>
-              <p className="mt-4 max-w-xl text-sm leading-6 text-white/60 sm:text-base">
-                Share the shape of your project and I&apos;ll follow up with the
-                right next step.
-              </p>
+              <div className="relative z-10">
+                <p className="text-[0.68rem] uppercase tracking-[0.35em] text-white/45">
+                  Contact
+                </p>
+                <h2
+                  id="contact-modal-title"
+                  className="mt-3 max-w-2xl text-3xl font-semibold leading-tight text-white sm:text-4xl"
+                >
+                  Start a cinematic collaboration.
+                </h2>
+                <p className="mt-4 max-w-2xl text-sm leading-6 text-white/56 sm:text-base">
+                  {currentCategory.modalDescription}
+                </p>
 
-              <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="mt-6 flex gap-2 overflow-x-auto pb-1">
+                  {categoryOrder.map((categoryKey) => {
+                    const category = portfolioCategories[categoryKey];
+                    const isActive = categoryKey === selectedCategory;
+
+                    return (
+                      <button
+                        key={category.key}
+                        type="button"
+                        onClick={() => setSelectedCategory(category.key)}
+                        className={`shrink-0 rounded-full border px-4 py-2 text-[0.7rem] uppercase tracking-[0.26em] transition ${
+                          isActive
+                            ? "border-white/22 bg-white/10 text-white shadow-[0_0_24px_rgba(255,255,255,0.07)]"
+                            : "border-white/10 bg-white/[0.03] text-white/45 hover:border-white/18 hover:bg-white/[0.05] hover:text-white/78"
+                        }`}
+                      >
+                        {category.label}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <label className="block">
+                      <span className="sr-only">Name</span>
+                      <input
+                        type="text"
+                        name="name"
+                        value={fields.name}
+                        onChange={handleChange}
+                        placeholder="Your name"
+                        required
+                        className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
+                      />
+                    </label>
+
+                    <label className="block">
+                      <span className="sr-only">Email</span>
+                      <input
+                        type="email"
+                        name="email"
+                        value={fields.email}
+                        onChange={handleChange}
+                        placeholder="Email address"
+                        required
+                        className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
+                      />
+                    </label>
+                  </div>
+
                   <label className="block">
-                    <span className="sr-only">Name</span>
-                    <input
-                      type="text"
-                      name="name"
-                      value={fields.name}
+                    <span className="sr-only">Message</span>
+                    <textarea
+                      name="message"
+                      value={fields.message}
                       onChange={handleChange}
-                      placeholder="Your name"
+                      placeholder={currentCategory.textareaPlaceholder}
                       required
-                      className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
+                      rows={6}
+                      className="w-full resize-none rounded-[1.6rem] border border-white/10 bg-white/[0.04] px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
                     />
                   </label>
 
-                  <label className="block">
-                    <span className="sr-only">Email</span>
-                    <input
-                      type="email"
-                      name="email"
-                      value={fields.email}
-                      onChange={handleChange}
-                      placeholder="Email address"
-                      required
-                      className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
-                    />
-                  </label>
-                </div>
+                  <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-[0.62rem] uppercase tracking-[0.22em] text-white/22">
+                      Direct and discreet
+                    </p>
 
-                <label className="block">
-                  <span className="sr-only">Message</span>
-                  <textarea
-                    name="message"
-                    value={fields.message}
-                    onChange={handleChange}
-                    placeholder="Tell me about the world you want to build"
-                    required
-                    rows={6}
-                    className="w-full resize-none rounded-[1.6rem] border border-white/10 bg-white/[0.04] px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
-                  />
-                </label>
+                    <button
+                      type="submit"
+                      className="rounded-full border border-white/12 bg-zinc-200 px-7 py-3 text-sm font-semibold text-black shadow-[0_0_30px_rgba(255,255,255,0.08)] transition duration-300 hover:scale-[1.01] hover:border-white/20 hover:bg-zinc-100 hover:shadow-[0_0_38px_rgba(255,255,255,0.15)] motion-safe:animate-[breatheGlow_8s_ease-in-out_infinite]"
+                    >
+                      Send
+                    </button>
+                  </div>
+                </form>
 
-                <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-xs uppercase tracking-[0.25em] text-white/35">
-                    Direct and discreet
-                  </p>
-
-                  <button
-                    type="submit"
-                    className="rounded-full border border-white/10 bg-white px-7 py-3 text-sm font-semibold text-black transition hover:scale-[1.01] hover:bg-zinc-200"
-                  >
-                    Send
-                  </button>
-                </div>
-              </form>
+                <CategoryPanel category={currentCategory} />
+              </div>
             </div>
           </div>
         </div>

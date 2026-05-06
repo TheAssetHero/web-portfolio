@@ -3,18 +3,13 @@
 import { useEffect, useState } from "react";
 
 import Hero from "@/components/Hero";
+import {
+  categoryOrder,
+  CategoryKey,
+  portfolioCategories,
+} from "@/lib/portfolio-categories";
 
-const slides = [
-  { key: "ai", title: "AI PRODUCTION", desc: "AI-assisted workflows." },
-  { key: "vp", title: "VIRTUAL PRODUCTION", desc: "Unreal Engine pipelines." },
-  { key: "3d", title: "3D PRODUCTION", desc: "From modeling to cinematic output." },
-  { key: "vfx", title: "VFX", desc: "Real-time and cinematic FX." },
-  { key: "dev", title: "DEV / UI / UX", desc: "Interactive systems." },
-] as const;
-
-type SlideKey = (typeof slides)[number]["key"];
-
-const videoBank: Record<SlideKey, readonly string[]> = {
+const videoBank: Record<CategoryKey, readonly string[]> = {
   ai: ["/videos/ai1.mp4", "/videos/ai2.mp4", "/videos/ai3.mp4"],
   vp: ["/videos/vp1.mp4", "/videos/vp2.mp4"],
   "3d": ["/videos/3d1.mp4", "/videos/3d2.mp4"],
@@ -31,22 +26,22 @@ function getRandomVideo(videos: readonly string[], current?: string) {
 
 export default function Showcase() {
   const [showcaseState, setShowcaseState] = useState(() => {
-    const initialIndex = Math.floor(Math.random() * slides.length);
-    const initialKey = slides[initialIndex].key;
+    const initialIndex = Math.floor(Math.random() * categoryOrder.length);
+    const initialKey = categoryOrder[initialIndex];
 
     return {
       index: initialIndex,
       videoMap: {
         [initialKey]: getRandomVideo(videoBank[initialKey]),
-      } satisfies Partial<Record<SlideKey, string>>,
+      } satisfies Partial<Record<CategoryKey, string>>,
     };
   });
 
   useEffect(() => {
     const interval = setInterval(() => {
       setShowcaseState((prev) => {
-        const nextIndex = (prev.index + 1) % slides.length;
-        const nextKey = slides[nextIndex].key;
+        const nextIndex = (prev.index + 1) % categoryOrder.length;
+        const nextKey = categoryOrder[nextIndex];
 
         return {
           index: nextIndex,
@@ -61,12 +56,13 @@ export default function Showcase() {
     return () => clearInterval(interval);
   }, []);
 
-  const currentSlide = slides[showcaseState.index];
-  const currentVideo = showcaseState.videoMap[currentSlide.key];
+  const currentKey = categoryOrder[showcaseState.index];
+  const currentCategory = portfolioCategories[currentKey];
+  const currentVideo = showcaseState.videoMap[currentCategory.key];
 
   const handleVideoEnd = () => {
     setShowcaseState((prev) => {
-      const key = currentSlide.key;
+      const key = currentKey;
       const videos = videoBank[key];
 
       return {
@@ -82,20 +78,24 @@ export default function Showcase() {
   return (
     <Hero
       currentVideo={currentVideo}
-      title={currentSlide.title}
-      description={currentSlide.desc}
+      title={currentCategory.heroTitle}
+      description={currentCategory.heroDescription}
+      activeCategory={currentCategory.key}
       onVideoEnd={handleVideoEnd}
     >
       <div className="absolute bottom-12 left-1/2 z-20 flex -translate-x-1/2 gap-10">
-        {slides.map((slide, slideIndex) => (
+        {categoryOrder.map((categoryKey, slideIndex) => (
           <div
-            key={slide.key}
+            key={categoryKey}
             onClick={() =>
               setShowcaseState((prev) => ({
                 index: slideIndex,
                 videoMap: {
                   ...prev.videoMap,
-                  [slide.key]: getRandomVideo(videoBank[slide.key], prev.videoMap[slide.key]),
+                  [categoryKey]: getRandomVideo(
+                    videoBank[categoryKey],
+                    prev.videoMap[categoryKey]
+                  ),
                 },
               }))
             }
@@ -105,7 +105,7 @@ export default function Showcase() {
                 : "text-sm text-white/40 hover:text-white/80"
             }`}
           >
-            {slide.key.toUpperCase()}
+            {portfolioCategories[categoryKey].label}
 
             {slideIndex === showcaseState.index && (
               <div className="absolute left-0 -bottom-2 h-[2px] w-full rounded-full bg-white" />

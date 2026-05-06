@@ -6,7 +6,7 @@ const products = [
 
 export default function Plugins() {
   return (
-    <section className="bg-black px-24 py-32">
+    <section id="assets" className="bg-black px-24 py-32">
       <h2 className="mb-12 text-4xl font-bold">ASSETS / PLUGINS</h2>
 
       <div className="grid grid-cols-3 gap-10">

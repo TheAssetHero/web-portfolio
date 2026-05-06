@@ -1,9 +1,11 @@
 import ContactModal from "@/components/ContactModal";
+import { CategoryKey } from "@/lib/portfolio-categories";
 
 type HeroProps = {
   currentVideo?: string;
   title: string;
   description: string;
+  activeCategory: CategoryKey;
   onVideoEnd: () => void;
   children: React.ReactNode;
 };
@@ -12,11 +14,12 @@ export default function Hero({
   currentVideo,
   title,
   description,
+  activeCategory,
   onVideoEnd,
   children,
 }: HeroProps) {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section id="showcase" className="relative h-screen w-full overflow-hidden">
       {currentVideo && (
         <video
           key={title + currentVideo}
@@ -43,7 +46,7 @@ export default function Hero({
             VIEW CHANNEL
           </a>
 
-          <ContactModal />
+          <ContactModal activeCategory={activeCategory} />
         </div>
       </div>
 
