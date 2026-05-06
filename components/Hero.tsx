@@ -1,3 +1,5 @@
+import ContactModal from "@/components/ContactModal";
+
 type HeroProps = {
   currentVideo?: string;
   title: string;
@@ -41,12 +43,7 @@ export default function Hero({
             VIEW CHANNEL
           </a>
 
-          <a
-            href="mailto:nolo.blancas@gmail.com"
-            className="rounded-full border border-white px-8 py-3 transition hover:bg-white hover:text-black"
-          >
-            CONTACT
-          </a>
+          <ContactModal />
         </div>
       </div>
 
