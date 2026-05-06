@@ -128,16 +128,15 @@ export default function ContactModal() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-modal-title"
-            className={`relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] shadow-[0_0_50px_rgba(255,255,255,0.06)] transition duration-200 ${
+            className={`relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] shadow-[0_0_34px_rgba(255,255,255,0.05)] transition duration-200 ${
               isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
             }`}
             onClick={(event) => event.stopPropagation()}
           >
             <div className="p-5 sm:p-6 md:p-8">
               <div className="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/8" />
-              <div className="pointer-events-none absolute inset-x-14 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
-              <div className="pointer-events-none absolute -left-10 top-12 h-28 w-28 rounded-full bg-white/8 blur-3xl motion-safe:animate-[breatheGlow_9s_ease-in-out_infinite]" />
-              <div className="pointer-events-none absolute -right-10 bottom-10 h-28 w-28 rounded-full bg-white/5 blur-3xl motion-safe:animate-[breatheGlow_11s_ease-in-out_infinite]" />
+              <div className="pointer-events-none absolute inset-x-16 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+              <div className="pointer-events-none absolute left-1/2 top-0 h-32 w-32 -translate-x-1/2 rounded-full bg-white/[0.05] blur-3xl motion-safe:animate-[breatheGlow_10s_ease-in-out_infinite]" />
 
               <button
                 type="button"
