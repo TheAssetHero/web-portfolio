@@ -146,10 +146,10 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
     secondaryFeatures: [
       {
         eyebrow: s("AI / Proyecto destacado"),
-        title: s("BMW M2 Racing V6 2026"),
-        subtitle: s("M2 Racing 2026 probando España"),
+        title: s("BMW M2 Racing 2026"),
+        subtitle: s("M2 Racing Full IA Production"),
         description: s(
-          "Esta imponente fiera alemana se agarra a la pista con su tracción trasera en la pista F1 de Barcelona."
+          "Pieza audiovisual de producción IA enfocada en visualización automotriz, performance y estética cinematográfica."
         ),
         videoUrl: "https://youtu.be/AaqX9k6b0Gw",
         buttonLabel: s("VER VIDEO"),
@@ -159,7 +159,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
     campaignBanner: {
       title: s("Runaway 2150"),
       description: s(
-        "Este a\u00f1o se producir\u00e1 la primera temporada de Runaway 2150, totalmente producida por The Asset Hero."
+        "Se producirá este 2026 la primera temporada de Runaway 2150, totalmente producida por The Asset Hero."
       ),
       videoUrl: "https://www.youtube.com/embed/AaqX9k6b0Gw?rel=0",
       actions: [
@@ -184,7 +184,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
           "Cortometraje que muestra las estadísticas de fallas de vehículos extranjeros en el año 2025, sin tirarle a nadie en específico."
         ),
         href: "https://youtu.be/Y1UbzPnqJPo",
-        cta: s("Ver video"),
+        cta: s("VER VIDEO"),
       },
     ],
 

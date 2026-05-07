@@ -215,9 +215,71 @@ function AiCampaignBanner({
   );
 }
 
+function AiCompactFeatureCard({
+  eyebrow,
+  title,
+  headline,
+  description,
+  cta,
+  href,
+  badge,
+}: {
+  eyebrow: string;
+  title: string;
+  headline: string;
+  description: string;
+  cta: string;
+  href: string;
+  badge?: string;
+}) {
+  return (
+    <article className="relative overflow-hidden rounded-[1.55rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_28px_rgba(255,255,255,0.04)] sm:p-6">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_45%)]" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-8 h-px w-32 bg-gradient-to-r from-emerald-300/42 to-transparent" />
+
+      <div className="relative z-10 flex h-full min-h-[18rem] flex-col justify-between">
+        <div className="max-w-3xl">
+          <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
+            {eyebrow}
+          </p>
+          <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-[2rem]">
+            {title}
+          </h4>
+          <p className="mt-3 text-lg leading-7 text-white/84">
+            {headline}
+          </p>
+
+          {badge ? (
+            <div className="mt-4 inline-flex rounded-full border border-white/14 bg-white/[0.07] px-3.5 py-1.5 text-[0.64rem] uppercase tracking-[0.24em] text-white/78 shadow-[0_0_18px_rgba(255,255,255,0.04)]">
+              {badge}
+            </div>
+          ) : null}
+
+          <p className="mt-5 max-w-3xl text-sm leading-7 text-white/48 sm:text-base">
+            {description}
+          </p>
+        </div>
+
+        <div className="mt-6">
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
+          >
+            {cta}
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function AiCategoryContent({
   announcements,
   campaignBanner,
+  secondaryFeatures,
   items,
   language,
 }: {
@@ -239,6 +301,15 @@ function AiCategoryContent({
       href: string;
     }>;
   };
+  secondaryFeatures?: Array<{
+    eyebrow: { en: string; es: string };
+    title: { en: string; es: string };
+    subtitle: { en: string; es: string };
+    description: { en: string; es: string };
+    videoUrl: string;
+    buttonLabel?: { en: string; es: string };
+    externalUrl?: string;
+  }>;
   items: ProfileHubItem[];
   language: Language;
 }) {
@@ -248,53 +319,40 @@ function AiCategoryContent({
       ? null
       : items.find((item) => item.id === detailItemId && item.detail);
   const mainFeature = announcements?.[0];
+  const bmwFeature = secondaryFeatures?.[0];
   const anatomyItem = items.find((item) => item.id === "ai-youtube");
   const theriansItem = items.find((item) => item.id === "ai-tooling");
   const donBigotesItem = items.find((item) => item.id === "ai-reel");
 
   return (
     <>
-      {mainFeature ? (
-        <article className="relative overflow-hidden rounded-[1.7rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_45%)]" />
-          <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
-          <div className="pointer-events-none absolute bottom-0 left-8 h-px w-40 bg-gradient-to-r from-emerald-300/50 to-transparent" />
+      <div className="grid gap-4 lg:grid-cols-2">
+        {mainFeature ? (
+          <AiCompactFeatureCard
+            eyebrow={resolveText(uiCopy.categoryModal.featuredProject, language)}
+            title={resolveText(mainFeature.projectTitle, language)}
+            headline={resolveText(mainFeature.headline, language)}
+            badge={resolveText(mainFeature.releaseInfo, language)}
+            description={resolveText(mainFeature.description, language)}
+            cta={resolveText(mainFeature.cta, language)}
+            href={mainFeature.href}
+          />
+        ) : null}
 
-          <div className="relative z-10 max-w-4xl">
-            <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
-              {resolveText(uiCopy.categoryModal.featuredProject, language)}
-            </p>
-            <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.4rem]">
-              {resolveText(mainFeature.projectTitle, language)}
-            </h4>
-            <p className="mt-3 text-lg leading-7 text-white/86">
-              {resolveText(mainFeature.headline, language)}
-            </p>
-
-            <div className="mt-4 inline-flex rounded-full border border-white/14 bg-white/[0.07] px-3.5 py-1.5 text-[0.64rem] uppercase tracking-[0.24em] text-white/78 shadow-[0_0_18px_rgba(255,255,255,0.04)]">
-              {resolveText(mainFeature.releaseInfo, language)}
-            </div>
-
-            <p className="mt-5 max-w-3xl text-sm leading-7 text-white/48 sm:text-base">
-              {resolveText(mainFeature.description, language)}
-            </p>
-
-            <div className="mt-6">
-              <a
-                href={mainFeature.href}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
-              >
-                {resolveText(mainFeature.cta, language)}
-                <span className="text-white/32">
-                  {resolveText(uiCopy.categoryModal.open, language)}
-                </span>
-              </a>
-            </div>
-          </div>
-        </article>
-      ) : null}
+        {bmwFeature ? (
+          <AiCompactFeatureCard
+            eyebrow={resolveText(bmwFeature.eyebrow, language)}
+            title={resolveText(bmwFeature.title, language)}
+            headline={resolveText(bmwFeature.subtitle, language)}
+            description={resolveText(bmwFeature.description, language)}
+            cta={resolveText(
+              bmwFeature.buttonLabel ?? { en: "VER VIDEO", es: "VER VIDEO" },
+              language
+            )}
+            href={bmwFeature.externalUrl ?? bmwFeature.videoUrl}
+          />
+        ) : null}
+      </div>
 
       {campaignBanner ? (
         <AiCampaignBanner
@@ -539,6 +597,7 @@ export default function ProfileCategoryModal({
               <AiCategoryContent
                 announcements={category.announcements}
                 campaignBanner={category.campaignBanner}
+                secondaryFeatures={category.secondaryFeatures}
                 items={category.items}
                 language={language}
               />
