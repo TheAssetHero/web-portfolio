@@ -85,6 +85,20 @@ export type ProfileHubCategory = {
     buttonLabel?: LocalizedText;
     externalUrl?: string;
   }>;
+  campaignBanner?: {
+    // --------------------------------------------------------------------------
+    // BANNER EDITORIAL INTERMEDIO
+    // - Título
+    // - Texto principal
+    // - Botones
+    // --------------------------------------------------------------------------
+    title: LocalizedText;
+    description: LocalizedText;
+    actions: Array<{
+      label: LocalizedText;
+      href: string;
+    }>;
+  };
   announcements?: Array<{
     // --------------------------------------------------------------------------
     // TARJETA EDITORIAL SECUNDARIA
@@ -140,6 +154,22 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         externalUrl: "https://youtu.be/AaqX9k6b0Gw",
       },
     ],
+    campaignBanner: {
+      title: s("Runaway 2150"),
+      description: s(
+        "Este a\u00f1o se producir\u00e1 la primera temporada de Runaway 2150, totalmente producida por The Asset Hero."
+      ),
+      actions: [
+        {
+          label: s("VER TRAILER"),
+          href: "#",
+        },
+        {
+          label: s("VER PROYECTO"),
+          href: "#",
+        },
+      ],
+    },
 
     announcements: [
       {

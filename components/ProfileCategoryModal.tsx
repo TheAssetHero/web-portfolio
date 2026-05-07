@@ -232,6 +232,68 @@ function AiFeatureCard({
   );
 }
 
+function AiCampaignBanner({
+  title,
+  description,
+  actions,
+  language,
+}: {
+  title: { en: string; es: string };
+  description: { en: string; es: string };
+  actions: Array<{
+    label: { en: string; es: string };
+    href: string;
+  }>;
+  language: Language;
+}) {
+  return (
+    <article className="relative overflow-hidden rounded-[1.7rem] border border-white/12 bg-[linear-gradient(140deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5 shadow-[0_0_34px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_34%,rgba(74,222,128,0.06))]" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent" />
+      <div className="pointer-events-none absolute -right-12 top-6 h-32 w-32 rounded-full bg-emerald-300/[0.06] blur-3xl" />
+
+      <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="min-w-0 max-w-4xl">
+          <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/36">
+            Serie cinematogr\u00e1fica / Anuncio
+          </p>
+          <h4 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.6rem] lg:leading-[1.04]">
+            {resolveText(title, language)}
+          </h4>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-white/52 sm:text-base">
+            {resolveText(description, language)}
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-end">
+          {actions.map((action, index) =>
+            action.href === "#" ? (
+              <button
+                key={`${action.href}-${index}`}
+                type="button"
+                className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/76 transition hover:border-emerald-300/28 hover:bg-white/[0.08] hover:text-white"
+              >
+                {resolveText(action.label, language)}
+              </button>
+            ) : (
+              <a
+                key={`${action.href}-${index}`}
+                href={action.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/76 transition hover:border-emerald-300/28 hover:bg-white/[0.08] hover:text-white"
+              >
+                {resolveText(action.label, language)}
+              </a>
+            )
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function AiCategoryContent({
   items,
   language,
@@ -397,6 +459,15 @@ export default function ProfileCategoryModal({
                 ))}
               </div>
             )}
+
+            {isAiCategory && category.campaignBanner ? (
+              <AiCampaignBanner
+                title={category.campaignBanner.title}
+                description={category.campaignBanner.description}
+                actions={category.campaignBanner.actions}
+                language={language}
+              />
+            ) : null}
 
             {!isAiCategory && category.feature && (
               <article className="relative overflow-hidden rounded-[1.5rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
