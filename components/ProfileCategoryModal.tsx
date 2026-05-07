@@ -128,6 +128,31 @@ export default function ProfileCategoryModal({
               })}
             </div>
 
+            {category.feature && (
+              <article className="relative overflow-hidden rounded-[1.5rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_35%,rgba(125,211,252,0.04))]" />
+
+                <div className="relative z-10 max-w-3xl">
+                  <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/36">
+                    {category.feature.eyebrow}
+                  </p>
+                  <p className="mt-3 text-sm uppercase tracking-[0.3em] text-white/62 sm:text-base">
+                    {category.feature.headline}
+                  </p>
+                  <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.25rem]">
+                    {category.feature.title}
+                  </h4>
+                  <p className="mt-3 text-[0.72rem] uppercase tracking-[0.3em] text-white/48 sm:text-[0.78rem]">
+                    {category.feature.subtitle}
+                  </p>
+                  <p className="mt-5 max-w-2xl text-sm leading-7 text-white/48 sm:text-base">
+                    {category.feature.description}
+                  </p>
+                </div>
+              </article>
+            )}
+
             <div
               key={`${activeCategory}-${activeItem.id}`}
               className="grid gap-4 motion-safe:animate-[panelFade_260ms_ease-out] xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]"

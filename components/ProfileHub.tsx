@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import BrandProfileModal from "@/components/BrandProfileModal";
 import ProfileCategoryModal from "@/components/ProfileCategoryModal";
 import { profileHubContent } from "@/lib/profile-hub-content";
 import { categoryOrder, CategoryKey } from "@/lib/portfolio-categories";
@@ -13,7 +14,9 @@ const modalTransitionMs = 260;
 
 export default function ProfileHub() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("ai");
-  const [modalState, setModalState] = useState<ModalState>("closed");
+  const [categoryModalState, setCategoryModalState] =
+    useState<ModalState>("closed");
+  const [brandModalState, setBrandModalState] = useState<ModalState>("closed");
   const [selectedItemByCategory, setSelectedItemByCategory] = useState<
     Record<CategoryKey, string>
   >(() => ({
@@ -24,29 +27,52 @@ export default function ProfileHub() {
     dev: profileHubContent.dev.items[0].id,
   }));
 
-  const isMounted = modalState !== "closed";
-  const isVisible = modalState === "opening" || modalState === "open";
+  const isCategoryMounted = categoryModalState !== "closed";
+  const isCategoryVisible =
+    categoryModalState === "opening" || categoryModalState === "open";
+  const isBrandMounted = brandModalState !== "closed";
+  const isBrandVisible =
+    brandModalState === "opening" || brandModalState === "open";
+  const isAnyModalMounted = isCategoryMounted || isBrandMounted;
 
   useEffect(() => {
-    if (modalState === "opening") {
+    if (categoryModalState === "opening") {
       const frame = window.requestAnimationFrame(() => {
-        setModalState("open");
+        setCategoryModalState("open");
       });
 
       return () => window.cancelAnimationFrame(frame);
     }
 
-    if (modalState === "closing") {
+    if (categoryModalState === "closing") {
       const timeout = window.setTimeout(() => {
-        setModalState("closed");
+        setCategoryModalState("closed");
       }, modalTransitionMs);
 
       return () => window.clearTimeout(timeout);
     }
-  }, [modalState]);
+  }, [categoryModalState]);
 
   useEffect(() => {
-    if (!isMounted) {
+    if (brandModalState === "opening") {
+      const frame = window.requestAnimationFrame(() => {
+        setBrandModalState("open");
+      });
+
+      return () => window.cancelAnimationFrame(frame);
+    }
+
+    if (brandModalState === "closing") {
+      const timeout = window.setTimeout(() => {
+        setBrandModalState("closed");
+      }, modalTransitionMs);
+
+      return () => window.clearTimeout(timeout);
+    }
+  }, [brandModalState]);
+
+  useEffect(() => {
+    if (!isAnyModalMounted) {
       return;
     }
 
@@ -55,7 +81,10 @@ export default function ProfileHub() {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setModalState((currentState) =>
+        setCategoryModalState((currentState) =>
+          currentState === "closed" ? currentState : "closing"
+        );
+        setBrandModalState((currentState) =>
           currentState === "closed" ? currentState : "closing"
         );
       }
@@ -67,17 +96,29 @@ export default function ProfileHub() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isMounted]);
+  }, [isAnyModalMounted]);
 
   const openCategory = (categoryKey: CategoryKey) => {
     setActiveCategory(categoryKey);
-    setModalState((currentState) =>
+    setCategoryModalState((currentState) =>
       currentState === "closed" ? "opening" : "open"
     );
   };
 
-  const closeModal = () => {
-    setModalState((currentState) =>
+  const openBrandProfile = () => {
+    setBrandModalState((currentState) =>
+      currentState === "closed" ? "opening" : "open"
+    );
+  };
+
+  const closeCategoryModal = () => {
+    setCategoryModalState((currentState) =>
+      currentState === "closed" ? currentState : "closing"
+    );
+  };
+
+  const closeBrandModal = () => {
+    setBrandModalState((currentState) =>
       currentState === "closed" ? currentState : "closing"
     );
   };
@@ -94,14 +135,18 @@ export default function ProfileHub() {
           <div className="relative z-10">
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.38fr)_minmax(0,1fr)]">
               <div className="flex justify-center lg:justify-start">
-                <div className="group relative w-full max-w-[220px] sm:max-w-[250px]">
+                <button
+                  type="button"
+                  onClick={openBrandProfile}
+                  className="group relative w-full max-w-[220px] text-left sm:max-w-[250px]"
+                >
                   <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.1),transparent_58%)] blur-2xl transition duration-500 group-hover:opacity-100 motion-safe:animate-[breatheGlow_9s_ease-in-out_infinite]" />
                   <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-3">
                     <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(255,255,255,0.07),transparent_48%,rgba(255,255,255,0.03))]" />
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[1.6rem] border border-white/8">
                       <Image
                         src="/images/img4.jpeg"
-                        alt="Portrait placeholder for Emmanuel Blancas"
+                        alt="Portrait placeholder for The Asset Hero"
                         fill
                         sizes="(max-width: 1024px) 250px, 320px"
                         className="object-cover transition duration-500 group-hover:scale-[1.02]"
@@ -109,22 +154,38 @@ export default function ProfileHub() {
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.28))]" />
                     </div>
                   </div>
-                </div>
+                </button>
               </div>
 
               <div>
                 <p className="text-[0.68rem] uppercase tracking-[0.34em] text-white/38">
-                  Creative Technology
+                  The Asset Hero
                 </p>
 
-                <h2 className="mt-5 text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
-                  Emmanuel Blancas
-                </h2>
+                <button
+                  type="button"
+                  onClick={openBrandProfile}
+                  className="mt-5 block text-left transition hover:text-white/92"
+                >
+                  <h2 className="text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
+                    Who is The Asset Hero?
+                  </h2>
+                </button>
 
                 <p className="mt-6 max-w-3xl text-xl leading-8 text-white/84 sm:text-2xl sm:leading-9">
-                  Creating high-end visuals, realtime experiences and cinematic
-                  technology for modern production.
+                  A mysterious creative technology identity built around
+                  realtime visuals, cinematic systems, and premium digital
+                  production.
                 </p>
+
+                <button
+                  type="button"
+                  onClick={openBrandProfile}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[0.68rem] uppercase tracking-[0.28em] text-white/58 transition hover:border-white/18 hover:bg-white/[0.06] hover:text-white"
+                >
+                  Reveal profile
+                  <span className="text-white/30">/</span>
+                </button>
 
                 <div className="mt-8 flex flex-wrap gap-2 sm:gap-3">
                   {categoryOrder.map((categoryKey) => {
@@ -158,12 +219,20 @@ export default function ProfileHub() {
           </div>
         </div>
       </div>
-      {isMounted && (
+
+      {isBrandMounted && (
+        <BrandProfileModal
+          isVisible={isBrandVisible}
+          onClose={closeBrandModal}
+        />
+      )}
+
+      {isCategoryMounted && (
         <ProfileCategoryModal
           activeCategory={activeCategory}
           activeItemId={selectedItemByCategory[activeCategory]}
-          isVisible={isVisible}
-          onClose={closeModal}
+          isVisible={isCategoryVisible}
+          onClose={closeCategoryModal}
           onSelectCategory={setActiveCategory}
           onSelectItem={(categoryKey, itemId) =>
             setSelectedItemByCategory((current) => ({

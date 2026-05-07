@@ -25,6 +25,12 @@ export default function ContactModal() {
   const isMounted = modalState !== "closed";
   const isVisible = modalState === "opening" || modalState === "open";
 
+  const requestClose = () => {
+    setModalState((currentState) =>
+      currentState === "closed" ? currentState : "closing"
+    );
+  };
+
   useEffect(() => {
     if (modalState === "opening") {
       const frame = window.requestAnimationFrame(() => {
@@ -53,9 +59,7 @@ export default function ContactModal() {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setModalState((currentState) =>
-          currentState === "closed" ? currentState : "closing"
-        );
+        requestClose();
       }
     };
 
@@ -70,12 +74,6 @@ export default function ContactModal() {
   const openModal = () => {
     setModalState((currentState) =>
       currentState === "closed" ? "opening" : currentState
-    );
-  };
-
-  const closeModal = () => {
-    setModalState((currentState) =>
-      currentState === "closed" ? currentState : "closing"
     );
   };
 
@@ -104,7 +102,7 @@ export default function ContactModal() {
     window.location.href = `mailto:nolo.blancas@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     setFields(initialFields);
-    closeModal();
+    requestClose();
   };
 
   return (
@@ -119,29 +117,31 @@ export default function ContactModal() {
 
       {isMounted && (
         <div
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 backdrop-blur-md transition duration-200 sm:px-6 ${
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/82 px-4 backdrop-blur-md transition duration-200 sm:px-6 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
-          onClick={closeModal}
+          onClick={requestClose}
         >
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-modal-title"
-            className={`relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] shadow-[0_0_34px_rgba(255,255,255,0.05)] transition duration-200 ${
+            className={`relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(10,10,12,0.98),rgba(5,5,7,0.95))] shadow-[0_0_34px_rgba(255,255,255,0.05)] transition duration-200 ${
               isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
             }`}
             onClick={(event) => event.stopPropagation()}
           >
             <div className="p-5 sm:p-6 md:p-8">
               <div className="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/8" />
+              <div className="pointer-events-none absolute inset-0 bg-black/42" />
               <div className="pointer-events-none absolute inset-x-16 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
-              <div className="pointer-events-none absolute left-1/2 top-0 h-32 w-32 -translate-x-1/2 rounded-full bg-white/[0.05] blur-3xl motion-safe:animate-[breatheGlow_10s_ease-in-out_infinite]" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-[linear-gradient(180deg,rgba(0,0,0,0.48),transparent)]" />
+              <div className="pointer-events-none absolute left-1/2 top-0 h-32 w-32 -translate-x-1/2 rounded-full bg-white/[0.04] blur-3xl motion-safe:animate-[breatheGlow_10s_ease-in-out_infinite]" />
 
               <button
                 type="button"
-                onClick={closeModal}
-                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm text-white/70 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
+                onClick={requestClose}
+                className="absolute right-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-black/45 text-base text-white/72 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
                 aria-label="Close contact modal"
               >
                 X

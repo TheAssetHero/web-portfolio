@@ -29,6 +29,13 @@ export type ProfileHubCategory = {
   label: string;
   title: string;
   description: string;
+  feature?: {
+    eyebrow: string;
+    headline: string;
+    title: string;
+    subtitle: string;
+    description: string;
+  };
   items: ProfileHubItem[];
 };
 
@@ -38,20 +45,28 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
     title: "Automation experiments and AI-native creative systems",
     description:
       "A cinematic mix of AI tools, workflow prototypes, and interface-led experiments shaped for modern production.",
+    feature: {
+      eyebrow: "Featured Release",
+      headline: "YA EST\u00c1 DISPONIBLE",
+      title: "PRIMERA PARTE \u2014 RUNAWAY 2150",
+      subtitle: "ALL AI PRODUCTION",
+      description:
+        "A premium project announcement framed like a mysterious cinematic drop, positioned as the lead AI release inside the editorial viewer.",
+    },
     items: [
       {
         id: "ai-youtube",
-        eyebrow: "YouTube / Featured",
-        title: "AI workflow broadcast",
+        eyebrow: "Release / Featured",
+        title: "Runaway 2150 launch broadcast",
         description:
-          "A featured broadcast-style embed for process, prototypes, and production-minded AI thinking.",
+          "The main AI feature spotlight, pairing the release announcement with a broadcast-style embed for all-AI production direction and rollout.",
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Open channel",
+        cta: "Watch release",
         linkKind: "external",
-        accent: "from-cyan-400/18 via-white/8 to-sky-300/18",
+        accent: "from-zinc-100/12 via-black/10 to-cyan-300/14",
         thumbnail: {
           src: "/images/img1.jpeg",
-          alt: "AI workflow broadcast thumbnail",
+          alt: "Runaway 2150 launch thumbnail",
         },
         media: {
           type: "youtube",
