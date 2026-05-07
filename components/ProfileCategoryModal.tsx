@@ -44,6 +44,55 @@ function HubAction({ item }: { item: ProfileHubItem }) {
   );
 }
 
+function MinimalHubCard({ item }: { item: ProfileHubItem }) {
+  const className =
+    "group relative flex aspect-square overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-4 text-left transition duration-300 hover:border-white/18 hover:bg-white/[0.05]";
+
+  const content = (
+    <>
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),transparent_55%)]" />
+      <div className="relative z-10 flex h-full flex-col justify-between">
+        <div>
+          <p className="text-[0.58rem] uppercase tracking-[0.26em] text-white/32">
+            {item.eyebrow}
+          </p>
+          <h5 className="mt-3 max-w-[13rem] text-base font-semibold leading-6 text-white">
+            {item.title}
+          </h5>
+        </div>
+
+        <div>
+          <p className="line-clamp-3 text-sm leading-6 text-white/40">
+            {item.description}
+          </p>
+          <p className="mt-4 text-[0.58rem] uppercase tracking-[0.24em] text-white/46">
+            {item.cta}
+          </p>
+        </div>
+      </div>
+    </>
+  );
+
+  if (item.linkKind === "internal") {
+    return (
+      <Link href={item.href} className={className}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={item.href}
+      target={item.linkKind === "external" ? "_blank" : undefined}
+      rel={item.linkKind === "external" ? "noreferrer" : undefined}
+      className={className}
+    >
+      {content}
+    </a>
+  );
+}
+
 export default function ProfileCategoryModal({
   activeCategory,
   activeItemId,
@@ -55,6 +104,7 @@ export default function ProfileCategoryModal({
   const category = profileHubContent[activeCategory];
   const activeItem =
     category.items.find((item) => item.id === activeItemId) ?? category.items[0];
+  const isAiCategory = activeCategory === "ai";
 
   return (
     <div
@@ -201,167 +251,180 @@ export default function ProfileCategoryModal({
               </div>
             )}
 
-            <div
-              key={`${activeCategory}-${activeItem.id}`}
-              className="grid gap-4 motion-safe:animate-[panelFade_260ms_ease-out] xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]"
-            >
-              <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.03]">
-                <div className="relative aspect-[16/10] overflow-hidden bg-black">
-                  {activeItem.media.type === "youtube" ? (
-                    <iframe
-                      src={activeItem.media.embedUrl}
-                      title={activeItem.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="h-full w-full"
-                    />
-                  ) : (
-                    <>
-                      <Image
-                        src={activeItem.media.src}
-                        alt={activeItem.media.alt}
-                        fill
-                        sizes="(max-width: 1280px) 100vw, 820px"
-                        className="object-cover"
-                      />
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${activeItem.accent}`}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/42 to-transparent" />
-                      <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
-                        <div>
-                          <p className="text-[0.62rem] uppercase tracking-[0.26em] text-white/54">
-                            {activeItem.eyebrow}
-                          </p>
-                          <h4 className="mt-2 text-2xl font-semibold text-white sm:text-[1.9rem]">
-                            {activeItem.title}
-                          </h4>
-                        </div>
+            {isAiCategory ? (
+              <div className="grid gap-3 md:grid-cols-3">
+                {category.items.map((item) => (
+                  <MinimalHubCard key={item.id} item={item} />
+                ))}
+              </div>
+            ) : (
+              <>
+                <div
+                  key={`${activeCategory}-${activeItem.id}`}
+                  className="grid gap-4 motion-safe:animate-[panelFade_260ms_ease-out] xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]"
+                >
+                  <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.03]">
+                    <div className="relative aspect-[16/10] overflow-hidden bg-black">
+                      {activeItem.media.type === "youtube" ? (
+                        <iframe
+                          src={activeItem.media.embedUrl}
+                          title={activeItem.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                          className="h-full w-full"
+                        />
+                      ) : (
+                        <>
+                          <Image
+                            src={activeItem.media.src}
+                            alt={activeItem.media.alt}
+                            fill
+                            sizes="(max-width: 1280px) 100vw, 820px"
+                            className="object-cover"
+                          />
+                          <div
+                            className={`absolute inset-0 bg-gradient-to-br ${activeItem.accent}`}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/42 to-transparent" />
+                          <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
+                            <div>
+                              <p className="text-[0.62rem] uppercase tracking-[0.26em] text-white/54">
+                                {activeItem.eyebrow}
+                              </p>
+                              <h4 className="mt-2 text-2xl font-semibold text-white sm:text-[1.9rem]">
+                                {activeItem.title}
+                              </h4>
+                            </div>
 
-                        <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/14 bg-white/8 text-[0.62rem] uppercase tracking-[0.18em] text-white/74">
-                          {activeItem.linkKind === "reel" ? "Play" : "Open"}
-                        </div>
+                            <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/14 bg-white/8 text-[0.62rem] uppercase tracking-[0.18em] text-white/74">
+                              {activeItem.linkKind === "reel"
+                                ? "Play"
+                                : "Open"}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="p-4 sm:p-5 lg:p-6">
+                      <p className="text-[0.65rem] uppercase tracking-[0.28em] text-white/34">
+                        {activeItem.eyebrow}
+                      </p>
+                      <h4 className="mt-2 text-xl font-semibold text-white sm:text-2xl">
+                        {activeItem.title}
+                      </h4>
+                      <p className="mt-3 max-w-2xl text-sm leading-6 text-white/48">
+                        {activeItem.description}
+                      </p>
+
+                      <div className="mt-5">
+                        <HubAction item={activeItem} />
                       </div>
-                    </>
-                  )}
-                </div>
+                    </div>
+                  </div>
 
-                <div className="p-4 sm:p-5 lg:p-6">
-                  <p className="text-[0.65rem] uppercase tracking-[0.28em] text-white/34">
-                    {activeItem.eyebrow}
-                  </p>
-                  <h4 className="mt-2 text-xl font-semibold text-white sm:text-2xl">
-                    {activeItem.title}
-                  </h4>
-                  <p className="mt-3 max-w-2xl text-sm leading-6 text-white/48">
-                    {activeItem.description}
-                  </p>
+                  <div className="grid gap-4">
+                    <article className="rounded-[1.4rem] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+                      <p className="text-[0.64rem] uppercase tracking-[0.28em] text-white/32">
+                        Editorial Note
+                      </p>
+                      <h4 className="mt-3 text-lg font-semibold text-white">
+                        Featured direction
+                      </h4>
+                      <p className="mt-3 text-sm leading-7 text-white/46">
+                        {category.description} Each category opens like a digital
+                        feature spread, combining reels, article-style notes,
+                        and launch-ready previews inside a focused cinematic
+                        overlay.
+                      </p>
+                    </article>
 
-                  <div className="mt-5">
-                    <HubAction item={activeItem} />
+                    <article className="rounded-[1.4rem] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+                      <p className="text-[0.64rem] uppercase tracking-[0.28em] text-white/32">
+                        Featured Projects
+                      </p>
+                      <div className="mt-4 space-y-4">
+                        {category.items.slice(0, 2).map((item) => (
+                          <button
+                            key={item.id}
+                            type="button"
+                            onClick={() => onSelectItem(activeCategory, item.id)}
+                            className={`block w-full rounded-[1.1rem] border p-4 text-left transition ${
+                              item.id === activeItem.id
+                                ? "border-white/18 bg-white/[0.06]"
+                                : "border-white/10 bg-black/20 hover:border-white/18 hover:bg-white/[0.04]"
+                            }`}
+                          >
+                            <p className="text-[0.58rem] uppercase tracking-[0.24em] text-white/34">
+                              {item.eyebrow}
+                            </p>
+                            <h5 className="mt-2 text-sm font-semibold text-white">
+                              {item.title}
+                            </h5>
+                            <p className="mt-2 text-sm leading-6 text-white/42">
+                              {item.description}
+                            </p>
+                          </button>
+                        ))}
+                      </div>
+                    </article>
                   </div>
                 </div>
-              </div>
 
-              <div className="grid gap-4">
-                <article className="rounded-[1.4rem] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
-                  <p className="text-[0.64rem] uppercase tracking-[0.28em] text-white/32">
-                    Editorial Note
-                  </p>
-                  <h4 className="mt-3 text-lg font-semibold text-white">
-                    Featured direction
-                  </h4>
-                  <p className="mt-3 text-sm leading-7 text-white/46">
-                    {category.description} Each category opens like a digital
-                    feature spread, combining reels, article-style notes, and
-                    launch-ready previews inside a focused cinematic overlay.
-                  </p>
-                </article>
+                <div className="grid gap-3 md:grid-cols-3">
+                  {category.items.map((item) => {
+                    const isSelected = item.id === activeItem.id;
 
-                <article className="rounded-[1.4rem] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
-                  <p className="text-[0.64rem] uppercase tracking-[0.28em] text-white/32">
-                    Featured Projects
-                  </p>
-                  <div className="mt-4 space-y-4">
-                    {category.items.slice(0, 2).map((item) => (
+                    return (
                       <button
                         key={item.id}
                         type="button"
                         onClick={() => onSelectItem(activeCategory, item.id)}
-                        className={`block w-full rounded-[1.1rem] border p-4 text-left transition ${
-                          item.id === activeItem.id
-                            ? "border-white/18 bg-white/[0.06]"
-                            : "border-white/10 bg-black/20 hover:border-white/18 hover:bg-white/[0.04]"
+                        className={`group overflow-hidden rounded-[1.25rem] border text-left transition duration-300 ${
+                          isSelected
+                            ? "border-white/20 bg-white/[0.06] shadow-[0_0_26px_rgba(255,255,255,0.06)]"
+                            : "border-white/10 bg-white/[0.03] hover:-translate-y-0.5 hover:border-white/18 hover:bg-white/[0.05]"
                         }`}
                       >
-                        <p className="text-[0.58rem] uppercase tracking-[0.24em] text-white/34">
-                          {item.eyebrow}
-                        </p>
-                        <h5 className="mt-2 text-sm font-semibold text-white">
-                          {item.title}
-                        </h5>
-                        <p className="mt-2 text-sm leading-6 text-white/42">
-                          {item.description}
-                        </p>
+                        <div className="relative h-40 overflow-hidden">
+                          <Image
+                            src={item.thumbnail.src}
+                            alt={item.thumbnail.alt}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 280px"
+                            className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                          />
+                          <div
+                            className={`absolute inset-0 bg-gradient-to-br ${item.accent}`}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
+                          <div className="absolute left-3 top-3 rounded-full border border-white/12 bg-black/35 px-2.5 py-1 text-[0.58rem] uppercase tracking-[0.24em] text-white/64">
+                            {item.media.type === "youtube"
+                              ? "Video"
+                              : item.linkKind === "reel"
+                                ? "Reel"
+                                : "Preview"}
+                          </div>
+                        </div>
+
+                        <div className="p-3.5">
+                          <p className="text-[0.6rem] uppercase tracking-[0.24em] text-white/34">
+                            {item.eyebrow}
+                          </p>
+                          <h5 className="mt-2 text-sm font-semibold text-white">
+                            {item.title}
+                          </h5>
+                          <p className="mt-2 line-clamp-3 text-sm leading-6 text-white/42">
+                            {item.description}
+                          </p>
+                        </div>
                       </button>
-                    ))}
-                  </div>
-                </article>
-              </div>
-            </div>
-
-            <div className="grid gap-3 md:grid-cols-3">
-              {category.items.map((item) => {
-                const isSelected = item.id === activeItem.id;
-
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => onSelectItem(activeCategory, item.id)}
-                    className={`group overflow-hidden rounded-[1.25rem] border text-left transition duration-300 ${
-                      isSelected
-                        ? "border-white/20 bg-white/[0.06] shadow-[0_0_26px_rgba(255,255,255,0.06)]"
-                        : "border-white/10 bg-white/[0.03] hover:-translate-y-0.5 hover:border-white/18 hover:bg-white/[0.05]"
-                    }`}
-                  >
-                    <div className="relative h-40 overflow-hidden">
-                      <Image
-                        src={item.thumbnail.src}
-                        alt={item.thumbnail.alt}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 280px"
-                        className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                      />
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${item.accent}`}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
-                      <div className="absolute left-3 top-3 rounded-full border border-white/12 bg-black/35 px-2.5 py-1 text-[0.58rem] uppercase tracking-[0.24em] text-white/64">
-                        {item.media.type === "youtube"
-                          ? "Video"
-                          : item.linkKind === "reel"
-                            ? "Reel"
-                            : "Preview"}
-                      </div>
-                    </div>
-
-                    <div className="p-3.5">
-                      <p className="text-[0.6rem] uppercase tracking-[0.24em] text-white/34">
-                        {item.eyebrow}
-                      </p>
-                      <h5 className="mt-2 text-sm font-semibold text-white">
-                        {item.title}
-                      </h5>
-                      <p className="mt-2 line-clamp-3 text-sm leading-6 text-white/42">
-                        {item.description}
-                      </p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
