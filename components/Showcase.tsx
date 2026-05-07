@@ -21,6 +21,15 @@ const videoBank: Record<CategoryKey, readonly string[]> = {
   dev: ["/videos/dev1.mp4", "/videos/dev2.mp4"],
 };
 
+const INITIAL_CATEGORY: CategoryKey = "ai";
+const INITIAL_INDEX = categoryOrder.indexOf(INITIAL_CATEGORY);
+
+function getInitialVideoMap() {
+  return {
+    [INITIAL_CATEGORY]: videoBank[INITIAL_CATEGORY][0],
+  } satisfies Partial<Record<CategoryKey, string>>;
+}
+
 function getRandomVideo(videos: readonly string[], current?: string) {
   const filteredVideos = videos.filter((video) => video !== current);
   const availableVideos = filteredVideos.length > 0 ? filteredVideos : videos;
@@ -31,17 +40,10 @@ function getRandomVideo(videos: readonly string[], current?: string) {
 export default function Showcase() {
   const { language } = useLanguage();
   const { isOverlayOpen, openContact } = useOverlayController();
-  const [showcaseState, setShowcaseState] = useState(() => {
-    const initialIndex = Math.floor(Math.random() * categoryOrder.length);
-    const initialKey = categoryOrder[initialIndex];
-
-    return {
-      index: initialIndex,
-      videoMap: {
-        [initialKey]: getRandomVideo(videoBank[initialKey]),
-      } satisfies Partial<Record<CategoryKey, string>>,
-    };
-  });
+  const [showcaseState, setShowcaseState] = useState(() => ({
+    index: INITIAL_INDEX,
+    videoMap: getInitialVideoMap(),
+  }));
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,7 +66,8 @@ export default function Showcase() {
 
   const currentKey = categoryOrder[showcaseState.index];
   const currentCategory = portfolioCategories[currentKey];
-  const currentVideo = showcaseState.videoMap[currentCategory.key];
+  const currentVideo =
+    showcaseState.videoMap[currentCategory.key] ?? videoBank[currentCategory.key][0];
   const currentTitle = resolveText(currentCategory.heroTitle, language);
   const currentDescription = resolveText(
     currentCategory.heroDescription,

@@ -20,7 +20,9 @@ export default function ProfileHub() {
         <div className="pointer-events-none absolute -left-20 bottom-16 h-44 w-44 rounded-full bg-white/[0.04] blur-3xl motion-safe:animate-[breatheGlow_13s_ease-in-out_infinite]" />
 
         <div className="relative z-10 grid items-start gap-10 lg:grid-cols-[minmax(240px,0.42fr)_minmax(0,1fr)]">
-          <div className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+          <div className="relative overflow-visible rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5 pt-7 sm:p-6 sm:pt-8">
+            <div className="pointer-events-none absolute left-5 right-5 top-0 h-px bg-emerald-300/38 sm:left-6 sm:right-6" />
+            <div className="pointer-events-none absolute bottom-0 left-5 right-14 h-px bg-gradient-to-r from-emerald-300/50 via-emerald-200/16 to-transparent sm:left-6 sm:right-18" />
             <p className="text-[0.64rem] uppercase tracking-[0.32em] text-white/34">
               {resolveText(uiCopy.profileHub.categoryIndex, language)}
             </p>
@@ -32,7 +34,8 @@ export default function ProfileHub() {
             </p>
           </div>
 
-          <div>
+          <div className="relative overflow-visible pt-5">
+            <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-amber-300/52 via-amber-200/18 to-transparent" />
             <p className="text-[0.68rem] uppercase tracking-[0.34em] text-white/34">
               {resolveText(uiCopy.profileHub.editorialContent, language)}
             </p>

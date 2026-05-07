@@ -23,43 +23,6 @@ type ProfileCategoryModalProps = {
   onSelectItem: (categoryKey: CategoryKey, itemId: string) => void;
 };
 
-type FeaturedCaseStudy = {
-  eyebrow: { en: string; es: string };
-  title: { en: string; es: string };
-  subtitle: { en: string; es: string };
-  description: { en: string; es: string };
-  videoUrl: string;
-  buttonLabel?: { en: string; es: string };
-  externalUrl?: string;
-};
-
-function getEmbeddedMediaUrl(videoUrl: string) {
-  if (videoUrl.includes("player.vimeo.com/video/")) {
-    return videoUrl;
-  }
-
-  const vimeoMatch = videoUrl.match(/vimeo\.com\/(\d+)/);
-  if (vimeoMatch) {
-    return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
-  }
-
-  if (videoUrl.includes("youtube.com/embed/")) {
-    return videoUrl;
-  }
-
-  const youtubeShortMatch = videoUrl.match(/youtu\.be\/([^?&]+)/);
-  if (youtubeShortMatch) {
-    return `https://www.youtube-nocookie.com/embed/${youtubeShortMatch[1]}?rel=0`;
-  }
-
-  const youtubeLongMatch = videoUrl.match(/[?&]v=([^?&]+)/);
-  if (youtubeLongMatch) {
-    return `https://www.youtube-nocookie.com/embed/${youtubeLongMatch[1]}?rel=0`;
-  }
-
-  return null;
-}
-
 function HubAction({
   item,
   language,
@@ -97,39 +60,68 @@ function HubAction({
   );
 }
 
-function MinimalHubCard({
+function AiEditorialBanner({
   item,
   language,
   onOpenDetail,
+  isFullWidth = false,
 }: {
   item: ProfileHubItem;
   language: Language;
   onOpenDetail: (item: ProfileHubItem) => void;
+  isFullWidth?: boolean;
 }) {
+  const eyebrow = resolveText(item.eyebrow, language);
+  const title = resolveText(item.title, language);
+  const description = resolveText(item.description, language);
+  const cta =
+    item.id === "ai-youtube"
+      ? resolveText(item.cta, language)
+      : language === "es"
+        ? "Próximamente"
+        : "Coming soon";
   const className =
-    "group relative flex aspect-square overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-4 text-left transition duration-300 hover:border-white/18 hover:bg-white/[0.05]";
+    "group relative overflow-hidden rounded-[1.55rem] border border-white/12 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] text-left shadow-[0_0_28px_rgba(255,255,255,0.04)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_0_34px_rgba(255,255,255,0.06)]";
 
   const content = (
     <>
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),transparent_55%)]" />
-      <div className="relative z-10 flex h-full flex-col justify-between">
-        <div>
-          <p className="text-[0.58rem] uppercase tracking-[0.26em] text-white/32">
-            {resolveText(item.eyebrow, language)}
+      <Image
+        src={item.thumbnail.src}
+        alt={item.thumbnail.alt}
+        fill
+        sizes={isFullWidth ? "(max-width: 1024px) 100vw, 1200px" : "(max-width: 1024px) 100vw, 560px"}
+        className="object-cover transition duration-500 group-hover:scale-[1.03]"
+      />
+      <div className={`absolute inset-0 bg-gradient-to-br ${item.accent}`} />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),transparent_36%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/62 to-black/12" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/24 to-transparent" />
+      <div className="pointer-events-none absolute -right-10 top-6 h-24 w-24 rounded-full bg-white/[0.05] blur-3xl" />
+
+      <div
+        className={`relative z-10 flex h-full flex-col justify-between p-5 sm:p-6 ${
+          isFullWidth ? "min-h-[18rem] lg:min-h-[20rem]" : "min-h-[16rem] lg:min-h-[18rem]"
+        }`}
+      >
+        <div className="max-w-2xl">
+          <p className="text-[0.6rem] uppercase tracking-[0.3em] text-white/42">
+            {eyebrow}
           </p>
-          <h5 className="mt-3 max-w-[13rem] text-base font-semibold leading-6 text-white">
-            {resolveText(item.title, language)}
+          <h5
+            className={`mt-3 font-semibold tracking-[-0.04em] text-white ${
+              isFullWidth ? "text-[1.85rem] leading-[1.05] sm:text-[2.2rem]" : "text-[1.55rem] leading-[1.08] sm:text-[1.9rem]"
+            }`}
+          >
+            {title}
           </h5>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-white/58 sm:text-base">
+            {description}
+          </p>
         </div>
 
-        <div>
-          <p className="line-clamp-3 text-sm leading-6 text-white/40">
-            {resolveText(item.description, language)}
-          </p>
-          <p className="mt-4 text-[0.58rem] uppercase tracking-[0.24em] text-white/46">
-            {resolveText(item.cta, language)}
-          </p>
-        </div>
+        <p className="mt-6 text-[0.62rem] uppercase tracking-[0.28em] text-white/58">
+          {cta}
+        </p>
       </div>
     </>
   );
@@ -142,162 +134,23 @@ function MinimalHubCard({
     );
   }
 
-  if (item.linkKind === "internal") {
-    return (
-      <Link href={item.href} className={className}>
-        {content}
-      </Link>
-    );
-  }
-
-  return (
-    <a
-      href={item.href}
-      target={item.linkKind === "external" ? "_blank" : undefined}
-      rel={item.linkKind === "external" ? "noreferrer" : undefined}
-      className={className}
-    >
-      {content}
-    </a>
-  );
-}
-
-function AiFeatureCard({
-  feature,
-  language,
-}: {
-  feature: FeaturedCaseStudy;
-  language: Language;
-}) {
-  const embeddedUrl = getEmbeddedMediaUrl(feature.videoUrl);
-
-  return (
-    <article className="relative overflow-hidden rounded-[1.6rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_32%,rgba(74,222,128,0.06))]" />
-      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/45 to-transparent" />
-      <div className="pointer-events-none absolute bottom-0 left-8 h-px w-32 bg-gradient-to-r from-emerald-300/50 to-transparent" />
-
-      <div className="relative z-10">
-        <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/38">
-          {resolveText(feature.eyebrow, language)}
-        </p>
-        <h4 className="mt-4 max-w-[54rem] text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.4rem] lg:leading-[1.04]">
-          {resolveText(feature.title, language)}
-        </h4>
-        <p className="mt-4 max-w-[50rem] text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
-          {resolveText(feature.subtitle, language)}
-        </p>
-
-        <div className="mt-6 overflow-hidden rounded-[1.45rem] border border-white/10 bg-black">
-          <div className="relative aspect-video w-full">
-            {embeddedUrl ? (
-              <iframe
-                src={embeddedUrl}
-                title={resolveText(feature.title, language)}
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                className="h-full w-full"
-              />
-            ) : (
-              <video
-                src={feature.videoUrl}
-                controls
-                playsInline
-                className="h-full w-full object-cover"
-              />
-            )}
-          </div>
-        </div>
-
-        <p className="mt-6 max-w-[52rem] text-sm leading-7 text-white/48 sm:text-base">
-          {resolveText(feature.description, language)}
-        </p>
-
-        {feature.externalUrl && feature.buttonLabel ? (
-          <div className="mt-6">
-            <a
-              href={feature.externalUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center rounded-full border border-emerald-300/18 bg-white/[0.06] px-4 py-2.5 text-sm text-white/78 transition hover:border-emerald-300/32 hover:bg-white/[0.1] hover:text-white"
-            >
-              {resolveText(feature.buttonLabel, language)}
-            </a>
-          </div>
-        ) : null}
-      </div>
-    </article>
-  );
-}
-
-function AiCampaignBanner({
-  title,
-  description,
-  actions,
-  language,
-}: {
-  title: { en: string; es: string };
-  description: { en: string; es: string };
-  actions: Array<{
-    label: { en: string; es: string };
-    href: string;
-  }>;
-  language: Language;
-}) {
-  return (
-    <article className="relative overflow-hidden rounded-[1.7rem] border border-white/12 bg-[linear-gradient(140deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5 shadow-[0_0_34px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_50%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_34%,rgba(74,222,128,0.06))]" />
-      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent" />
-      <div className="pointer-events-none absolute -right-12 top-6 h-32 w-32 rounded-full bg-emerald-300/[0.06] blur-3xl" />
-
-      <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-        <div className="min-w-0 max-w-4xl">
-          <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/36">
-            Serie cinematogr\u00e1fica / Anuncio
-          </p>
-          <h4 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.6rem] lg:leading-[1.04]">
-            {resolveText(title, language)}
-          </h4>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-white/52 sm:text-base">
-            {resolveText(description, language)}
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-end">
-          {actions.map((action, index) =>
-            action.href === "#" ? (
-              <button
-                key={`${action.href}-${index}`}
-                type="button"
-                className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/76 transition hover:border-emerald-300/28 hover:bg-white/[0.08] hover:text-white"
-              >
-                {resolveText(action.label, language)}
-              </button>
-            ) : (
-              <a
-                key={`${action.href}-${index}`}
-                href={action.href}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/76 transition hover:border-emerald-300/28 hover:bg-white/[0.08] hover:text-white"
-              >
-                {resolveText(action.label, language)}
-              </a>
-            )
-          )}
-        </div>
-      </div>
-    </article>
-  );
+  return <div className={className}>{content}</div>;
 }
 
 function AiCategoryContent({
+  announcements,
   items,
   language,
 }: {
+  announcements?: Array<{
+    id: string;
+    projectTitle: { en: string; es: string };
+    headline: { en: string; es: string };
+    releaseInfo: { en: string; es: string };
+    description: { en: string; es: string };
+    href: string;
+    cta: { en: string; es: string };
+  }>;
   items: ProfileHubItem[];
   language: Language;
 }) {
@@ -306,19 +159,81 @@ function AiCategoryContent({
     detailItemId == null
       ? null
       : items.find((item) => item.id === detailItemId && item.detail);
+  const mainFeature = announcements?.[0];
+  const anatomyItem = items.find((item) => item.id === "ai-youtube");
+  const theriansItem = items.find((item) => item.id === "ai-tooling");
+  const donBigotesItem = items.find((item) => item.id === "ai-reel");
 
   return (
     <>
-      <div className="grid gap-3 md:grid-cols-3">
-        {items.map((item) => (
-          <MinimalHubCard
-            key={item.id}
-            item={item}
+      {mainFeature ? (
+        <article className="relative overflow-hidden rounded-[1.7rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_45%)]" />
+          <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+          <div className="pointer-events-none absolute bottom-0 left-8 h-px w-40 bg-gradient-to-r from-emerald-300/50 to-transparent" />
+
+          <div className="relative z-10 max-w-4xl">
+            <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
+              {resolveText(uiCopy.categoryModal.featuredProject, language)}
+            </p>
+            <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.4rem]">
+              {resolveText(mainFeature.projectTitle, language)}
+            </h4>
+            <p className="mt-3 text-lg leading-7 text-white/86">
+              {resolveText(mainFeature.headline, language)}
+            </p>
+
+            <div className="mt-4 inline-flex rounded-full border border-white/14 bg-white/[0.07] px-3.5 py-1.5 text-[0.64rem] uppercase tracking-[0.24em] text-white/78 shadow-[0_0_18px_rgba(255,255,255,0.04)]">
+              {resolveText(mainFeature.releaseInfo, language)}
+            </div>
+
+            <p className="mt-5 max-w-3xl text-sm leading-7 text-white/48 sm:text-base">
+              {resolveText(mainFeature.description, language)}
+            </p>
+
+            <div className="mt-6">
+              <a
+                href={mainFeature.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
+              >
+                {resolveText(mainFeature.cta, language)}
+                <span className="text-white/32">
+                  {resolveText(uiCopy.categoryModal.open, language)}
+                </span>
+              </a>
+            </div>
+          </div>
+        </article>
+      ) : null}
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        {anatomyItem ? (
+          <AiEditorialBanner
+            item={anatomyItem}
             language={language}
             onOpenDetail={(selectedItem) => setDetailItemId(selectedItem.id)}
           />
-        ))}
+        ) : null}
+
+        {theriansItem ? (
+          <AiEditorialBanner
+            item={theriansItem}
+            language={language}
+            onOpenDetail={(selectedItem) => setDetailItemId(selectedItem.id)}
+          />
+        ) : null}
       </div>
+
+      {donBigotesItem ? (
+        <AiEditorialBanner
+          item={donBigotesItem}
+          language={language}
+          onOpenDetail={(selectedItem) => setDetailItemId(selectedItem.id)}
+          isFullWidth
+        />
+      ) : null}
 
       {detailItem?.detail ? (
         <ProfileItemDetailPanel
@@ -364,9 +279,6 @@ export default function ProfileCategoryModal({
 }: ProfileCategoryModalProps) {
   const { language } = useLanguage();
   const category = profileHubContent[activeCategory];
-  const aiFeatures = category.feature
-    ? [category.feature, ...(category.secondaryFeatures ?? [])]
-    : [];
   const activeItem =
     category.items.find((item) => item.id === activeItemId) ?? category.items[0];
   const isAiCategory = activeCategory === "ai";
@@ -410,21 +322,26 @@ export default function ProfileCategoryModal({
         <div className="relative z-10 flex-1 overflow-y-auto px-5 pb-5 pt-14 sm:px-6 sm:pb-6 sm:pt-16 lg:px-8 lg:pb-8">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-5 border-b border-white/10 pb-6 lg:flex-row lg:items-end lg:justify-between">
-              <div>
+              <div className="relative overflow-visible pb-5 pt-5 lg:basis-[62%] lg:pr-8">
+                <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-emerald-300/42" />
+                <div className="pointer-events-none absolute bottom-0 left-0 right-12 h-px bg-gradient-to-r from-emerald-300/55 via-emerald-200/18 to-transparent" />
                 <p className="text-[0.64rem] uppercase tracking-[0.34em] text-white/34">
                   {resolveText(uiCopy.categoryModal.editorialFeature, language)}
                 </p>
                 <h3
                   id="profile-category-modal-title"
-                  className="mt-3 max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl lg:text-[2.8rem]"
+                  className="mt-3 max-w-none text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl lg:text-[2.8rem] lg:leading-[1.02] xl:max-w-[58rem]"
                 >
                   {categoryTitle}
                 </h3>
               </div>
 
-              <p className="max-w-2xl text-sm leading-6 text-white/46 sm:text-base">
-                {categoryDescription}
-              </p>
+              <div className="relative overflow-visible pt-5 lg:basis-[38%] lg:pl-6">
+                <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-amber-300/55 via-amber-200/20 to-transparent" />
+                <p className="max-w-2xl text-sm leading-6 text-white/46 sm:text-base">
+                  {categoryDescription}
+                </p>
+              </div>
             </div>
 
             <div className="flex flex-wrap gap-2 sm:gap-3">
@@ -447,27 +364,6 @@ export default function ProfileCategoryModal({
                 );
               })}
             </div>
-
-            {isAiCategory && category.feature && (
-              <div className="grid gap-4 xl:grid-cols-2">
-                {aiFeatures.map((feature, index) => (
-                  <AiFeatureCard
-                    key={`${activeCategory}-feature-${index}`}
-                    feature={feature}
-                    language={language}
-                  />
-                ))}
-              </div>
-            )}
-
-            {isAiCategory && category.campaignBanner ? (
-              <AiCampaignBanner
-                title={category.campaignBanner.title}
-                description={category.campaignBanner.description}
-                actions={category.campaignBanner.actions}
-                language={language}
-              />
-            ) : null}
 
             {!isAiCategory && category.feature && (
               <article className="relative overflow-hidden rounded-[1.5rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
@@ -589,10 +485,14 @@ export default function ProfileCategoryModal({
                     </article>
                   ))}
                 </div>
-              )}
+            )}
 
             {isAiCategory ? (
-              <AiCategoryContent items={category.items} language={language} />
+              <AiCategoryContent
+                announcements={category.announcements}
+                items={category.items}
+                language={language}
+              />
             ) : (
               <>
                 <div

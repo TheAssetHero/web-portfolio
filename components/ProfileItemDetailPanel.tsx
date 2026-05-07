@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 type ProfileItemDetailPanelProps = {
   title: string;
   subtitle: string;
@@ -18,6 +20,11 @@ type ProfileItemDetailPanelProps = {
 function getYoutubeEmbedUrl(videoUrl: string) {
   if (videoUrl.includes("youtube.com/embed/")) {
     return videoUrl;
+  }
+
+  const shortsMatch = videoUrl.match(/youtube\.com\/shorts\/([^?&/]+)/);
+  if (shortsMatch) {
+    return `https://www.youtube-nocookie.com/embed/${shortsMatch[1]}?rel=0`;
   }
 
   const shortMatch = videoUrl.match(/youtu\.be\/([^?&]+)/);
@@ -48,6 +55,21 @@ export default function ProfileItemDetailPanel({
   detailInfoLabel,
 }: ProfileItemDetailPanelProps) {
   const youtubeEmbedUrl = getYoutubeEmbedUrl(videoUrl);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   return (
     <div

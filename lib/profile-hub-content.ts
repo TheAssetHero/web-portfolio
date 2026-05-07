@@ -90,10 +90,12 @@ export type ProfileHubCategory = {
     // BANNER EDITORIAL INTERMEDIO
     // - Título
     // - Texto principal
+    // - Video embebido / preview
     // - Botones
     // --------------------------------------------------------------------------
     title: LocalizedText;
     description: LocalizedText;
+    videoUrl: string;
     actions: Array<{
       label: LocalizedText;
       href: string;
@@ -159,6 +161,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       description: s(
         "Este a\u00f1o se producir\u00e1 la primera temporada de Runaway 2150, totalmente producida por The Asset Hero."
       ),
+      videoUrl: "https://www.youtube.com/embed/AaqX9k6b0Gw?rel=0",
       actions: [
         {
           label: s("VER TRAILER"),
@@ -208,12 +211,9 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         detail: {
           subtitle: s("AI / Destacado"),
           description: s(
-            "Proyecto editorial y audiovisual presentado como pieza destacada dentro del área de producción con AI. Aquí vive el video principal y el texto explicativo del proyecto."
+            "Pieza experimental desarrollada dentro del área de AI Production."
           ),
-          videoUrl: "/videos/ai1.mp4",
-          extraInfo: s(
-            "Este bloque está pensado para crecer fácilmente con notas, contexto creativo, enlaces adicionales y futuras versiones del proyecto."
-          ),
+          videoUrl: "https://youtube.com/shorts/uwMm0Wl1b7s",
         },
       },
       {
@@ -250,7 +250,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       {
         id: "ai-reel",
         eyebrow: s("AI / Proyecto"),
-        title: s("Don Beto"),
+        title: s("Don Bigotes"),
         description: s(
           "Tarjeta sobria para trabajo corto en AI, presentación conceptual y empaquetado editorial listo para mostrarse dentro del sitio."
         ),
@@ -260,12 +260,12 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         accent: "from-sky-400/16 via-transparent to-white/8",
         thumbnail: {
           src: "/images/img4.jpeg",
-          alt: "Imagen destacada de Don Beto",
+          alt: "Imagen destacada de Don Bigotes",
         },
         media: {
           type: "poster",
           src: "/images/img4.jpeg",
-          alt: "Poster de Don Beto",
+          alt: "Poster de Don Bigotes",
         },
         detail: {
           subtitle: s("AI / Proyecto"),
