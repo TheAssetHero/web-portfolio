@@ -67,6 +67,24 @@ export type ProfileHubCategory = {
     buttonLabel?: LocalizedText;
     externalUrl?: string;
   };
+  secondaryFeatures?: Array<{
+    // --------------------------------------------------------------------------
+    // PROYECTO DESTACADO ADICIONAL
+    // - Título principal
+    // - Headline / texto secundario
+    // - Descripción
+    // - Video embebido
+    // - Botón
+    // - Link externo
+    // --------------------------------------------------------------------------
+    eyebrow: LocalizedText;
+    title: LocalizedText;
+    subtitle: LocalizedText;
+    description: LocalizedText;
+    videoUrl: string;
+    buttonLabel?: LocalizedText;
+    externalUrl?: string;
+  }>;
   announcements?: Array<{
     // --------------------------------------------------------------------------
     // TARJETA EDITORIAL SECUNDARIA
@@ -109,6 +127,19 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       buttonLabel: s("Ver proyecto completo"),
       externalUrl: "https://vimeo.com/1190250981?share=copy&fl=sv&fe=ci",
     },
+    secondaryFeatures: [
+      {
+        eyebrow: s("AI / Proyecto destacado"),
+        title: s("BMW M2 Racing V6 2026"),
+        subtitle: s("M2 Racing 2026 probando España"),
+        description: s(
+          "Esta imponente fiera alemana se agarra a la pista con su tracción trasera en la pista F1 de Barcelona."
+        ),
+        videoUrl: "https://youtu.be/AaqX9k6b0Gw",
+        buttonLabel: s("VER VIDEO"),
+        externalUrl: "https://youtu.be/AaqX9k6b0Gw",
+      },
+    ],
 
     announcements: [
       {

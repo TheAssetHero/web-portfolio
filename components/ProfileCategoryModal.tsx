@@ -23,6 +23,16 @@ type ProfileCategoryModalProps = {
   onSelectItem: (categoryKey: CategoryKey, itemId: string) => void;
 };
 
+type FeaturedCaseStudy = {
+  eyebrow: { en: string; es: string };
+  title: { en: string; es: string };
+  subtitle: { en: string; es: string };
+  description: { en: string; es: string };
+  videoUrl: string;
+  buttonLabel?: { en: string; es: string };
+  externalUrl?: string;
+};
+
 function getEmbeddedMediaUrl(videoUrl: string) {
   if (videoUrl.includes("player.vimeo.com/video/")) {
     return videoUrl;
@@ -152,6 +162,76 @@ function MinimalHubCard({
   );
 }
 
+function AiFeatureCard({
+  feature,
+  language,
+}: {
+  feature: FeaturedCaseStudy;
+  language: Language;
+}) {
+  const embeddedUrl = getEmbeddedMediaUrl(feature.videoUrl);
+
+  return (
+    <article className="relative overflow-hidden rounded-[1.6rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_32%,rgba(74,222,128,0.06))]" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/45 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-8 h-px w-32 bg-gradient-to-r from-emerald-300/50 to-transparent" />
+
+      <div className="relative z-10">
+        <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/38">
+          {resolveText(feature.eyebrow, language)}
+        </p>
+        <h4 className="mt-4 max-w-[54rem] text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.4rem] lg:leading-[1.04]">
+          {resolveText(feature.title, language)}
+        </h4>
+        <p className="mt-4 max-w-[50rem] text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
+          {resolveText(feature.subtitle, language)}
+        </p>
+
+        <div className="mt-6 overflow-hidden rounded-[1.45rem] border border-white/10 bg-black">
+          <div className="relative aspect-video w-full">
+            {embeddedUrl ? (
+              <iframe
+                src={embeddedUrl}
+                title={resolveText(feature.title, language)}
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="h-full w-full"
+              />
+            ) : (
+              <video
+                src={feature.videoUrl}
+                controls
+                playsInline
+                className="h-full w-full object-cover"
+              />
+            )}
+          </div>
+        </div>
+
+        <p className="mt-6 max-w-[52rem] text-sm leading-7 text-white/48 sm:text-base">
+          {resolveText(feature.description, language)}
+        </p>
+
+        {feature.externalUrl && feature.buttonLabel ? (
+          <div className="mt-6">
+            <a
+              href={feature.externalUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center rounded-full border border-emerald-300/18 bg-white/[0.06] px-4 py-2.5 text-sm text-white/78 transition hover:border-emerald-300/32 hover:bg-white/[0.1] hover:text-white"
+            >
+              {resolveText(feature.buttonLabel, language)}
+            </a>
+          </div>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
 function AiCategoryContent({
   items,
   language,
@@ -222,6 +302,9 @@ export default function ProfileCategoryModal({
 }: ProfileCategoryModalProps) {
   const { language } = useLanguage();
   const category = profileHubContent[activeCategory];
+  const aiFeatures = category.feature
+    ? [category.feature, ...(category.secondaryFeatures ?? [])]
+    : [];
   const activeItem =
     category.items.find((item) => item.id === activeItemId) ?? category.items[0];
   const isAiCategory = activeCategory === "ai";
@@ -304,63 +387,15 @@ export default function ProfileCategoryModal({
             </div>
 
             {isAiCategory && category.feature && (
-              <article className="relative overflow-hidden rounded-[1.6rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_32%,rgba(74,222,128,0.06))]" />
-                <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/45 to-transparent" />
-                <div className="pointer-events-none absolute bottom-0 left-8 h-px w-32 bg-gradient-to-r from-emerald-300/50 to-transparent" />
-
-                <div className="relative z-10">
-                  <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/38">
-                    {resolveText(category.feature.eyebrow, language)}
-                  </p>
-                  <h4 className="mt-4 max-w-[54rem] text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[3rem] lg:leading-[1.02] xl:text-[3.2rem]">
-                    {resolveText(category.feature.title, language)}
-                  </h4>
-                  <p className="mt-4 max-w-[50rem] text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
-                    {resolveText(category.feature.subtitle, language)}
-                  </p>
-
-                  <div className="mt-6 overflow-hidden rounded-[1.45rem] border border-white/10 bg-black">
-                    <div className="relative aspect-video w-full">
-                      {getEmbeddedMediaUrl(category.feature.videoUrl) ? (
-                        <iframe
-                          src={getEmbeddedMediaUrl(category.feature.videoUrl) ?? undefined}
-                          title={resolveText(category.feature.title, language)}
-                          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          allowFullScreen
-                          className="h-full w-full"
-                        />
-                      ) : (
-                        <video
-                          src={category.feature.videoUrl}
-                          controls
-                          playsInline
-                          className="h-full w-full object-cover"
-                        />
-                      )}
-                    </div>
-                  </div>
-
-                  <p className="mt-6 max-w-[52rem] text-sm leading-7 text-white/48 sm:text-base">
-                    {resolveText(category.feature.description, language)}
-                  </p>
-
-                  {category.feature.externalUrl && category.feature.buttonLabel ? (
-                    <div className="mt-6">
-                      <a
-                        href={category.feature.externalUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center rounded-full border border-emerald-300/18 bg-white/[0.06] px-4 py-2.5 text-sm text-white/78 transition hover:border-emerald-300/32 hover:bg-white/[0.1] hover:text-white"
-                      >
-                        {resolveText(category.feature.buttonLabel, language)}
-                      </a>
-                    </div>
-                  ) : null}
-                </div>
-              </article>
+              <div className="grid gap-4 xl:grid-cols-2">
+                {aiFeatures.map((feature, index) => (
+                  <AiFeatureCard
+                    key={`${activeCategory}-feature-${index}`}
+                    feature={feature}
+                    language={language}
+                  />
+                ))}
+              </div>
             )}
 
             {!isAiCategory && category.feature && (
