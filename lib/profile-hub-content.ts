@@ -36,6 +36,15 @@ export type ProfileHubCategory = {
     subtitle: string;
     description: string;
   };
+  announcements?: Array<{
+    id: string;
+    projectTitle: string;
+    headline: string;
+    releaseInfo: string;
+    description: string;
+    href: string;
+    cta: string;
+  }>;
   items: ProfileHubItem[];
 };
 
@@ -53,6 +62,18 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       description:
         "A premium project announcement framed like a mysterious cinematic drop, positioned as the lead AI release inside the editorial viewer.",
     },
+    announcements: [
+      {
+        id: "rango-bravo-release",
+        projectTitle: "The Rango Bravo",
+        headline: 'Estreno de "Una M\u00e1s al Kilo"',
+        releaseInfo: "Estreno hoy a la 1:00 PM",
+        description:
+          "Cortometraje que muestra las estad\u00edsticas de fallas de veh\u00edculos extranjeros en el a\u00f1o 2025, sin tirarle a nadie en espec\u00edfico.",
+        href: "https://youtu.be/Y1UbzPnqJPo",
+        cta: "VER VIDEO",
+      },
+    ],
     items: [
       {
         id: "ai-youtube",

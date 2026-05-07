@@ -155,6 +155,52 @@ export default function ProfileCategoryModal({
               </article>
             )}
 
+            {category.announcements && category.announcements.length > 0 && (
+              <div className="grid gap-4 lg:grid-cols-2">
+                {category.announcements.map((announcement) => (
+                  <article
+                    key={announcement.id}
+                    className="relative overflow-hidden rounded-[1.5rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 shadow-[0_0_28px_rgba(255,255,255,0.03)] sm:p-6"
+                  >
+                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_45%)]" />
+                    <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+
+                    <div className="relative z-10">
+                      <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
+                        Featured Project
+                      </p>
+                      <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-[1.9rem]">
+                        {announcement.projectTitle}
+                      </h4>
+                      <p className="mt-3 text-lg leading-7 text-white/86">
+                        {announcement.headline}
+                      </p>
+
+                      <div className="mt-4 inline-flex rounded-full border border-white/14 bg-white/[0.07] px-3.5 py-1.5 text-[0.64rem] uppercase tracking-[0.24em] text-white/78 shadow-[0_0_18px_rgba(255,255,255,0.04)]">
+                        {announcement.releaseInfo}
+                      </div>
+
+                      <p className="mt-5 max-w-2xl text-sm leading-7 text-white/48 sm:text-base">
+                        {announcement.description}
+                      </p>
+
+                      <div className="mt-6">
+                        <a
+                          href={announcement.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
+                        >
+                          {announcement.cta}
+                          <span className="text-white/32">OUT</span>
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+
             <div
               key={`${activeCategory}-${activeItem.id}`}
               className="grid gap-4 motion-safe:animate-[panelFade_260ms_ease-out] xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]"
