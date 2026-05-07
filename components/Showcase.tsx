@@ -27,7 +27,7 @@ function getRandomVideo(videos: readonly string[], current?: string) {
 }
 
 export default function Showcase() {
-  const { isOverlayOpen, openBrand, openContact } = useOverlayController();
+  const { isOverlayOpen, openContact } = useOverlayController();
   const [showcaseState, setShowcaseState] = useState(() => {
     const initialIndex = Math.floor(Math.random() * categoryOrder.length);
     const initialKey = categoryOrder[initialIndex];
@@ -89,8 +89,6 @@ export default function Showcase() {
       <BottomLauncherNav
         activeCategory={currentKey}
         isHidden={isOverlayOpen}
-        onOpenBrand={openBrand}
-        onOpenContact={openContact}
         onSelectCategory={(categoryKey) => {
           const slideIndex = categoryOrder.indexOf(categoryKey);
 
