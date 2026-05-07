@@ -78,7 +78,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       {
         id: "ai-youtube",
         eyebrow: "Release / Featured",
-        title: "Runaway 2150 launch broadcast",
+        title: "Anatomía al límite",
         description:
           "The main AI feature spotlight, pairing the release announcement with a broadcast-style embed for all-AI production direction and rollout.",
         href: "https://www.youtube.com/@TheAssetHero",
@@ -97,7 +97,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       {
         id: "ai-tooling",
         eyebrow: "Tooling / Preview",
-        title: "Experimental interface lab",
+        title: "The Therians",
         description:
           "Prompting surfaces, orchestration panels, and creator-facing automation concepts presented with a premium UI lens.",
         href: "/#showcase",
@@ -117,7 +117,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       {
         id: "ai-reel",
         eyebrow: "Reel / Motion",
-        title: "Agent workflow reel",
+        title: "Don Beto",
         description:
           "A cinematic pass through automation loops, AI-assisted production timing, and creative tooling momentum.",
         href: "/videos/ai1.mp4",
