@@ -1,11 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
+import { useLanguage } from "@/components/LanguageProvider";
+import { Language, resolveText } from "@/lib/localization";
 import {
   profileHubContent,
   ProfileHubItem,
 } from "@/lib/profile-hub-content";
 import { categoryOrder, CategoryKey } from "@/lib/portfolio-categories";
+import { uiCopy } from "@/lib/ui-copy";
 
 type ProfileCategoryModalProps = {
   activeCategory: CategoryKey;
@@ -16,14 +21,25 @@ type ProfileCategoryModalProps = {
   onSelectItem: (categoryKey: CategoryKey, itemId: string) => void;
 };
 
-function HubAction({ item }: { item: ProfileHubItem }) {
+function HubAction({
+  item,
+  language,
+}: {
+  item: ProfileHubItem;
+  language: Language;
+}) {
   const className =
     "inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[0.68rem] uppercase tracking-[0.24em] text-white/62 transition hover:border-white/22 hover:bg-white/[0.06] hover:text-white";
+  const cta = resolveText(item.cta, language);
+  const trailingLabel =
+    item.linkKind === "reel"
+      ? resolveText(uiCopy.categoryModal.play, language)
+      : resolveText(uiCopy.categoryModal.open, language);
 
   if (item.linkKind === "internal") {
     return (
       <Link href={item.href} className={className}>
-        {item.cta}
+        {cta}
         <span className="text-white/34">/</span>
       </Link>
     );
@@ -36,15 +52,19 @@ function HubAction({ item }: { item: ProfileHubItem }) {
       rel={item.linkKind === "external" ? "noreferrer" : undefined}
       className={className}
     >
-      {item.cta}
-      <span className="text-white/34">
-        {item.linkKind === "reel" ? "PLAY" : "OUT"}
-      </span>
+      {cta}
+      <span className="text-white/34">{trailingLabel}</span>
     </a>
   );
 }
 
-function MinimalHubCard({ item }: { item: ProfileHubItem }) {
+function MinimalHubCard({
+  item,
+  language,
+}: {
+  item: ProfileHubItem;
+  language: Language;
+}) {
   const className =
     "group relative flex aspect-square overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-4 text-left transition duration-300 hover:border-white/18 hover:bg-white/[0.05]";
 
@@ -54,19 +74,19 @@ function MinimalHubCard({ item }: { item: ProfileHubItem }) {
       <div className="relative z-10 flex h-full flex-col justify-between">
         <div>
           <p className="text-[0.58rem] uppercase tracking-[0.26em] text-white/32">
-            {item.eyebrow}
+            {resolveText(item.eyebrow, language)}
           </p>
           <h5 className="mt-3 max-w-[13rem] text-base font-semibold leading-6 text-white">
-            {item.title}
+            {resolveText(item.title, language)}
           </h5>
         </div>
 
         <div>
           <p className="line-clamp-3 text-sm leading-6 text-white/40">
-            {item.description}
+            {resolveText(item.description, language)}
           </p>
           <p className="mt-4 text-[0.58rem] uppercase tracking-[0.24em] text-white/46">
-            {item.cta}
+            {resolveText(item.cta, language)}
           </p>
         </div>
       </div>
@@ -101,10 +121,14 @@ export default function ProfileCategoryModal({
   onSelectCategory,
   onSelectItem,
 }: ProfileCategoryModalProps) {
+  const { language } = useLanguage();
   const category = profileHubContent[activeCategory];
   const activeItem =
     category.items.find((item) => item.id === activeItemId) ?? category.items[0];
   const isAiCategory = activeCategory === "ai";
+  const categoryTitle = resolveText(category.title, language);
+  const categoryDescription = resolveText(category.description, language);
+  const activeItemTitle = resolveText(activeItem.title, language);
 
   return (
     <div
@@ -134,7 +158,7 @@ export default function ProfileCategoryModal({
           type="button"
           onClick={onClose}
           className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm text-white/70 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
-          aria-label="Close category modal"
+          aria-label={resolveText(uiCopy.categoryModal.closeAria, language)}
         >
           X
         </button>
@@ -144,18 +168,18 @@ export default function ProfileCategoryModal({
             <div className="flex flex-col gap-5 border-b border-white/10 pb-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <p className="text-[0.64rem] uppercase tracking-[0.34em] text-white/34">
-                  Editorial Feature
+                  {resolveText(uiCopy.categoryModal.editorialFeature, language)}
                 </p>
                 <h3
                   id="profile-category-modal-title"
                   className="mt-3 max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl lg:text-[2.8rem]"
                 >
-                  {category.title}
+                  {categoryTitle}
                 </h3>
               </div>
 
               <p className="max-w-2xl text-sm leading-6 text-white/46 sm:text-base">
-                {category.description}
+                {categoryDescription}
               </p>
             </div>
 
@@ -187,19 +211,19 @@ export default function ProfileCategoryModal({
 
                 <div className="relative z-10 max-w-3xl">
                   <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/36">
-                    {category.feature.eyebrow}
+                    {resolveText(category.feature.eyebrow, language)}
                   </p>
                   <p className="mt-3 text-sm uppercase tracking-[0.3em] text-white/62 sm:text-base">
-                    {category.feature.headline}
+                    {resolveText(category.feature.headline, language)}
                   </p>
                   <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.25rem]">
-                    {category.feature.title}
+                    {resolveText(category.feature.title, language)}
                   </h4>
                   <p className="mt-3 text-[0.72rem] uppercase tracking-[0.3em] text-white/48 sm:text-[0.78rem]">
-                    {category.feature.subtitle}
+                    {resolveText(category.feature.subtitle, language)}
                   </p>
                   <p className="mt-5 max-w-2xl text-sm leading-7 text-white/48 sm:text-base">
-                    {category.feature.description}
+                    {resolveText(category.feature.description, language)}
                   </p>
                 </div>
               </article>
@@ -217,21 +241,21 @@ export default function ProfileCategoryModal({
 
                     <div className="relative z-10">
                       <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
-                        Featured Project
+                        {resolveText(uiCopy.categoryModal.featuredProject, language)}
                       </p>
                       <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-[1.9rem]">
-                        {announcement.projectTitle}
+                        {resolveText(announcement.projectTitle, language)}
                       </h4>
                       <p className="mt-3 text-lg leading-7 text-white/86">
-                        {announcement.headline}
+                        {resolveText(announcement.headline, language)}
                       </p>
 
                       <div className="mt-4 inline-flex rounded-full border border-white/14 bg-white/[0.07] px-3.5 py-1.5 text-[0.64rem] uppercase tracking-[0.24em] text-white/78 shadow-[0_0_18px_rgba(255,255,255,0.04)]">
-                        {announcement.releaseInfo}
+                        {resolveText(announcement.releaseInfo, language)}
                       </div>
 
                       <p className="mt-5 max-w-2xl text-sm leading-7 text-white/48 sm:text-base">
-                        {announcement.description}
+                        {resolveText(announcement.description, language)}
                       </p>
 
                       <div className="mt-6">
@@ -241,8 +265,10 @@ export default function ProfileCategoryModal({
                           rel="noreferrer"
                           className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
                         >
-                          {announcement.cta}
-                          <span className="text-white/32">OUT</span>
+                          {resolveText(announcement.cta, language)}
+                          <span className="text-white/32">
+                            {resolveText(uiCopy.categoryModal.open, language)}
+                          </span>
                         </a>
                       </div>
                     </div>
@@ -254,7 +280,7 @@ export default function ProfileCategoryModal({
             {isAiCategory ? (
               <div className="grid gap-3 md:grid-cols-3">
                 {category.items.map((item) => (
-                  <MinimalHubCard key={item.id} item={item} />
+                  <MinimalHubCard key={item.id} item={item} language={language} />
                 ))}
               </div>
             ) : (
@@ -268,7 +294,7 @@ export default function ProfileCategoryModal({
                       {activeItem.media.type === "youtube" ? (
                         <iframe
                           src={activeItem.media.embedUrl}
-                          title={activeItem.title}
+                          title={activeItemTitle}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           referrerPolicy="strict-origin-when-cross-origin"
                           allowFullScreen
@@ -290,17 +316,17 @@ export default function ProfileCategoryModal({
                           <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
                             <div>
                               <p className="text-[0.62rem] uppercase tracking-[0.26em] text-white/54">
-                                {activeItem.eyebrow}
+                                {resolveText(activeItem.eyebrow, language)}
                               </p>
                               <h4 className="mt-2 text-2xl font-semibold text-white sm:text-[1.9rem]">
-                                {activeItem.title}
+                                {activeItemTitle}
                               </h4>
                             </div>
 
                             <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/14 bg-white/8 text-[0.62rem] uppercase tracking-[0.18em] text-white/74">
                               {activeItem.linkKind === "reel"
-                                ? "Play"
-                                : "Open"}
+                                ? resolveText(uiCopy.categoryModal.play, language)
+                                : resolveText(uiCopy.categoryModal.open, language)}
                             </div>
                           </div>
                         </>
@@ -309,17 +335,17 @@ export default function ProfileCategoryModal({
 
                     <div className="p-4 sm:p-5 lg:p-6">
                       <p className="text-[0.65rem] uppercase tracking-[0.28em] text-white/34">
-                        {activeItem.eyebrow}
+                        {resolveText(activeItem.eyebrow, language)}
                       </p>
                       <h4 className="mt-2 text-xl font-semibold text-white sm:text-2xl">
-                        {activeItem.title}
+                        {activeItemTitle}
                       </h4>
                       <p className="mt-3 max-w-2xl text-sm leading-6 text-white/48">
-                        {activeItem.description}
+                        {resolveText(activeItem.description, language)}
                       </p>
 
                       <div className="mt-5">
-                        <HubAction item={activeItem} />
+                        <HubAction item={activeItem} language={language} />
                       </div>
                     </div>
                   </div>
@@ -327,22 +353,20 @@ export default function ProfileCategoryModal({
                   <div className="grid gap-4">
                     <article className="rounded-[1.4rem] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
                       <p className="text-[0.64rem] uppercase tracking-[0.28em] text-white/32">
-                        Editorial Note
+                        {resolveText(uiCopy.categoryModal.editorialNote, language)}
                       </p>
                       <h4 className="mt-3 text-lg font-semibold text-white">
-                        Featured direction
+                        {resolveText(uiCopy.categoryModal.featuredDirection, language)}
                       </h4>
                       <p className="mt-3 text-sm leading-7 text-white/46">
-                        {category.description} Each category opens like a digital
-                        feature spread, combining reels, article-style notes,
-                        and launch-ready previews inside a focused cinematic
-                        overlay.
+                        {categoryDescription}{" "}
+                        {resolveText(uiCopy.categoryModal.editorialSuffix, language)}
                       </p>
                     </article>
 
                     <article className="rounded-[1.4rem] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
                       <p className="text-[0.64rem] uppercase tracking-[0.28em] text-white/32">
-                        Featured Projects
+                        {resolveText(uiCopy.categoryModal.featuredProjects, language)}
                       </p>
                       <div className="mt-4 space-y-4">
                         {category.items.slice(0, 2).map((item) => (
@@ -357,13 +381,13 @@ export default function ProfileCategoryModal({
                             }`}
                           >
                             <p className="text-[0.58rem] uppercase tracking-[0.24em] text-white/34">
-                              {item.eyebrow}
+                              {resolveText(item.eyebrow, language)}
                             </p>
                             <h5 className="mt-2 text-sm font-semibold text-white">
-                              {item.title}
+                              {resolveText(item.title, language)}
                             </h5>
                             <p className="mt-2 text-sm leading-6 text-white/42">
-                              {item.description}
+                              {resolveText(item.description, language)}
                             </p>
                           </button>
                         ))}
@@ -401,22 +425,22 @@ export default function ProfileCategoryModal({
                           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
                           <div className="absolute left-3 top-3 rounded-full border border-white/12 bg-black/35 px-2.5 py-1 text-[0.58rem] uppercase tracking-[0.24em] text-white/64">
                             {item.media.type === "youtube"
-                              ? "Video"
+                              ? resolveText(uiCopy.categoryModal.video, language)
                               : item.linkKind === "reel"
-                                ? "Reel"
-                                : "Preview"}
+                                ? resolveText(uiCopy.categoryModal.reel, language)
+                                : resolveText(uiCopy.categoryModal.preview, language)}
                           </div>
                         </div>
 
                         <div className="p-3.5">
                           <p className="text-[0.6rem] uppercase tracking-[0.24em] text-white/34">
-                            {item.eyebrow}
+                            {resolveText(item.eyebrow, language)}
                           </p>
                           <h5 className="mt-2 text-sm font-semibold text-white">
-                            {item.title}
+                            {resolveText(item.title, language)}
                           </h5>
                           <p className="mt-2 line-clamp-3 text-sm leading-6 text-white/42">
-                            {item.description}
+                            {resolveText(item.description, language)}
                           </p>
                         </div>
                       </button>

@@ -1,12 +1,13 @@
+import { LocalizedText } from "@/lib/localization";
 import { CategoryKey } from "@/lib/portfolio-categories";
 
 export type ProfileHubItem = {
   id: string;
-  title: string;
-  eyebrow: string;
-  description: string;
+  title: LocalizedText;
+  eyebrow: LocalizedText;
+  description: LocalizedText;
   href: string;
-  cta: string;
+  cta: LocalizedText;
   linkKind: "external" | "internal" | "reel";
   accent: string;
   thumbnail: {
@@ -27,62 +28,81 @@ export type ProfileHubItem = {
 
 export type ProfileHubCategory = {
   label: string;
-  title: string;
-  description: string;
+  title: LocalizedText;
+  description: LocalizedText;
   feature?: {
-    eyebrow: string;
-    headline: string;
-    title: string;
-    subtitle: string;
-    description: string;
+    eyebrow: LocalizedText;
+    headline: LocalizedText;
+    title: LocalizedText;
+    subtitle: LocalizedText;
+    description: LocalizedText;
   };
   announcements?: Array<{
     id: string;
-    projectTitle: string;
-    headline: string;
-    releaseInfo: string;
-    description: string;
+    projectTitle: LocalizedText;
+    headline: LocalizedText;
+    releaseInfo: LocalizedText;
+    description: LocalizedText;
     href: string;
-    cta: string;
+    cta: LocalizedText;
   }>;
   items: ProfileHubItem[];
 };
 
+const t = (en: string, es: string): LocalizedText => ({ en, es });
+
 export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   ai: {
     label: "AI",
-    title: "Automation experiments and AI-native creative systems",
-    description:
+    title: t(
+      "Automation experiments and AI-native creative systems",
+      "Experimentos de automatizacion y sistemas creativos nativos de AI"
+    ),
+    description: t(
       "A cinematic mix of AI tools, workflow prototypes, and interface-led experiments shaped for modern production.",
+      "Una mezcla cinematografica de herramientas de AI, prototipos de flujo de trabajo y experimentos guiados por interfaz para la produccion moderna."
+    ),
     feature: {
-      eyebrow: "Featured Release",
-      headline: "YA EST\u00c1 DISPONIBLE",
-      title: "PRIMERA PARTE \u2014 RUNAWAY 2150",
-      subtitle: "ALL AI PRODUCTION",
-      description:
+      eyebrow: t("Featured Release", "Lanzamiento destacado"),
+      headline: t("NOW AVAILABLE", "YA ESTA DISPONIBLE"),
+      title: t("PART ONE - RUNAWAY 2150", "PRIMERA PARTE - RUNAWAY 2150"),
+      subtitle: t("ALL AI PRODUCTION", "PRODUCCION TOTALMENTE AI"),
+      description: t(
         "A premium project announcement framed like a mysterious cinematic drop, positioned as the lead AI release inside the editorial viewer.",
+        "Un anuncio premium de proyecto presentado como un misterioso estreno cinematografico, colocado como el lanzamiento principal de AI dentro de la vista editorial."
+      ),
     },
     announcements: [
       {
         id: "rango-bravo-release",
-        projectTitle: "The Rango Bravo",
-        headline: 'Estreno de "Una M\u00e1s al Kilo"',
-        releaseInfo: "Estreno hoy a la 1:00 PM",
-        description:
-          "Cortometraje que muestra las estad\u00edsticas de fallas de veh\u00edculos extranjeros en el a\u00f1o 2025, sin tirarle a nadie en espec\u00edfico.",
+        projectTitle: t("The Rango Bravo", "The Rango Bravo"),
+        headline: t(
+          'Premiere of "Una Mas al Kilo"',
+          'Estreno de "Una Mas al Kilo"'
+        ),
+        releaseInfo: t(
+          "Premieres today at 1:00 PM",
+          "Estreno hoy a la 1:00 PM"
+        ),
+        description: t(
+          "Short film showing foreign vehicle failure statistics in 2025, without aiming at anyone in particular.",
+          "Cortometraje que muestra las estadisticas de fallas de vehiculos extranjeros en el ano 2025, sin tirarle a nadie en especifico."
+        ),
         href: "https://youtu.be/Y1UbzPnqJPo",
-        cta: "VER VIDEO",
+        cta: t("WATCH VIDEO", "VER VIDEO"),
       },
     ],
     items: [
       {
         id: "ai-youtube",
-        eyebrow: "Release / Featured",
-        title: "Anatomía al límite",
-        description:
-          "The main AI feature spotlight, pairing the release announcement with a broadcast-style embed for all-AI production direction and rollout.",
+        eyebrow: t("Release / Featured", "Lanzamiento / Destacado"),
+        title: t("Anatomia al limite", "Anatomia al limite"),
+        description: t(
+          "A compact AI release marker for worldbuilding experiments and launch-minded visual storytelling.",
+          "Una senal compacta de lanzamiento AI para experimentos de worldbuilding y narrativa visual orientada a estrenos."
+        ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Watch release",
+        cta: t("Watch release", "Ver lanzamiento"),
         linkKind: "external",
         accent: "from-zinc-100/12 via-black/10 to-cyan-300/14",
         thumbnail: {
@@ -96,12 +116,14 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "ai-tooling",
-        eyebrow: "Tooling / Preview",
-        title: "The Therians",
-        description:
-          "Prompting surfaces, orchestration panels, and creator-facing automation concepts presented with a premium UI lens.",
+        eyebrow: t("Tooling / Preview", "Herramientas / Preview"),
+        title: t("The Therians", "The Therians"),
+        description: t(
+          "A small-format project tile for AI concepts, interface experiments, and narrative release ideas.",
+          "Una pieza de proyecto en formato pequeno para conceptos AI, experimentos de interfaz e ideas narrativas de lanzamiento."
+        ),
         href: "/#showcase",
-        cta: "Open preview",
+        cta: t("Open preview", "Abrir preview"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-cyan-300/10",
         thumbnail: {
@@ -116,12 +138,14 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "ai-reel",
-        eyebrow: "Reel / Motion",
-        title: "Don Beto",
-        description:
-          "A cinematic pass through automation loops, AI-assisted production timing, and creative tooling momentum.",
+        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
+        title: t("Don Beto", "Don Beto"),
+        description: t(
+          "A restrained card for AI-driven short-form work and release-ready concept packaging.",
+          "Una tarjeta sobria para trabajo AI en formato corto y empaquetado conceptual listo para lanzamiento."
+        ),
         href: "/videos/ai1.mp4",
-        cta: "Play reel",
+        cta: t("Play reel", "Ver reel"),
         linkKind: "reel",
         accent: "from-sky-400/16 via-transparent to-white/8",
         thumbnail: {
@@ -138,18 +162,28 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   },
   vp: {
     label: "VP",
-    title: "Virtual production reels and realtime environments",
-    description:
+    title: t(
+      "Virtual production reels and realtime environments",
+      "Reels de produccion virtual y entornos en tiempo real"
+    ),
+    description: t(
       "Stagecraft, environment development, and realtime camera language assembled into a clean creative launch surface.",
+      "Stagecraft, desarrollo de entornos y lenguaje de camara en tiempo real reunidos en una superficie creativa limpia."
+    ),
     items: [
       {
         id: "vp-youtube",
-        eyebrow: "YouTube / Featured",
-        title: "Virtual production stage reel",
-        description:
+        eyebrow: t("YouTube / Featured", "YouTube / Destacado"),
+        title: t(
+          "Virtual production stage reel",
+          "Reel de escenario de produccion virtual"
+        ),
+        description: t(
           "A featured embed space for realtime stage motion, previs framing, and Unreal-centric production studies.",
+          "Un espacio destacado para movimiento de escenario en tiempo real, encuadres de previs y estudios de produccion centrados en Unreal."
+        ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Watch breakdowns",
+        cta: t("Watch breakdowns", "Ver breakdowns"),
         linkKind: "external",
         accent: "from-violet-300/18 via-white/7 to-cyan-300/18",
         thumbnail: {
@@ -163,12 +197,17 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "vp-environment",
-        eyebrow: "Environment / Preview",
-        title: "Realtime environment deck",
-        description:
+        eyebrow: t("Environment / Preview", "Entorno / Preview"),
+        title: t(
+          "Realtime environment deck",
+          "Deck de entorno en tiempo real"
+        ),
+        description: t(
           "Scalable scene language, lighting beats, and cinematic environment cues for virtual production pipelines.",
+          "Lenguaje de escena escalable, ritmos de iluminacion y claves cinematicas de entorno para pipelines de produccion virtual."
+        ),
         href: "/#showcase",
-        cta: "Open preview",
+        cta: t("Open preview", "Abrir preview"),
         linkKind: "internal",
         accent: "from-white/15 via-transparent to-blue-300/10",
         thumbnail: {
@@ -183,12 +222,14 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "vp-reel",
-        eyebrow: "Reel / Motion",
-        title: "Stage motion reel",
-        description:
+        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
+        title: t("Stage motion reel", "Reel de movimiento de escenario"),
+        description: t(
           "Realtime camera movement, cinematic blocking, and stage-driven visual flow for production-ready presentation.",
+          "Movimiento de camara en tiempo real, bloqueo cinematografico y flujo visual guiado por escenario para una presentacion lista para produccion."
+        ),
         href: "/videos/vp1.mp4",
-        cta: "Play reel",
+        cta: t("Play reel", "Ver reel"),
         linkKind: "reel",
         accent: "from-cyan-300/14 via-transparent to-white/8",
         thumbnail: {
@@ -205,18 +246,25 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   },
   "3d": {
     label: "3D",
-    title: "Automotive renders and cinematic 3D shots",
-    description:
+    title: t(
+      "Automotive renders and cinematic 3D shots",
+      "Renders automotrices y tomas 3D cinematicas"
+    ),
+    description: t(
       "High-fidelity forms, product studies, and cinematic visual development framed as a premium interactive gallery.",
+      "Formas de alta fidelidad, estudios de producto y desarrollo visual cinematografico presentados como una galeria interactiva premium."
+    ),
     items: [
       {
         id: "3d-youtube",
-        eyebrow: "YouTube / Featured",
-        title: "Cinematic 3D presentation",
-        description:
+        eyebrow: t("YouTube / Featured", "YouTube / Destacado"),
+        title: t("Cinematic 3D presentation", "Presentacion 3D cinematica"),
+        description: t(
           "A featured video slot for polished render stories, lighting studies, and hero asset presentations.",
+          "Un espacio de video destacado para historias de render pulidas, estudios de iluminacion y presentaciones de assets hero."
+        ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Open gallery",
+        cta: t("Open gallery", "Abrir galeria"),
         linkKind: "external",
         accent: "from-zinc-200/14 via-white/7 to-amber-200/12",
         thumbnail: {
@@ -230,12 +278,14 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "3d-materials",
-        eyebrow: "Lookdev / Preview",
-        title: "Material study launcher",
-        description:
+        eyebrow: t("Lookdev / Preview", "Lookdev / Preview"),
+        title: t("Material study launcher", "Launcher de estudio de materiales"),
+        description: t(
           "Surfaces, paint systems, and lighting direction arranged like a cinematic product configurator.",
+          "Superficies, sistemas de pintura y direccion de iluminacion organizados como un configurador cinematografico de producto."
+        ),
         href: "/#profile-journal",
-        cta: "Open preview",
+        cta: t("Open preview", "Abrir preview"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-zinc-300/10",
         thumbnail: {
@@ -250,12 +300,14 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "3d-reel",
-        eyebrow: "Reel / Motion",
-        title: "Automotive render reel",
-        description:
+        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
+        title: t("Automotive render reel", "Reel de render automotriz"),
+        description: t(
           "A polished motion piece focused on hard-surface confidence, camera rhythm, and premium render presentation.",
+          "Una pieza de movimiento pulida centrada en superficies duras, ritmo de camara y presentacion premium de render."
+        ),
         href: "/videos/3d1.mp4",
-        cta: "Play reel",
+        cta: t("Play reel", "Ver reel"),
         linkKind: "reel",
         accent: "from-amber-200/12 via-transparent to-white/8",
         thumbnail: {
@@ -272,18 +324,28 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   },
   vfx: {
     label: "VFX",
-    title: "Niagara, simulations, and compositing launchers",
-    description:
+    title: t(
+      "Niagara, simulations, and compositing launchers",
+      "Niagara, simulaciones y lanzadores de composicion"
+    ),
+    description: t(
       "Realtime effects, layered motion, and shot-driven compositing previews shaped as a lightweight cinematic hub.",
+      "Efectos en tiempo real, movimiento por capas y avances de composicion orientados al shot, reunidos como un hub cinematografico ligero."
+    ),
     items: [
       {
         id: "vfx-youtube",
-        eyebrow: "YouTube / Featured",
-        title: "Realtime effects breakdown",
-        description:
+        eyebrow: t("YouTube / Featured", "YouTube / Destacado"),
+        title: t(
+          "Realtime effects breakdown",
+          "Breakdown de efectos en tiempo real"
+        ),
+        description: t(
           "A featured embed area for Niagara timing, simulation studies, and realtime VFX breakdowns.",
+          "Un area destacada para timing en Niagara, estudios de simulacion y breakdowns VFX en tiempo real."
+        ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Watch feed",
+        cta: t("Watch feed", "Ver feed"),
         linkKind: "external",
         accent: "from-fuchsia-300/18 via-white/8 to-cyan-300/18",
         thumbnail: {
@@ -297,12 +359,14 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "vfx-preview",
-        eyebrow: "Toolkit / Preview",
-        title: "FX pack preview",
-        description:
+        eyebrow: t("Toolkit / Preview", "Toolkit / Preview"),
+        title: t("FX pack preview", "Preview de paquete FX"),
+        description: t(
           "Reusable effect systems, cinematic atmospherics, and layered implementation details for premium shot work.",
+          "Sistemas de efectos reutilizables, atmosfericos cinematicos y detalles de implementacion por capas para trabajo de shot premium."
+        ),
         href: "/#profile-journal",
-        cta: "Open preview",
+        cta: t("Open preview", "Abrir preview"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-fuchsia-300/10",
         thumbnail: {
@@ -317,12 +381,14 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "vfx-reel",
-        eyebrow: "Reel / Motion",
-        title: "Niagara sequence reel",
-        description:
+        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
+        title: t("Niagara sequence reel", "Reel de secuencia Niagara"),
+        description: t(
           "A cinematic reel for layered effects, atmospheric motion, and high-impact realtime timing.",
+          "Un reel cinematografico para efectos por capas, movimiento atmosferico y timing en tiempo real de alto impacto."
+        ),
         href: "/videos/vfx1.mp4",
-        cta: "Play reel",
+        cta: t("Play reel", "Ver reel"),
         linkKind: "reel",
         accent: "from-cyan-300/12 via-transparent to-white/8",
         thumbnail: {
@@ -339,18 +405,28 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   },
   dev: {
     label: "DEV",
-    title: "Unreal systems, plugins, and technical tools",
-    description:
+    title: t(
+      "Unreal systems, plugins, and technical tools",
+      "Sistemas de Unreal, plugins y herramientas tecnicas"
+    ),
+    description: t(
       "Systems thinking, plugin launches, and technical tooling surfaced through a premium studio-style interface.",
+      "Pensamiento de sistemas, lanzamientos de plugins y herramientas tecnicas presentados a traves de una interfaz premium con estilo de estudio."
+    ),
     items: [
       {
         id: "dev-youtube",
-        eyebrow: "YouTube / Featured",
-        title: "Technical toolchain broadcast",
-        description:
+        eyebrow: t("YouTube / Featured", "YouTube / Destacado"),
+        title: t(
+          "Technical toolchain broadcast",
+          "Broadcast de toolchain tecnica"
+        ),
+        description: t(
           "A featured embed for Unreal systems, workflow tooling, and technical demos presented with cinematic clarity.",
+          "Un embed destacado para sistemas de Unreal, herramientas de flujo de trabajo y demos tecnicas presentadas con claridad cinematografica."
+        ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Open channel",
+        cta: t("Open channel", "Abrir canal"),
         linkKind: "external",
         accent: "from-emerald-300/16 via-white/8 to-cyan-300/16",
         thumbnail: {
@@ -364,12 +440,14 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "dev-plugin",
-        eyebrow: "Plugins / Preview",
-        title: "Plugin shelf",
-        description:
+        eyebrow: t("Plugins / Preview", "Plugins / Preview"),
+        title: t("Plugin shelf", "Vitrina de plugins"),
+        description: t(
           "A clean launch surface for Unreal tools, plugin systems, and future technical product drops.",
+          "Una superficie limpia de lanzamiento para herramientas de Unreal, sistemas de plugins y futuros productos tecnicos."
+        ),
         href: "/#profile-journal",
-        cta: "Open journal",
+        cta: t("Open journal", "Abrir journal"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-emerald-300/10",
         thumbnail: {
@@ -384,12 +462,14 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "dev-reel",
-        eyebrow: "Reel / Motion",
-        title: "Systems reel",
-        description:
+        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
+        title: t("Systems reel", "Reel de sistemas"),
+        description: t(
           "A technical motion reel for workflow systems, creator-facing tools, and polished UI-driven engineering work.",
+          "Un reel tecnico de movimiento para sistemas de flujo de trabajo, herramientas orientadas al creador y trabajo de ingenieria guiado por UI."
+        ),
         href: "/videos/dev1.mp4",
-        cta: "Play reel",
+        cta: t("Play reel", "Ver reel"),
         linkKind: "reel",
         accent: "from-cyan-300/12 via-transparent to-white/8",
         thumbnail: {

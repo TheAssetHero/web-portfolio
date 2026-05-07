@@ -1,3 +1,9 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { resolveText } from "@/lib/localization";
+import { uiCopy } from "@/lib/ui-copy";
+
 type HeroProps = {
   currentVideo?: string;
   title: string;
@@ -15,11 +21,13 @@ export default function Hero({
   onOpenContact,
   children,
 }: HeroProps) {
+  const { language } = useLanguage();
+
   return (
     <section id="showcase" className="relative h-screen w-full overflow-hidden">
       {currentVideo && (
         <video
-          key={title + currentVideo}
+          key={currentVideo}
           src={currentVideo}
           autoPlay
           muted
@@ -42,9 +50,10 @@ export default function Hero({
           <a
             href="https://www.youtube.com/@TheAssetHero"
             target="_blank"
+            rel="noreferrer"
             className="rounded-full bg-white px-8 py-3 font-semibold text-black transition hover:bg-zinc-200"
           >
-            VIEW CHANNEL
+            {resolveText(uiCopy.hero.viewChannel, language)}
           </a>
 
           <button
@@ -52,7 +61,7 @@ export default function Hero({
             onClick={onOpenContact}
             className="rounded-full border border-white px-8 py-3 transition hover:bg-white hover:text-black"
           >
-            CONTACT
+            {resolveText(uiCopy.hero.contact, language)}
           </button>
         </div>
       </div>

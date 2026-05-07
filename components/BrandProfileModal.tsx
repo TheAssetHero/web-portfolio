@@ -1,4 +1,10 @@
+"use client";
+
 import Image from "next/image";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { resolveText } from "@/lib/localization";
+import { uiCopy } from "@/lib/ui-copy";
 
 type BrandProfileModalProps = {
   isOpen: boolean;
@@ -9,6 +15,8 @@ export default function BrandProfileModal({
   isOpen,
   onClose,
 }: BrandProfileModalProps) {
+  const { language } = useLanguage();
+
   return (
     <div
       className={`fixed inset-0 z-[90] flex items-center justify-center bg-black/88 px-4 backdrop-blur-lg transition duration-300 sm:px-6 ${
@@ -35,7 +43,7 @@ export default function BrandProfileModal({
           type="button"
           onClick={onClose}
           className="absolute right-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-black/45 text-base text-white/72 transition hover:border-white/24 hover:bg-white/10 hover:text-white"
-          aria-label="Close profile reveal"
+          aria-label={resolveText(uiCopy.brand.closeAria, language)}
         >
           X
         </button>
@@ -59,7 +67,7 @@ export default function BrandProfileModal({
 
           <div className="flex flex-col justify-center">
             <p className="text-[0.68rem] uppercase tracking-[0.34em] text-white/38">
-              Creative Technology
+              {resolveText(uiCopy.brand.creativeTechnology, language)}
             </p>
 
             <h3
@@ -70,14 +78,11 @@ export default function BrandProfileModal({
             </h3>
 
             <p className="mt-6 max-w-3xl text-xl leading-8 text-white/84 sm:text-2xl sm:leading-9">
-              Creating high-end visuals, realtime experiences and cinematic
-              technology for modern production.
+              {resolveText(uiCopy.brand.statement, language)}
             </p>
 
             <p className="mt-6 max-w-2xl text-sm leading-7 text-white/46 sm:text-base">
-              Studio-focused direction across realtime visuals, cinematic
-              tooling, and modern production systems. This profile panel stays
-              intentionally restrained so the work remains the lead signal.
+              {resolveText(uiCopy.brand.note, language)}
             </p>
           </div>
         </div>

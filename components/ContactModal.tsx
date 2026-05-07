@@ -2,6 +2,10 @@
 
 import { ChangeEvent, FormEvent, useState } from "react";
 
+import { useLanguage } from "@/components/LanguageProvider";
+import { resolveText } from "@/lib/localization";
+import { uiCopy } from "@/lib/ui-copy";
+
 type FormFields = {
   name: string;
   email: string;
@@ -20,6 +24,7 @@ type ContactModalProps = {
 };
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const { language } = useLanguage();
   const [fields, setFields] = useState<FormFields>(initialFields);
 
   const handleChange = (
@@ -36,10 +41,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const subject = `Portfolio inquiry from ${fields.name}`;
+    const subject = `${resolveText(uiCopy.contact.subjectPrefix, language)} ${fields.name}`;
     const body = [
-      `Name: ${fields.name}`,
-      `Email: ${fields.email}`,
+      `${resolveText(uiCopy.contact.nameLabel, language)}: ${fields.name}`,
+      `${resolveText(uiCopy.contact.emailLabel, language)}: ${fields.email}`,
       "",
       fields.message,
     ].join("\n");
@@ -78,49 +83,58 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             type="button"
             onClick={onClose}
             className="absolute right-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-black/55 text-base text-white/72 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
-            aria-label="Close contact modal"
+            aria-label={resolveText(uiCopy.contact.closeAria, language)}
           >
             X
           </button>
 
           <div className="relative z-10">
             <p className="text-[0.68rem] uppercase tracking-[0.35em] text-white/42">
-              Contact
+              {resolveText(uiCopy.contact.label, language)}
             </p>
             <h2
               id="contact-modal-title"
               className="mt-3 max-w-2xl text-3xl font-semibold leading-tight text-white sm:text-4xl"
             >
-              Start a cinematic collaboration.
+              {resolveText(uiCopy.contact.title, language)}
             </h2>
             <p className="mt-4 max-w-lg text-sm leading-6 text-white/46 sm:text-base">
-              Share the shape of your project and I&apos;ll follow up with the
-              next step.
+              {resolveText(uiCopy.contact.description, language)}
             </p>
 
             <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
               <div className="grid gap-4 md:grid-cols-2">
                 <label className="block">
-                  <span className="sr-only">Name</span>
+                  <span className="sr-only">
+                    {resolveText(uiCopy.contact.nameLabel, language)}
+                  </span>
                   <input
                     type="text"
                     name="name"
                     value={fields.name}
                     onChange={handleChange}
-                    placeholder="Your name"
+                    placeholder={resolveText(
+                      uiCopy.contact.namePlaceholder,
+                      language
+                    )}
                     required
                     className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
                   />
                 </label>
 
                 <label className="block">
-                  <span className="sr-only">Email</span>
+                  <span className="sr-only">
+                    {resolveText(uiCopy.contact.emailLabel, language)}
+                  </span>
                   <input
                     type="email"
                     name="email"
                     value={fields.email}
                     onChange={handleChange}
-                    placeholder="Email address"
+                    placeholder={resolveText(
+                      uiCopy.contact.emailPlaceholder,
+                      language
+                    )}
                     required
                     className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
                   />
@@ -128,12 +142,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </div>
 
               <label className="block">
-                <span className="sr-only">Message</span>
+                <span className="sr-only">
+                  {resolveText(uiCopy.contact.messageLabel, language)}
+                </span>
                 <textarea
                   name="message"
                   value={fields.message}
                   onChange={handleChange}
-                  placeholder="Tell me about the world you want to build"
+                  placeholder={resolveText(
+                    uiCopy.contact.messagePlaceholder,
+                    language
+                  )}
                   required
                   rows={6}
                   className="w-full resize-none rounded-[1.6rem] border border-white/10 bg-white/[0.04] px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
@@ -145,7 +164,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   type="submit"
                   className="rounded-full border border-white/12 bg-zinc-200 px-7 py-3 text-sm font-semibold text-black shadow-[0_0_22px_rgba(255,255,255,0.06)] transition duration-300 hover:scale-[1.01] hover:border-white/18 hover:bg-zinc-100 hover:shadow-[0_0_28px_rgba(255,255,255,0.11)]"
                 >
-                  Send
+                  {resolveText(uiCopy.contact.send, language)}
                 </button>
               </div>
             </form>

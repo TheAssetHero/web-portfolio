@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 
 import BottomLauncherNav from "@/components/BottomLauncherNav";
 import Hero from "@/components/Hero";
+import { useLanguage } from "@/components/LanguageProvider";
 import { useOverlayController } from "@/components/OverlayController";
+import { resolveText } from "@/lib/localization";
 import {
   categoryOrder,
   CategoryKey,
@@ -27,6 +29,7 @@ function getRandomVideo(videos: readonly string[], current?: string) {
 }
 
 export default function Showcase() {
+  const { language } = useLanguage();
   const { isOverlayOpen, openContact } = useOverlayController();
   const [showcaseState, setShowcaseState] = useState(() => {
     const initialIndex = Math.floor(Math.random() * categoryOrder.length);
@@ -62,6 +65,11 @@ export default function Showcase() {
   const currentKey = categoryOrder[showcaseState.index];
   const currentCategory = portfolioCategories[currentKey];
   const currentVideo = showcaseState.videoMap[currentCategory.key];
+  const currentTitle = resolveText(currentCategory.heroTitle, language);
+  const currentDescription = resolveText(
+    currentCategory.heroDescription,
+    language
+  );
 
   const handleVideoEnd = () => {
     setShowcaseState((prev) => {
@@ -81,8 +89,8 @@ export default function Showcase() {
   return (
     <Hero
       currentVideo={currentVideo}
-      title={currentCategory.heroTitle}
-      description={currentCategory.heroDescription}
+      title={currentTitle}
+      description={currentDescription}
       onVideoEnd={handleVideoEnd}
       onOpenContact={openContact}
     >

@@ -2,9 +2,13 @@
 
 import Image from "next/image";
 
+import { useLanguage } from "@/components/LanguageProvider";
 import { useOverlayController } from "@/components/OverlayController";
+import { resolveText } from "@/lib/localization";
+import { uiCopy } from "@/lib/ui-copy";
 
 export default function BrandDiscoverySection() {
+  const { language } = useLanguage();
   const { openBrand } = useOverlayController();
 
   return (
@@ -20,7 +24,7 @@ export default function BrandDiscoverySection() {
             <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(260px,0.4fr)]">
               <div>
                 <p className="text-[0.68rem] uppercase tracking-[0.34em] text-white/34">
-                  Editorial Dossier
+                  {resolveText(uiCopy.brand.dossier, language)}
                 </p>
 
                 <button
@@ -29,12 +33,12 @@ export default function BrandDiscoverySection() {
                   className="mt-5 block text-left transition hover:text-white/92"
                 >
                   <h2 className="text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
-                    Who Is The Asset Hero?
+                    {resolveText(uiCopy.brand.heading, language)}
                   </h2>
                 </button>
 
                 <p className="mt-6 max-w-3xl text-xl leading-8 text-white/82 sm:text-2xl sm:leading-9">
-                  Creative technology behind cinematic systems.
+                  {resolveText(uiCopy.brand.teaser, language)}
                 </p>
 
                 <button
@@ -42,7 +46,7 @@ export default function BrandDiscoverySection() {
                   onClick={openBrand}
                   className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[0.68rem] uppercase tracking-[0.28em] text-white/58 transition hover:border-white/18 hover:bg-white/[0.06] hover:text-white"
                 >
-                  Enter
+                  {resolveText(uiCopy.brand.enter, language)}
                   <span className="text-white/30">/</span>
                 </button>
               </div>

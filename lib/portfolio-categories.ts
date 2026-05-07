@@ -1,3 +1,5 @@
+import { LocalizedText } from "@/lib/localization";
+
 export type CategoryKey = "ai" | "vp" | "3d" | "vfx" | "dev";
 
 export type CategoryCard = {
@@ -17,8 +19,8 @@ export type CategoryCard = {
 export type PortfolioCategory = {
   key: CategoryKey;
   label: string;
-  heroTitle: string;
-  heroDescription: string;
+  heroTitle: LocalizedText;
+  heroDescription: LocalizedText;
   modalDescription: string;
   textareaPlaceholder: string;
   panelTitle: string;
@@ -32,8 +34,14 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
   ai: {
     key: "ai",
     label: "AI",
-    heroTitle: "AI PRODUCTION",
-    heroDescription: "AI-assisted workflows.",
+    heroTitle: {
+      en: "AI PRODUCTION",
+      es: "PRODUCCION AI",
+    },
+    heroDescription: {
+      en: "AI-assisted workflows.",
+      es: "Flujos de trabajo asistidos por AI.",
+    },
     modalDescription:
       "Automation, rapid experiments, and AI-native creative tooling shaped for production velocity.",
     textareaPlaceholder:
@@ -89,8 +97,14 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
   vp: {
     key: "vp",
     label: "VP",
-    heroTitle: "VIRTUAL PRODUCTION",
-    heroDescription: "Unreal Engine pipelines.",
+    heroTitle: {
+      en: "VIRTUAL PRODUCTION",
+      es: "PRODUCCION VIRTUAL",
+    },
+    heroDescription: {
+      en: "Unreal Engine pipelines.",
+      es: "Pipelines en Unreal Engine.",
+    },
     modalDescription:
       "Realtime stages, previs, and pipeline thinking for premium virtual production execution.",
     textareaPlaceholder:
@@ -146,8 +160,14 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
   "3d": {
     key: "3d",
     label: "3D",
-    heroTitle: "3D PRODUCTION",
-    heroDescription: "From modeling to cinematic output.",
+    heroTitle: {
+      en: "3D PRODUCTION",
+      es: "PRODUCCION 3D",
+    },
+    heroDescription: {
+      en: "From modeling to cinematic output.",
+      es: "Del modelado a la salida cinematografica.",
+    },
     modalDescription:
       "Modeling, surfacing, automotive detail, and cinematic rendering across polished 3D pipelines.",
     textareaPlaceholder:
@@ -203,8 +223,14 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
   vfx: {
     key: "vfx",
     label: "VFX",
-    heroTitle: "VFX",
-    heroDescription: "Real-time and cinematic FX.",
+    heroTitle: {
+      en: "VFX",
+      es: "VFX",
+    },
+    heroDescription: {
+      en: "Real-time and cinematic FX.",
+      es: "FX en tiempo real y cinematicos.",
+    },
     modalDescription:
       "Niagara, simulations, compositing, and realtime effects assembled with cinematic control.",
     textareaPlaceholder:
@@ -260,8 +286,14 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
   dev: {
     key: "dev",
     label: "DEV",
-    heroTitle: "DEV / UI / UX",
-    heroDescription: "Interactive systems.",
+    heroTitle: {
+      en: "DEV / UI / UX",
+      es: "DEV / UI / UX",
+    },
+    heroDescription: {
+      en: "Interactive systems.",
+      es: "Sistemas interactivos.",
+    },
     modalDescription:
       "Plugins, systems, UI tooling, and Unreal-oriented development experiences with premium presentation.",
     textareaPlaceholder:

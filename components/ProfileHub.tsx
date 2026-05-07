@@ -1,10 +1,14 @@
 "use client";
 
+import { useLanguage } from "@/components/LanguageProvider";
 import { useOverlayController } from "@/components/OverlayController";
+import { resolveText } from "@/lib/localization";
 import { profileHubContent } from "@/lib/profile-hub-content";
 import { categoryOrder } from "@/lib/portfolio-categories";
+import { uiCopy } from "@/lib/ui-copy";
 
 export default function ProfileHub() {
+  const { language } = useLanguage();
   const { activeCategory, openCategory } = useOverlayController();
 
   return (
@@ -18,20 +22,19 @@ export default function ProfileHub() {
         <div className="relative z-10 grid items-start gap-10 lg:grid-cols-[minmax(240px,0.42fr)_minmax(0,1fr)]">
           <div className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
             <p className="text-[0.64rem] uppercase tracking-[0.32em] text-white/34">
-              Category Index
+              {resolveText(uiCopy.profileHub.categoryIndex, language)}
             </p>
             <h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl">
-              Cinematic fields and technical directions.
+              {resolveText(uiCopy.profileHub.fieldsTitle, language)}
             </h2>
             <p className="mt-4 text-sm leading-7 text-white/46 sm:text-base">
-              Open category overlays for editorial notes, releases, reels, and
-              technical previews without leaving the current experience.
+              {resolveText(uiCopy.profileHub.fieldsDescription, language)}
             </p>
           </div>
 
           <div>
             <p className="text-[0.68rem] uppercase tracking-[0.34em] text-white/34">
-              Editorial Content
+              {resolveText(uiCopy.profileHub.editorialContent, language)}
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
@@ -56,8 +59,7 @@ export default function ProfileHub() {
             </div>
 
             <p className="mt-8 max-w-2xl text-sm leading-7 text-white/44 sm:text-base">
-              Select a category to open a cinematic editorial overlay with
-              releases, project cards, reels, and technical notes.
+              {resolveText(uiCopy.profileHub.editorialDescription, language)}
             </p>
 
             <div className="mt-10 h-px w-full max-w-2xl bg-gradient-to-r from-white/18 via-white/6 to-transparent" />
