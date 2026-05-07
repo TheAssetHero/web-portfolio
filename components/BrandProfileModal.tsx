@@ -1,27 +1,28 @@
 import Image from "next/image";
 
 type BrandProfileModalProps = {
-  isVisible: boolean;
+  isOpen: boolean;
   onClose: () => void;
 };
 
 export default function BrandProfileModal({
-  isVisible,
+  isOpen,
   onClose,
 }: BrandProfileModalProps) {
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/82 px-4 backdrop-blur-md transition duration-300 sm:px-6 ${
-        isVisible ? "opacity-100" : "opacity-0"
+      className={`fixed inset-0 z-[90] flex items-center justify-center bg-black/88 px-4 backdrop-blur-lg transition duration-300 sm:px-6 ${
+        isOpen ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
+      aria-hidden={!isOpen}
       onClick={onClose}
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="brand-profile-modal-title"
-        className={`relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(10,10,12,0.98),rgba(4,4,6,0.95))] shadow-[0_0_56px_rgba(255,255,255,0.05)] transition duration-300 ${
-          isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
+        className={`relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(7,7,10,0.99),rgba(3,3,5,0.97))] shadow-[0_0_56px_rgba(0,0,0,0.5)] transition duration-300 ${
+          isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
         onClick={(event) => event.stopPropagation()}
       >

@@ -1,10 +1,9 @@
-import ContactModal from "@/components/ContactModal";
-
 type HeroProps = {
   currentVideo?: string;
   title: string;
   description: string;
   onVideoEnd: () => void;
+  onOpenContact: () => void;
   children: React.ReactNode;
 };
 
@@ -13,6 +12,7 @@ export default function Hero({
   title,
   description,
   onVideoEnd,
+  onOpenContact,
   children,
 }: HeroProps) {
   return (
@@ -29,12 +29,16 @@ export default function Hero({
         />
       )}
 
-      <div className="relative z-10 flex h-full flex-col justify-center px-24">
-        <h1 className="text-7xl font-bold leading-[0.9] drop-shadow-xl">{title}</h1>
+      <div className="relative z-10 flex h-full flex-col justify-center px-6 sm:px-10 lg:px-24">
+        <h1 className="max-w-4xl text-5xl font-bold leading-[0.9] drop-shadow-xl sm:text-6xl lg:text-7xl">
+          {title}
+        </h1>
 
-        <p className="mt-4 max-w-md text-lg text-white/90">{description}</p>
+        <p className="mt-4 max-w-md text-base text-white/90 sm:text-lg">
+          {description}
+        </p>
 
-        <div className="mt-6 flex gap-4">
+        <div className="mt-6 flex flex-wrap gap-4">
           <a
             href="https://www.youtube.com/@TheAssetHero"
             target="_blank"
@@ -43,7 +47,13 @@ export default function Hero({
             VIEW CHANNEL
           </a>
 
-          <ContactModal />
+          <button
+            type="button"
+            onClick={onOpenContact}
+            className="rounded-full border border-white px-8 py-3 transition hover:bg-white hover:text-black"
+          >
+            CONTACT
+          </button>
         </div>
       </div>
 

@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+import BottomLauncherNav from "@/components/BottomLauncherNav";
 import Hero from "@/components/Hero";
+import { useOverlayController } from "@/components/OverlayController";
 import {
   categoryOrder,
   CategoryKey,
@@ -25,6 +27,7 @@ function getRandomVideo(videos: readonly string[], current?: string) {
 }
 
 export default function Showcase() {
+  const { isOverlayOpen, openBrand, openContact } = useOverlayController();
   const [showcaseState, setShowcaseState] = useState(() => {
     const initialIndex = Math.floor(Math.random() * categoryOrder.length);
     const initialKey = categoryOrder[initialIndex];
@@ -81,37 +84,28 @@ export default function Showcase() {
       title={currentCategory.heroTitle}
       description={currentCategory.heroDescription}
       onVideoEnd={handleVideoEnd}
+      onOpenContact={openContact}
     >
-      <div className="absolute bottom-12 left-1/2 z-20 flex -translate-x-1/2 gap-10">
-        {categoryOrder.map((categoryKey, slideIndex) => (
-          <div
-            key={categoryKey}
-            onClick={() =>
-              setShowcaseState((prev) => ({
-                index: slideIndex,
-                videoMap: {
-                  ...prev.videoMap,
-                  [categoryKey]: getRandomVideo(
-                    videoBank[categoryKey],
-                    prev.videoMap[categoryKey]
-                  ),
-                },
-              }))
-            }
-            className={`relative cursor-pointer transition-all duration-300 ${
-              slideIndex === showcaseState.index
-                ? "scale-125 text-lg tracking-wide text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]"
-                : "text-sm text-white/40 hover:text-white/80"
-            }`}
-          >
-            {portfolioCategories[categoryKey].label}
+      <BottomLauncherNav
+        activeCategory={currentKey}
+        isHidden={isOverlayOpen}
+        onOpenBrand={openBrand}
+        onOpenContact={openContact}
+        onSelectCategory={(categoryKey) => {
+          const slideIndex = categoryOrder.indexOf(categoryKey);
 
-            {slideIndex === showcaseState.index && (
-              <div className="absolute left-0 -bottom-2 h-[2px] w-full rounded-full bg-white" />
-            )}
-          </div>
-        ))}
-      </div>
+          setShowcaseState((prev) => ({
+            index: slideIndex,
+            videoMap: {
+              ...prev.videoMap,
+              [categoryKey]: getRandomVideo(
+                videoBank[categoryKey],
+                prev.videoMap[categoryKey]
+              ),
+            },
+          }));
+        }}
+      />
     </Hero>
   );
 }

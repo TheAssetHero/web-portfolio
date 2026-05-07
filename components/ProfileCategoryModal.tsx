@@ -10,7 +10,7 @@ import { categoryOrder, CategoryKey } from "@/lib/portfolio-categories";
 type ProfileCategoryModalProps = {
   activeCategory: CategoryKey;
   activeItemId: string;
-  isVisible: boolean;
+  isOpen: boolean;
   onClose: () => void;
   onSelectCategory: (categoryKey: CategoryKey) => void;
   onSelectItem: (categoryKey: CategoryKey, itemId: string) => void;
@@ -47,7 +47,7 @@ function HubAction({ item }: { item: ProfileHubItem }) {
 export default function ProfileCategoryModal({
   activeCategory,
   activeItemId,
-  isVisible,
+  isOpen,
   onClose,
   onSelectCategory,
   onSelectItem,
@@ -58,25 +58,27 @@ export default function ProfileCategoryModal({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/78 px-4 backdrop-blur-md transition duration-300 sm:px-6 ${
-        isVisible ? "opacity-100" : "opacity-0"
+      className={`fixed inset-0 z-[90] flex items-center justify-center bg-black/88 px-4 backdrop-blur-lg transition duration-300 sm:px-6 ${
+        isOpen ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
+      aria-hidden={!isOpen}
       onClick={onClose}
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="profile-category-modal-title"
-        className={`relative flex max-h-[calc(100vh-2rem)] w-full max-w-7xl flex-col overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] shadow-[0_0_60px_rgba(255,255,255,0.06)] transition duration-300 sm:max-h-[calc(100vh-3rem)] ${
-          isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
+        className={`relative flex max-h-[calc(100vh-2rem)] w-full max-w-7xl flex-col overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(7,7,10,0.99),rgba(3,3,5,0.97))] shadow-[0_0_60px_rgba(0,0,0,0.5)] transition duration-300 sm:max-h-[calc(100vh-3rem)] ${
+          isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
         onClick={(event) => event.stopPropagation()}
       >
         <div className="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/8" />
+        <div className="pointer-events-none absolute inset-0 bg-black/44" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),transparent_22%)]" />
         <div className="pointer-events-none absolute inset-0 opacity-[0.04] bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:34px_34px]" />
-        <div className="pointer-events-none absolute -right-24 top-10 h-56 w-56 rounded-full bg-white/[0.05] blur-3xl motion-safe:animate-[breatheGlow_12s_ease-in-out_infinite]" />
-        <div className="pointer-events-none absolute -left-20 bottom-12 h-48 w-48 rounded-full bg-white/[0.04] blur-3xl motion-safe:animate-[breatheGlow_14s_ease-in-out_infinite]" />
+        <div className="pointer-events-none absolute -right-24 top-10 h-56 w-56 rounded-full bg-white/[0.04] blur-3xl motion-safe:animate-[breatheGlow_12s_ease-in-out_infinite]" />
+        <div className="pointer-events-none absolute -left-20 bottom-12 h-48 w-48 rounded-full bg-white/[0.03] blur-3xl motion-safe:animate-[breatheGlow_14s_ease-in-out_infinite]" />
 
         <button
           type="button"
@@ -129,7 +131,7 @@ export default function ProfileCategoryModal({
             </div>
 
             {category.feature && (
-              <article className="relative overflow-hidden rounded-[1.5rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
+              <article className="relative overflow-hidden rounded-[1.5rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_35%,rgba(125,211,252,0.04))]" />
 
