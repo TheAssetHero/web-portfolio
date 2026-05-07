@@ -17,9 +17,9 @@ export default function BottomLauncherNav({
         isHidden ? "pointer-events-none translate-y-4 opacity-0" : "opacity-100"
       }`}
     >
-      <div className="rounded-[1.75rem] border border-white/10 bg-black/58 px-3 py-3 shadow-[0_0_40px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:px-4 lg:px-5">
+      <div className="rounded-[1.5rem] border border-white/10 bg-black/55 px-2.5 py-2.5 shadow-[0_0_36px_rgba(0,0,0,0.42)] backdrop-blur-xl sm:px-3.5 lg:px-4">
         <div className="flex justify-center">
-          <div className="flex flex-wrap items-center justify-center gap-2 rounded-[1.4rem] border border-white/8 bg-white/[0.03] p-2">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 rounded-[1.2rem] border border-white/8 bg-white/[0.03] p-1.5">
             {categoryOrder.map((categoryKey) => {
               const isActive = categoryKey === activeCategory;
 
@@ -28,7 +28,7 @@ export default function BottomLauncherNav({
                   key={categoryKey}
                   type="button"
                   onClick={() => onSelectCategory(categoryKey)}
-                  className={`rounded-full px-3.5 py-2 text-[0.68rem] uppercase tracking-[0.28em] transition sm:px-4 ${
+                  className={`rounded-full px-3 py-1.5 text-[0.62rem] uppercase tracking-[0.24em] transition sm:px-3.5 ${
                     isActive
                       ? "border border-white/16 bg-white/12 text-white shadow-[0_0_22px_rgba(255,255,255,0.06)]"
                       : "border border-transparent bg-transparent text-white/48 hover:border-white/10 hover:bg-white/[0.05] hover:text-white/82"

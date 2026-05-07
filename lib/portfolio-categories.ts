@@ -19,6 +19,12 @@ export type PortfolioCategory = {
   label: string;
   heroTitle: string;
   heroDescription: string;
+  featureCard: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    cta: string;
+  };
   modalDescription: string;
   textareaPlaceholder: string;
   panelTitle: string;
@@ -34,6 +40,13 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
     label: "AI",
     heroTitle: "AI PRODUCTION",
     heroDescription: "AI-assisted workflows.",
+    featureCard: {
+      eyebrow: "AI / FEATURED",
+      title: "Runaway 2150 launch broadcast",
+      description:
+        "Original AI-driven worldbuilding, cinematic experimentation, and release-focused visual storytelling from The Asset Hero.",
+      cta: "EXPLORE AI",
+    },
     modalDescription:
       "Automation, rapid experiments, and AI-native creative tooling shaped for production velocity.",
     textareaPlaceholder:
@@ -91,6 +104,13 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
     label: "VP",
     heroTitle: "VIRTUAL PRODUCTION",
     heroDescription: "Unreal Engine pipelines.",
+    featureCard: {
+      eyebrow: "VP / REALTIME",
+      title: "Virtual production environments",
+      description:
+        "Realtime world assembly, look development, scene blocking, and immersive production workflows powered by Unreal.",
+      cta: "OPEN VP",
+    },
     modalDescription:
       "Realtime stages, previs, and pipeline thinking for premium virtual production execution.",
     textareaPlaceholder:
@@ -148,6 +168,13 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
     label: "3D",
     heroTitle: "3D PRODUCTION",
     heroDescription: "From modeling to cinematic output.",
+    featureCard: {
+      eyebrow: "3D / PRODUCTION",
+      title: "Hard-surface and full pipeline craft",
+      description:
+        "Modeling, surfacing, lighting, and cinematic output across automotive, concept, and production-focused 3D work.",
+      cta: "VIEW 3D",
+    },
     modalDescription:
       "Modeling, surfacing, automotive detail, and cinematic rendering across polished 3D pipelines.",
     textareaPlaceholder:
@@ -205,6 +232,13 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
     label: "VFX",
     heroTitle: "VFX",
     heroDescription: "Real-time and cinematic FX.",
+    featureCard: {
+      eyebrow: "VFX / MOTION",
+      title: "Effects, simulation, and impact",
+      description:
+        "Cinematic effects, destruction, atmospheric motion, and visual energy designed for stylized and high-end realtime shots.",
+      cta: "SEE VFX",
+    },
     modalDescription:
       "Niagara, simulations, compositing, and realtime effects assembled with cinematic control.",
     textareaPlaceholder:
@@ -262,6 +296,13 @@ export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
     label: "DEV",
     heroTitle: "DEV / UI / UX",
     heroDescription: "Interactive systems.",
+    featureCard: {
+      eyebrow: "DEV / SYSTEMS",
+      title: "Tools, interfaces, and workflow design",
+      description:
+        "UI systems, interaction ideas, creative tooling, and dev-oriented concepts built to support production and content pipelines.",
+      cta: "OPEN DEV",
+    },
     modalDescription:
       "Plugins, systems, UI tooling, and Unreal-oriented development experiences with premium presentation.",
     textareaPlaceholder:
