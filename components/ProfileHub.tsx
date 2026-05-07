@@ -1,20 +1,11 @@
 "use client";
 
-import ThematicCategoryGrid from "@/components/ThematicCategoryGrid";
 import { useOverlayController } from "@/components/OverlayController";
 import { profileHubContent } from "@/lib/profile-hub-content";
-import { categoryOrder, CategoryKey } from "@/lib/portfolio-categories";
+import { categoryOrder } from "@/lib/portfolio-categories";
 
-type ProfileHubProps = {
-  activeCategory: CategoryKey;
-  onCategorySelect: (categoryKey: CategoryKey) => void;
-};
-
-export default function ProfileHub({
-  activeCategory,
-  onCategorySelect,
-}: ProfileHubProps) {
-  const { openCategory } = useOverlayController();
+export default function ProfileHub() {
+  const { activeCategory, openCategory } = useOverlayController();
 
   return (
     <div className="rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] shadow-[0_0_60px_rgba(255,255,255,0.03)]">
@@ -24,69 +15,52 @@ export default function ProfileHub({
         <div className="pointer-events-none absolute -right-24 top-10 h-52 w-52 rounded-full bg-white/[0.05] blur-3xl motion-safe:animate-[breatheGlow_11s_ease-in-out_infinite]" />
         <div className="pointer-events-none absolute -left-20 bottom-16 h-44 w-44 rounded-full bg-white/[0.04] blur-3xl motion-safe:animate-[breatheGlow_13s_ease-in-out_infinite]" />
 
-        <div className="relative z-10">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-[0.64rem] uppercase tracking-[0.32em] text-white/34">
-                Editorial Categories
-              </p>
-              <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
-                Cinematic fields, production worlds, and systems thinking.
-              </h2>
-            </div>
-
-            <p className="max-w-xl text-sm leading-7 text-white/44 sm:text-base">
-              Use these thematic cards as the main category separators, then
-              open the lighter strip below when you want the dedicated editorial
-              modal for each field.
+        <div className="relative z-10 grid items-start gap-10 lg:grid-cols-[minmax(240px,0.42fr)_minmax(0,1fr)]">
+          <div className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+            <p className="text-[0.64rem] uppercase tracking-[0.32em] text-white/34">
+              Category Index
+            </p>
+            <h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl">
+              Cinematic fields and technical directions.
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-white/46 sm:text-base">
+              Open category overlays for editorial notes, releases, reels, and
+              technical previews without leaving the current experience.
             </p>
           </div>
 
-          <div className="mt-8">
-            <ThematicCategoryGrid
-              activeCategory={activeCategory}
-              onSelectCategory={onCategorySelect}
-            />
-          </div>
+          <div>
+            <p className="text-[0.68rem] uppercase tracking-[0.34em] text-white/34">
+              Editorial Content
+            </p>
 
-          <div className="mt-10 rounded-[1.6rem] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/32">
-                  Editorial Launcher
-                </p>
-                <p className="mt-3 text-sm leading-7 text-white/44 sm:text-base">
-                  Open each category overlay for releases, project cards, reels,
-                  and technical notes.
-                </p>
-              </div>
+            <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
+              {categoryOrder.map((categoryKey) => {
+                const isActive = categoryKey === activeCategory;
 
-              <div className="flex flex-wrap gap-2">
-                {categoryOrder.map((categoryKey) => {
-                  const isActive = categoryKey === activeCategory;
-
-                  return (
-                    <button
-                      key={categoryKey}
-                      type="button"
-                      onClick={() => {
-                        onCategorySelect(categoryKey);
-                        openCategory(categoryKey);
-                      }}
-                      className={`rounded-full border px-3.5 py-2 text-[0.66rem] uppercase tracking-[0.26em] transition ${
-                        isActive
-                          ? "border-white/18 bg-white/10 text-white shadow-[0_0_18px_rgba(255,255,255,0.05)]"
-                          : "border-white/10 bg-white/[0.03] text-white/45 hover:border-white/18 hover:bg-white/[0.05] hover:text-white/78"
-                      }`}
-                    >
-                      {profileHubContent[categoryKey].label}
-                    </button>
-                  );
-                })}
-              </div>
+                return (
+                  <button
+                    key={categoryKey}
+                    type="button"
+                    onClick={() => openCategory(categoryKey)}
+                    className={`rounded-full border px-4 py-2 text-[0.72rem] uppercase tracking-[0.28em] transition ${
+                      isActive
+                        ? "border-white/22 bg-white/10 text-white shadow-[0_0_24px_rgba(255,255,255,0.07)]"
+                        : "border-white/10 bg-white/[0.03] text-white/45 hover:border-white/18 hover:bg-white/[0.05] hover:text-white/78"
+                    }`}
+                  >
+                    {profileHubContent[categoryKey].label}
+                  </button>
+                );
+              })}
             </div>
 
-            <div className="mt-6 h-px w-full bg-gradient-to-r from-white/18 via-white/6 to-transparent" />
+            <p className="mt-8 max-w-2xl text-sm leading-7 text-white/44 sm:text-base">
+              Select a category to open a cinematic editorial overlay with
+              releases, project cards, reels, and technical notes.
+            </p>
+
+            <div className="mt-10 h-px w-full max-w-2xl bg-gradient-to-r from-white/18 via-white/6 to-transparent" />
           </div>
         </div>
       </div>
