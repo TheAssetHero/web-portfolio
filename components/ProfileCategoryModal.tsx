@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { useLanguage } from "@/components/LanguageProvider";
+import ProfileItemDetailPanel from "@/components/ProfileItemDetailPanel";
 import { Language, resolveText } from "@/lib/localization";
 import {
   profileHubContent,
@@ -61,9 +63,11 @@ function HubAction({
 function MinimalHubCard({
   item,
   language,
+  onOpenDetail,
 }: {
   item: ProfileHubItem;
   language: Language;
+  onOpenDetail: (item: ProfileHubItem) => void;
 }) {
   const className =
     "group relative flex aspect-square overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-4 text-left transition duration-300 hover:border-white/18 hover:bg-white/[0.05]";
@@ -93,6 +97,14 @@ function MinimalHubCard({
     </>
   );
 
+  if (item.detail) {
+    return (
+      <button type="button" onClick={() => onOpenDetail(item)} className={className}>
+        {content}
+      </button>
+    );
+  }
+
   if (item.linkKind === "internal") {
     return (
       <Link href={item.href} className={className}>
@@ -110,6 +122,66 @@ function MinimalHubCard({
     >
       {content}
     </a>
+  );
+}
+
+function AiCategoryContent({
+  items,
+  language,
+}: {
+  items: ProfileHubItem[];
+  language: Language;
+}) {
+  const [detailItemId, setDetailItemId] = useState<string | null>(null);
+  const detailItem =
+    detailItemId == null
+      ? null
+      : items.find((item) => item.id === detailItemId && item.detail);
+
+  return (
+    <>
+      <div className="grid gap-3 md:grid-cols-3">
+        {items.map((item) => (
+          <MinimalHubCard
+            key={item.id}
+            item={item}
+            language={language}
+            onOpenDetail={(selectedItem) => setDetailItemId(selectedItem.id)}
+          />
+        ))}
+      </div>
+
+      {detailItem?.detail ? (
+        <ProfileItemDetailPanel
+          title={resolveText(detailItem.title, language)}
+          subtitle={resolveText(detailItem.detail.subtitle, language)}
+          description={resolveText(detailItem.detail.description, language)}
+          videoUrl={detailItem.detail.videoUrl}
+          extraInfo={
+            detailItem.detail.extraInfo
+              ? resolveText(detailItem.detail.extraInfo, language)
+              : undefined
+          }
+          externalUrl={detailItem.detail.externalUrl}
+          externalCta={
+            detailItem.detail.externalCta
+              ? resolveText(detailItem.detail.externalCta, language)
+              : undefined
+          }
+          isOpen={detailItem != null}
+          onClose={() => setDetailItemId(null)}
+          closeAriaLabel={resolveText(
+            uiCopy.categoryModal.closeDetailAria,
+            language
+          )}
+          detailLabel={resolveText(uiCopy.categoryModal.detailLabel, language)}
+          detailInfoLabel={resolveText(
+            uiCopy.categoryModal.detailInfo,
+            language
+          )}
+        />
+      ) : null}
+    </>
   );
 }
 
@@ -278,11 +350,7 @@ export default function ProfileCategoryModal({
             )}
 
             {isAiCategory ? (
-              <div className="grid gap-3 md:grid-cols-3">
-                {category.items.map((item) => (
-                  <MinimalHubCard key={item.id} item={item} language={language} />
-                ))}
-              </div>
+              <AiCategoryContent items={category.items} language={language} />
             ) : (
               <>
                 <div

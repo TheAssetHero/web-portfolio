@@ -24,6 +24,14 @@ export type ProfileHubItem = {
         src: string;
         alt: string;
       };
+  detail?: {
+    subtitle: LocalizedText;
+    description: LocalizedText;
+    videoUrl: string;
+    externalUrl?: string;
+    externalCta?: LocalizedText;
+    extraInfo?: LocalizedText;
+  };
 };
 
 export type ProfileHubCategory = {
@@ -95,15 +103,15 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
     items: [
       {
         id: "ai-youtube",
-        eyebrow: t("Release / Featured", "Lanzamiento / Destacado"),
-        title: t("Anatomia al limite", "Anatomia al limite"),
+        eyebrow: t("AI / Featured", "AI / Destacado"),
+        title: t("Anatomía al límite", "Anatomía al límite"),
         description: t(
           "A compact AI release marker for worldbuilding experiments and launch-minded visual storytelling.",
           "Una senal compacta de lanzamiento AI para experimentos de worldbuilding y narrativa visual orientada a estrenos."
         ),
-        href: "https://www.youtube.com/@TheAssetHero",
-        cta: t("Watch release", "Ver lanzamiento"),
-        linkKind: "external",
+        href: "#",
+        cta: t("Open feature", "Abrir detalle"),
+        linkKind: "internal",
         accent: "from-zinc-100/12 via-black/10 to-cyan-300/14",
         thumbnail: {
           src: "/images/img1.jpeg",
@@ -113,17 +121,29 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
           type: "youtube",
           embedUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0",
         },
+        detail: {
+          subtitle: t("AI / Featured", "AI / Destacado"),
+          description: t(
+            "Editorial and audiovisual project presented as a featured release inside the AI Production area. This internal panel is designed to hold the main video and supporting project context.",
+            "Proyecto editorial y audiovisual presentado como pieza destacada dentro del area de AI Production. Aqui puede vivir el video principal y texto explicativo del proyecto."
+          ),
+          videoUrl: "/videos/ai1.mp4",
+          extraInfo: t(
+            "Built as a premium in-site feature panel so editorial launches can open without breaking the current experience.",
+            "Construido como un panel interno premium para que los lanzamientos editoriales se abran sin romper la experiencia actual."
+          ),
+        },
       },
       {
         id: "ai-tooling",
-        eyebrow: t("Tooling / Preview", "Herramientas / Preview"),
+        eyebrow: t("AI / Feature", "AI / Feature"),
         title: t("The Therians", "The Therians"),
         description: t(
           "A small-format project tile for AI concepts, interface experiments, and narrative release ideas.",
           "Una pieza de proyecto en formato pequeno para conceptos AI, experimentos de interfaz e ideas narrativas de lanzamiento."
         ),
-        href: "/#showcase",
-        cta: t("Open preview", "Abrir preview"),
+        href: "#",
+        cta: t("Open feature", "Abrir detalle"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-cyan-300/10",
         thumbnail: {
@@ -135,18 +155,30 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
           src: "/images/img2.png",
           alt: "AI interface lab poster",
         },
+        detail: {
+          subtitle: t("AI / Feature", "AI / Feature"),
+          description: t(
+            "A future-ready internal feature surface for AI concept releases, visual experiments, and editorial breakdowns.",
+            "Una superficie interna lista para crecer con lanzamientos de conceptos AI, experimentos visuales y breakdowns editoriales."
+          ),
+          videoUrl: "/videos/ai2.mp4",
+          extraInfo: t(
+            "Reserved for project footage, release notes, and optional outbound links when this piece expands.",
+            "Reservado para footage del proyecto, notas de lanzamiento y enlaces externos opcionales cuando esta pieza crezca."
+          ),
+        },
       },
       {
         id: "ai-reel",
-        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
+        eyebrow: t("AI / Feature", "AI / Feature"),
         title: t("Don Beto", "Don Beto"),
         description: t(
           "A restrained card for AI-driven short-form work and release-ready concept packaging.",
           "Una tarjeta sobria para trabajo AI en formato corto y empaquetado conceptual listo para lanzamiento."
         ),
-        href: "/videos/ai1.mp4",
-        cta: t("Play reel", "Ver reel"),
-        linkKind: "reel",
+        href: "#",
+        cta: t("Open feature", "Abrir detalle"),
+        linkKind: "internal",
         accent: "from-sky-400/16 via-transparent to-white/8",
         thumbnail: {
           src: "/images/img4.jpeg",
@@ -156,6 +188,18 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
           type: "poster",
           src: "/images/img4.jpeg",
           alt: "Agent workflow reel poster",
+        },
+        detail: {
+          subtitle: t("AI / Feature", "AI / Feature"),
+          description: t(
+            "An internal cinematic detail view for short-form AI storytelling, release framing, and modular project notes.",
+            "Una vista interna cinematografica para storytelling AI en formato corto, presentacion de lanzamiento y notas modulares del proyecto."
+          ),
+          videoUrl: "/videos/ai3.mp4",
+          extraInfo: t(
+            "Ready to carry future trailer links, supporting text, and release metadata without leaving the site.",
+            "Lista para llevar trailers futuros, texto de apoyo y metadata de lanzamiento sin salir del sitio."
+          ),
         },
       },
     ],

@@ -146,6 +146,18 @@ export const uiCopy = {
       en: "Close category modal",
       es: "Cerrar modal de categoria",
     },
+    closeDetailAria: {
+      en: "Close featured detail panel",
+      es: "Cerrar panel de detalle destacado",
+    },
+    detailLabel: {
+      en: "Featured Detail",
+      es: "Detalle destacado",
+    },
+    detailInfo: {
+      en: "Project Overview",
+      es: "Resumen del proyecto",
+    },
     play: {
       en: "Play",
       es: "Ver",
