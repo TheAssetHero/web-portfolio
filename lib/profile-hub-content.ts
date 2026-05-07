@@ -1,6 +1,8 @@
 import { LocalizedText } from "@/lib/localization";
 import { CategoryKey } from "@/lib/portfolio-categories";
 
+const s = (text: string): LocalizedText => ({ en: text, es: text });
+
 export type ProfileHubItem = {
   id: string;
   title: LocalizedText;
@@ -25,6 +27,14 @@ export type ProfileHubItem = {
         alt: string;
       };
   detail?: {
+    // --------------------------------------------------------------------------
+    // DETALLE INTERNO DE TARJETA
+    // - Subtítulo / categoría
+    // - Descripción principal
+    // - Video embebido o video local
+    // - Link externo opcional
+    // - Texto adicional opcional
+    // --------------------------------------------------------------------------
     subtitle: LocalizedText;
     description: LocalizedText;
     videoUrl: string;
@@ -39,15 +49,33 @@ export type ProfileHubCategory = {
   title: LocalizedText;
   description: LocalizedText;
   feature?: {
+    // --------------------------------------------------------------------------
+    // PROYECTO DESTACADO / NOTICIA PRINCIPAL
+    // - Eyebrow
+    // - Título principal
+    // - Subtítulo
+    // - Descripción
+    // - Video embebido
+    // - Botón
+    // - Link externo
+    // --------------------------------------------------------------------------
     eyebrow: LocalizedText;
-    headline: LocalizedText;
     title: LocalizedText;
     subtitle: LocalizedText;
     description: LocalizedText;
-    href?: string;
-    cta?: LocalizedText;
+    videoUrl: string;
+    buttonLabel?: LocalizedText;
+    externalUrl?: string;
   };
   announcements?: Array<{
+    // --------------------------------------------------------------------------
+    // TARJETA EDITORIAL SECUNDARIA
+    // - Título del proyecto
+    // - Headline
+    // - Badge de lanzamiento
+    // - Descripción
+    // - Botón / link
+    // --------------------------------------------------------------------------
     id: string;
     projectTitle: LocalizedText;
     headline: LocalizedText;
@@ -59,190 +87,163 @@ export type ProfileHubCategory = {
   items: ProfileHubItem[];
 };
 
-const t = (en: string, es: string): LocalizedText => ({ en, es });
-
 export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
+  // ============================================================================
+  // IA
+  // ============================================================================
   ai: {
     label: "AI",
-    title: t(
-      "Automation experiments and AI-native creative systems",
-      "Experimentos de automatizacion y sistemas creativos nativos de AI"
+    title: s("Producción, exploración y sistemas creativos con inteligencia artificial"),
+    description: s(
+      "Una mezcla cinematográfica de herramientas de AI, prototipos de flujo de trabajo y experimentos guiados por interfaz para la producción moderna."
     ),
-    description: t(
-      "A cinematic mix of AI tools, workflow prototypes, and interface-led experiments shaped for modern production.",
-      "Una mezcla cinematografica de herramientas de AI, prototipos de flujo de trabajo y experimentos guiados por interfaz para la produccion moderna."
-    ),
+
     feature: {
-      eyebrow: t("Featured Case Study", "Caso destacado"),
-      headline: t(
-        "El Primer comercial producido en IA",
-        "El Primer comercial producido en IA"
+      eyebrow: s("IA / Proyecto destacado"),
+      title: s("The Echelon AI Project"),
+      subtitle: s("Primer comercial en Latam completamente creado con IA."),
+      description: s(
+        "Una pieza experimental donde imagen, voz, edición y audio fueron desarrollados con inteligencia artificial para explorar nuevas formas de producción audiovisual, narrativa comercial y dirección visual."
       ),
-      title: t("The Echelon", "The Echelon"),
-      subtitle: t(
-        "Junto a Arx Studio",
-        "Junto a Arx Studio"
-      ),
-      description: t(
-        "A premium achievement marker positioned as the lead AI case study inside the editorial viewer, highlighting a fully AI-driven commercial production.",
-        "Un marcador de logro premium colocado como el caso principal de AI dentro de la vista editorial, destacando una produccion comercial impulsada completamente por inteligencia artificial."
-      ),
-      href: "https://vimeo.com/1190250981?share=copy&fl=sv&fe=ci",
-      cta: t("VER VIDEO", "VER VIDEO"),
+      videoUrl: "https://vimeo.com/1190250981?share=copy&fl=sv&fe=ci",
+      buttonLabel: s("Ver proyecto completo"),
+      externalUrl: "https://vimeo.com/1190250981?share=copy&fl=sv&fe=ci",
     },
+
     announcements: [
       {
         id: "rango-bravo-release",
-        projectTitle: t("The Rango Bravo", "The Rango Bravo"),
-        headline: t(
-          'Premiere of "Una Mas al Kilo"',
-          'Estreno de "Una Mas al Kilo"'
-        ),
-        releaseInfo: t(
-          "Premieres today at 1:00 PM",
-          "Estreno hoy a la 1:00 PM"
-        ),
-        description: t(
-          "Short film showing foreign vehicle failure statistics in 2025, without aiming at anyone in particular.",
-          "Cortometraje que muestra las estadisticas de fallas de vehiculos extranjeros en el ano 2025, sin tirarle a nadie en especifico."
+        projectTitle: s("The Rango Bravo"),
+        headline: s('Estreno de "Una Más al Kilo"'),
+        releaseInfo: s("Estreno hoy a la 1:00 PM"),
+        description: s(
+          "Cortometraje que muestra las estadísticas de fallas de vehículos extranjeros en el año 2025, sin tirarle a nadie en específico."
         ),
         href: "https://youtu.be/Y1UbzPnqJPo",
-        cta: t("WATCH VIDEO", "VER VIDEO"),
+        cta: s("Ver video"),
       },
     ],
+
     items: [
       {
         id: "ai-youtube",
-        eyebrow: t("AI / Featured", "AI / Destacado"),
-        title: t("Anatom\u00eda al l\u00edmite", "Anatom\u00eda al l\u00edmite"),
-        description: t(
-          "A compact AI release marker for worldbuilding experiments and launch-minded visual storytelling.",
-          "Una senal compacta de lanzamiento AI para experimentos de worldbuilding y narrativa visual orientada a estrenos."
+        eyebrow: s("AI / Destacado"),
+        title: s("Anatomía al límite"),
+        description: s(
+          "Pieza editorial compacta para experimentación audiovisual, tono de lanzamiento y narrativa visual dentro del área de AI."
         ),
         href: "#",
-        cta: t("Open feature", "Abrir detalle"),
+        cta: s("Abrir detalle"),
         linkKind: "internal",
         accent: "from-zinc-100/12 via-black/10 to-cyan-300/14",
         thumbnail: {
           src: "/images/img1.jpeg",
-          alt: "Runaway 2150 launch thumbnail",
+          alt: "Imagen destacada de Anatomía al límite",
         },
         media: {
           type: "youtube",
           embedUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0",
         },
         detail: {
-          subtitle: t("AI / Featured", "AI / Destacado"),
-          description: t(
-            "Editorial and audiovisual project presented as a featured release inside the AI Production area. This internal panel is designed to hold the main video and supporting project context.",
-            "Proyecto editorial y audiovisual presentado como pieza destacada dentro del area de AI Production. Aqui puede vivir el video principal y texto explicativo del proyecto."
+          subtitle: s("AI / Destacado"),
+          description: s(
+            "Proyecto editorial y audiovisual presentado como pieza destacada dentro del área de producción con AI. Aquí vive el video principal y el texto explicativo del proyecto."
           ),
           videoUrl: "/videos/ai1.mp4",
-          extraInfo: t(
-            "Built as a premium in-site feature panel so editorial launches can open without breaking the current experience.",
-            "Construido como un panel interno premium para que los lanzamientos editoriales se abran sin romper la experiencia actual."
+          extraInfo: s(
+            "Este bloque está pensado para crecer fácilmente con notas, contexto creativo, enlaces adicionales y futuras versiones del proyecto."
           ),
         },
       },
       {
         id: "ai-tooling",
-        eyebrow: t("AI / Feature", "AI / Feature"),
-        title: t("The Therians", "The Therians"),
-        description: t(
-          "A small-format project tile for AI concepts, interface experiments, and narrative release ideas.",
-          "Una pieza de proyecto en formato pequeno para conceptos AI, experimentos de interfaz e ideas narrativas de lanzamiento."
+        eyebrow: s("AI / Proyecto"),
+        title: s("The Therians"),
+        description: s(
+          "Tarjeta editorial de formato pequeño para conceptos AI, experimentos visuales y lanzamientos narrativos dentro del portafolio."
         ),
         href: "#",
-        cta: t("Open feature", "Abrir detalle"),
+        cta: s("Abrir detalle"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-cyan-300/10",
         thumbnail: {
           src: "/images/img2.png",
-          alt: "AI interface lab thumbnail",
+          alt: "Imagen destacada de The Therians",
         },
         media: {
           type: "poster",
           src: "/images/img2.png",
-          alt: "AI interface lab poster",
+          alt: "Poster de The Therians",
         },
         detail: {
-          subtitle: t("AI / Feature", "AI / Feature"),
-          description: t(
-            "A future-ready internal feature surface for AI concept releases, visual experiments, and editorial breakdowns.",
-            "Una superficie interna lista para crecer con lanzamientos de conceptos AI, experimentos visuales y breakdowns editoriales."
+          subtitle: s("AI / Proyecto"),
+          description: s(
+            "Superficie editorial interna para lanzamientos de concepto, pruebas visuales y piezas narrativas relacionadas con producción asistida por inteligencia artificial."
           ),
           videoUrl: "/videos/ai2.mp4",
-          extraInfo: t(
-            "Reserved for project footage, release notes, and optional outbound links when this piece expands.",
-            "Reservado para footage del proyecto, notas de lanzamiento y enlaces externos opcionales cuando esta pieza crezca."
+          extraInfo: s(
+            "Puedes editar aquí el video, el texto principal, los enlaces externos y cualquier información adicional del proyecto."
           ),
         },
       },
       {
         id: "ai-reel",
-        eyebrow: t("AI / Feature", "AI / Feature"),
-        title: t("Don Beto", "Don Beto"),
-        description: t(
-          "A restrained card for AI-driven short-form work and release-ready concept packaging.",
-          "Una tarjeta sobria para trabajo AI en formato corto y empaquetado conceptual listo para lanzamiento."
+        eyebrow: s("AI / Proyecto"),
+        title: s("Don Beto"),
+        description: s(
+          "Tarjeta sobria para trabajo corto en AI, presentación conceptual y empaquetado editorial listo para mostrarse dentro del sitio."
         ),
         href: "#",
-        cta: t("Open feature", "Abrir detalle"),
+        cta: s("Abrir detalle"),
         linkKind: "internal",
         accent: "from-sky-400/16 via-transparent to-white/8",
         thumbnail: {
           src: "/images/img4.jpeg",
-          alt: "Agent workflow reel thumbnail",
+          alt: "Imagen destacada de Don Beto",
         },
         media: {
           type: "poster",
           src: "/images/img4.jpeg",
-          alt: "Agent workflow reel poster",
+          alt: "Poster de Don Beto",
         },
         detail: {
-          subtitle: t("AI / Feature", "AI / Feature"),
-          description: t(
-            "An internal cinematic detail view for short-form AI storytelling, release framing, and modular project notes.",
-            "Una vista interna cinematografica para storytelling AI en formato corto, presentacion de lanzamiento y notas modulares del proyecto."
+          subtitle: s("AI / Proyecto"),
+          description: s(
+            "Vista interna cinematográfica para storytelling corto en AI, contexto editorial y futuras extensiones del proyecto dentro del portafolio."
           ),
           videoUrl: "/videos/ai3.mp4",
-          extraInfo: t(
-            "Ready to carry future trailer links, supporting text, and release metadata without leaving the site.",
-            "Lista para llevar trailers futuros, texto de apoyo y metadata de lanzamiento sin salir del sitio."
+          extraInfo: s(
+            "Este espacio también puede alojar trailers, notas técnicas, imágenes complementarias o enlaces externos cuando el proyecto lo necesite."
           ),
         },
       },
     ],
   },
+
+  // ============================================================================
+  // PRODUCCIÓN VIRTUAL
+  // ============================================================================
   vp: {
     label: "VP",
-    title: t(
-      "Virtual production reels and realtime environments",
-      "Reels de produccion virtual y entornos en tiempo real"
-    ),
-    description: t(
-      "Stagecraft, environment development, and realtime camera language assembled into a clean creative launch surface.",
-      "Stagecraft, desarrollo de entornos y lenguaje de camara en tiempo real reunidos en una superficie creativa limpia."
+    title: s("Reels de producción virtual y entornos en tiempo real"),
+    description: s(
+      "Stagecraft, desarrollo de entornos y lenguaje de cámara en tiempo real reunidos en una superficie creativa limpia."
     ),
     items: [
       {
         id: "vp-youtube",
-        eyebrow: t("YouTube / Featured", "YouTube / Destacado"),
-        title: t(
-          "Virtual production stage reel",
-          "Reel de escenario de produccion virtual"
-        ),
-        description: t(
-          "A featured embed space for realtime stage motion, previs framing, and Unreal-centric production studies.",
-          "Un espacio destacado para movimiento de escenario en tiempo real, encuadres de previs y estudios de produccion centrados en Unreal."
+        eyebrow: s("YouTube / Destacado"),
+        title: s("Reel de escenario de producción virtual"),
+        description: s(
+          "Espacio destacado para movimiento de escenario en tiempo real, previs y estudios de producción centrados en Unreal."
         ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: t("Watch breakdowns", "Ver breakdowns"),
+        cta: s("Ver breakdowns"),
         linkKind: "external",
         accent: "from-violet-300/18 via-white/7 to-cyan-300/18",
         thumbnail: {
           src: "/images/img3.jpeg",
-          alt: "Virtual production stage reel thumbnail",
+          alt: "Miniatura de reel de producción virtual",
         },
         media: {
           type: "youtube",
@@ -251,79 +252,73 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "vp-environment",
-        eyebrow: t("Environment / Preview", "Entorno / Preview"),
-        title: t(
-          "Realtime environment deck",
-          "Deck de entorno en tiempo real"
-        ),
-        description: t(
-          "Scalable scene language, lighting beats, and cinematic environment cues for virtual production pipelines.",
-          "Lenguaje de escena escalable, ritmos de iluminacion y claves cinematicas de entorno para pipelines de produccion virtual."
+        eyebrow: s("Entorno / Vista previa"),
+        title: s("Deck de entorno en tiempo real"),
+        description: s(
+          "Lenguaje de escena escalable, ritmos de iluminación y claves visuales para pipelines de producción virtual."
         ),
         href: "/#showcase",
-        cta: t("Open preview", "Abrir preview"),
+        cta: s("Abrir vista previa"),
         linkKind: "internal",
         accent: "from-white/15 via-transparent to-blue-300/10",
         thumbnail: {
           src: "/images/img1.jpeg",
-          alt: "Realtime environment deck thumbnail",
+          alt: "Miniatura de entorno en tiempo real",
         },
         media: {
           type: "poster",
           src: "/images/img1.jpeg",
-          alt: "Realtime environment deck poster",
+          alt: "Poster de entorno en tiempo real",
         },
       },
       {
         id: "vp-reel",
-        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
-        title: t("Stage motion reel", "Reel de movimiento de escenario"),
-        description: t(
-          "Realtime camera movement, cinematic blocking, and stage-driven visual flow for production-ready presentation.",
-          "Movimiento de camara en tiempo real, bloqueo cinematografico y flujo visual guiado por escenario para una presentacion lista para produccion."
+        eyebrow: s("Reel / Movimiento"),
+        title: s("Reel de movimiento de escenario"),
+        description: s(
+          "Movimiento de cámara, bloqueo cinematográfico y flujo visual guiado por escenario para presentación lista para producción."
         ),
         href: "/videos/vp1.mp4",
-        cta: t("Play reel", "Ver reel"),
+        cta: s("Ver reel"),
         linkKind: "reel",
         accent: "from-cyan-300/14 via-transparent to-white/8",
         thumbnail: {
           src: "/images/img4.jpeg",
-          alt: "Stage motion reel thumbnail",
+          alt: "Miniatura de reel de movimiento de escenario",
         },
         media: {
           type: "poster",
           src: "/images/img4.jpeg",
-          alt: "Stage motion reel poster",
+          alt: "Poster de reel de movimiento de escenario",
         },
       },
     ],
   },
+
+  // ============================================================================
+  // 3D
+  // ============================================================================
   "3d": {
     label: "3D",
-    title: t(
-      "Automotive renders and cinematic 3D shots",
-      "Renders automotrices y tomas 3D cinematicas"
-    ),
-    description: t(
-      "High-fidelity forms, product studies, and cinematic visual development framed as a premium interactive gallery.",
-      "Formas de alta fidelidad, estudios de producto y desarrollo visual cinematografico presentados como una galeria interactiva premium."
+    title: s("Renders automotrices y tomas 3D cinematográficas"),
+    description: s(
+      "Formas de alta fidelidad, estudios de producto y desarrollo visual cinematográfico presentados como una galería interactiva premium."
     ),
     items: [
       {
         id: "3d-youtube",
-        eyebrow: t("YouTube / Featured", "YouTube / Destacado"),
-        title: t("Cinematic 3D presentation", "Presentacion 3D cinematica"),
-        description: t(
-          "A featured video slot for polished render stories, lighting studies, and hero asset presentations.",
-          "Un espacio de video destacado para historias de render pulidas, estudios de iluminacion y presentaciones de assets hero."
+        eyebrow: s("YouTube / Destacado"),
+        title: s("Presentación 3D cinematográfica"),
+        description: s(
+          "Espacio destacado para historias de render, estudios de iluminación y presentación de assets hero."
         ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: t("Open gallery", "Abrir galeria"),
+        cta: s("Abrir galería"),
         linkKind: "external",
         accent: "from-zinc-200/14 via-white/7 to-amber-200/12",
         thumbnail: {
           src: "/images/img2.png",
-          alt: "Cinematic 3D presentation thumbnail",
+          alt: "Miniatura de presentación 3D",
         },
         media: {
           type: "youtube",
@@ -332,79 +327,73 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "3d-materials",
-        eyebrow: t("Lookdev / Preview", "Lookdev / Preview"),
-        title: t("Material study launcher", "Launcher de estudio de materiales"),
-        description: t(
-          "Surfaces, paint systems, and lighting direction arranged like a cinematic product configurator.",
-          "Superficies, sistemas de pintura y direccion de iluminacion organizados como un configurador cinematografico de producto."
+        eyebrow: s("Lookdev / Vista previa"),
+        title: s("Lanzador de estudio de materiales"),
+        description: s(
+          "Superficies, sistemas de pintura y dirección de iluminación organizados como un configurador cinematográfico."
         ),
         href: "/#profile-journal",
-        cta: t("Open preview", "Abrir preview"),
+        cta: s("Abrir vista previa"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-zinc-300/10",
         thumbnail: {
           src: "/images/img3.jpeg",
-          alt: "Material study launcher thumbnail",
+          alt: "Miniatura de estudio de materiales",
         },
         media: {
           type: "poster",
           src: "/images/img3.jpeg",
-          alt: "Material study launcher poster",
+          alt: "Poster de estudio de materiales",
         },
       },
       {
         id: "3d-reel",
-        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
-        title: t("Automotive render reel", "Reel de render automotriz"),
-        description: t(
-          "A polished motion piece focused on hard-surface confidence, camera rhythm, and premium render presentation.",
-          "Una pieza de movimiento pulida centrada en superficies duras, ritmo de camara y presentacion premium de render."
+        eyebrow: s("Reel / Movimiento"),
+        title: s("Reel de render automotriz"),
+        description: s(
+          "Pieza pulida enfocada en superficies duras, ritmo de cámara y presentación premium de render."
         ),
         href: "/videos/3d1.mp4",
-        cta: t("Play reel", "Ver reel"),
+        cta: s("Ver reel"),
         linkKind: "reel",
         accent: "from-amber-200/12 via-transparent to-white/8",
         thumbnail: {
           src: "/images/img4.jpeg",
-          alt: "Automotive render reel thumbnail",
+          alt: "Miniatura de reel automotriz",
         },
         media: {
           type: "poster",
           src: "/images/img4.jpeg",
-          alt: "Automotive render reel poster",
+          alt: "Poster de reel automotriz",
         },
       },
     ],
   },
+
+  // ============================================================================
+  // VFX
+  // ============================================================================
   vfx: {
     label: "VFX",
-    title: t(
-      "Niagara, simulations, and compositing launchers",
-      "Niagara, simulaciones y lanzadores de composicion"
-    ),
-    description: t(
-      "Realtime effects, layered motion, and shot-driven compositing previews shaped as a lightweight cinematic hub.",
-      "Efectos en tiempo real, movimiento por capas y avances de composicion orientados al shot, reunidos como un hub cinematografico ligero."
+    title: s("Niagara, simulaciones y lanzadores de composición"),
+    description: s(
+      "Efectos en tiempo real, movimiento por capas y avances de composición orientados al shot dentro de un hub cinematográfico ligero."
     ),
     items: [
       {
         id: "vfx-youtube",
-        eyebrow: t("YouTube / Featured", "YouTube / Destacado"),
-        title: t(
-          "Realtime effects breakdown",
-          "Breakdown de efectos en tiempo real"
-        ),
-        description: t(
-          "A featured embed area for Niagara timing, simulation studies, and realtime VFX breakdowns.",
-          "Un area destacada para timing en Niagara, estudios de simulacion y breakdowns VFX en tiempo real."
+        eyebrow: s("YouTube / Destacado"),
+        title: s("Breakdown de efectos en tiempo real"),
+        description: s(
+          "Área destacada para timing en Niagara, estudios de simulación y breakdowns VFX en tiempo real."
         ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: t("Watch feed", "Ver feed"),
+        cta: s("Ver feed"),
         linkKind: "external",
         accent: "from-fuchsia-300/18 via-white/8 to-cyan-300/18",
         thumbnail: {
           src: "/images/img1.jpeg",
-          alt: "Realtime effects breakdown thumbnail",
+          alt: "Miniatura de breakdown VFX",
         },
         media: {
           type: "youtube",
@@ -413,79 +402,73 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "vfx-preview",
-        eyebrow: t("Toolkit / Preview", "Toolkit / Preview"),
-        title: t("FX pack preview", "Preview de paquete FX"),
-        description: t(
-          "Reusable effect systems, cinematic atmospherics, and layered implementation details for premium shot work.",
-          "Sistemas de efectos reutilizables, atmosfericos cinematicos y detalles de implementacion por capas para trabajo de shot premium."
+        eyebrow: s("Toolkit / Vista previa"),
+        title: s("Vista previa de paquete FX"),
+        description: s(
+          "Sistemas reutilizables de efectos, atmósfera cinematográfica y detalles de implementación para shots premium."
         ),
         href: "/#profile-journal",
-        cta: t("Open preview", "Abrir preview"),
+        cta: s("Abrir vista previa"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-fuchsia-300/10",
         thumbnail: {
           src: "/images/img4.jpeg",
-          alt: "FX pack preview thumbnail",
+          alt: "Miniatura de paquete FX",
         },
         media: {
           type: "poster",
           src: "/images/img4.jpeg",
-          alt: "FX pack preview poster",
+          alt: "Poster de paquete FX",
         },
       },
       {
         id: "vfx-reel",
-        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
-        title: t("Niagara sequence reel", "Reel de secuencia Niagara"),
-        description: t(
-          "A cinematic reel for layered effects, atmospheric motion, and high-impact realtime timing.",
-          "Un reel cinematografico para efectos por capas, movimiento atmosferico y timing en tiempo real de alto impacto."
+        eyebrow: s("Reel / Movimiento"),
+        title: s("Reel de secuencia Niagara"),
+        description: s(
+          "Reel cinematográfico para efectos por capas, movimiento atmosférico y timing en tiempo real de alto impacto."
         ),
         href: "/videos/vfx1.mp4",
-        cta: t("Play reel", "Ver reel"),
+        cta: s("Ver reel"),
         linkKind: "reel",
         accent: "from-cyan-300/12 via-transparent to-white/8",
         thumbnail: {
           src: "/images/img3.jpeg",
-          alt: "Niagara sequence reel thumbnail",
+          alt: "Miniatura de secuencia Niagara",
         },
         media: {
           type: "poster",
           src: "/images/img3.jpeg",
-          alt: "Niagara sequence reel poster",
+          alt: "Poster de secuencia Niagara",
         },
       },
     ],
   },
+
+  // ============================================================================
+  // DESARROLLO
+  // ============================================================================
   dev: {
     label: "DEV",
-    title: t(
-      "Unreal systems, plugins, and technical tools",
-      "Sistemas de Unreal, plugins y herramientas tecnicas"
-    ),
-    description: t(
-      "Systems thinking, plugin launches, and technical tooling surfaced through a premium studio-style interface.",
-      "Pensamiento de sistemas, lanzamientos de plugins y herramientas tecnicas presentados a traves de una interfaz premium con estilo de estudio."
+    title: s("Sistemas en Unreal, plugins y herramientas técnicas"),
+    description: s(
+      "Pensamiento de sistemas, lanzamientos de plugins y herramientas técnicas presentadas a través de una interfaz premium con estilo de estudio."
     ),
     items: [
       {
         id: "dev-youtube",
-        eyebrow: t("YouTube / Featured", "YouTube / Destacado"),
-        title: t(
-          "Technical toolchain broadcast",
-          "Broadcast de toolchain tecnica"
-        ),
-        description: t(
-          "A featured embed for Unreal systems, workflow tooling, and technical demos presented with cinematic clarity.",
-          "Un embed destacado para sistemas de Unreal, herramientas de flujo de trabajo y demos tecnicas presentadas con claridad cinematografica."
+        eyebrow: s("YouTube / Destacado"),
+        title: s("Broadcast de toolchain técnica"),
+        description: s(
+          "Embed destacado para sistemas en Unreal, herramientas de flujo y demos técnicas presentadas con claridad cinematográfica."
         ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: t("Open channel", "Abrir canal"),
+        cta: s("Abrir canal"),
         linkKind: "external",
         accent: "from-emerald-300/16 via-white/8 to-cyan-300/16",
         thumbnail: {
           src: "/images/img2.png",
-          alt: "Technical toolchain broadcast thumbnail",
+          alt: "Miniatura de toolchain técnica",
         },
         media: {
           type: "youtube",
@@ -494,46 +477,44 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       },
       {
         id: "dev-plugin",
-        eyebrow: t("Plugins / Preview", "Plugins / Preview"),
-        title: t("Plugin shelf", "Vitrina de plugins"),
-        description: t(
-          "A clean launch surface for Unreal tools, plugin systems, and future technical product drops.",
-          "Una superficie limpia de lanzamiento para herramientas de Unreal, sistemas de plugins y futuros productos tecnicos."
+        eyebrow: s("Plugins / Vista previa"),
+        title: s("Vitrina de plugins"),
+        description: s(
+          "Superficie limpia para herramientas en Unreal, sistemas de plugins y futuros lanzamientos técnicos."
         ),
         href: "/#profile-journal",
-        cta: t("Open journal", "Abrir journal"),
+        cta: s("Abrir sección"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-emerald-300/10",
         thumbnail: {
           src: "/images/img1.jpeg",
-          alt: "Plugin shelf thumbnail",
+          alt: "Miniatura de vitrina de plugins",
         },
         media: {
           type: "poster",
           src: "/images/img1.jpeg",
-          alt: "Plugin shelf poster",
+          alt: "Poster de vitrina de plugins",
         },
       },
       {
         id: "dev-reel",
-        eyebrow: t("Reel / Motion", "Reel / Movimiento"),
-        title: t("Systems reel", "Reel de sistemas"),
-        description: t(
-          "A technical motion reel for workflow systems, creator-facing tools, and polished UI-driven engineering work.",
-          "Un reel tecnico de movimiento para sistemas de flujo de trabajo, herramientas orientadas al creador y trabajo de ingenieria guiado por UI."
+        eyebrow: s("Reel / Movimiento"),
+        title: s("Reel de sistemas"),
+        description: s(
+          "Reel técnico para sistemas de flujo, herramientas orientadas al creador y trabajo de ingeniería guiado por interfaz."
         ),
         href: "/videos/dev1.mp4",
-        cta: t("Play reel", "Ver reel"),
+        cta: s("Ver reel"),
         linkKind: "reel",
         accent: "from-cyan-300/12 via-transparent to-white/8",
         thumbnail: {
           src: "/images/img4.jpeg",
-          alt: "Systems reel thumbnail",
+          alt: "Miniatura de reel de sistemas",
         },
         media: {
           type: "poster",
           src: "/images/img4.jpeg",
-          alt: "Systems reel poster",
+          alt: "Poster de reel de sistemas",
         },
       },
     ],

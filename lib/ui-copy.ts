@@ -1,188 +1,99 @@
 import { LocalizedText } from "@/lib/localization";
 
+const s = (text: string): LocalizedText => ({ en: text, es: text });
+
 export const uiCopy = {
+  // ============================================================================
+  // HERO
+  // - Botón principal
+  // - Botón de contacto
+  // ============================================================================
   hero: {
-    viewChannel: {
-      en: "VIEW CHANNEL",
-      es: "VER CANAL",
-    },
-    contact: {
-      en: "CONTACT",
-      es: "CONTACTO",
-    },
+    viewChannel: s("VER CANAL"),
+    contact: s("CONTACTO"),
   },
+
+  // ============================================================================
+  // SECCIÓN EDITORIAL / CATEGORÍAS
+  // ============================================================================
   profileHub: {
-    categoryIndex: {
-      en: "Category Index",
-      es: "Indice de categorias",
-    },
-    fieldsTitle: {
-      en: "Cinematic fields and technical directions.",
-      es: "Campos cinematograficos y direccion tecnica.",
-    },
-    fieldsDescription: {
-      en: "Open category overlays for editorial notes, releases, reels, and technical previews without leaving the current experience.",
-      es: "Abre vistas de categoria para notas editoriales, lanzamientos, reels y avances tecnicos sin salir de la experiencia actual.",
-    },
-    editorialContent: {
-      en: "Editorial Content",
-      es: "Contenido editorial",
-    },
-    editorialDescription: {
-      en: "Select a category to open a cinematic editorial overlay with releases, project cards, reels, and technical notes.",
-      es: "Selecciona una categoria para abrir una vista editorial cinematografica con lanzamientos, proyectos, reels y notas tecnicas.",
-    },
+    categoryIndex: s("Índice de categorías"),
+    fieldsTitle: s("Campos cinematográficos y dirección técnica."),
+    fieldsDescription: s(
+      "Abre vistas de categoría para notas editoriales, lanzamientos, reels y avances técnicos sin salir de la experiencia actual."
+    ),
+    editorialContent: s("Contenido editorial"),
+    editorialDescription: s(
+      "Selecciona una categoría para abrir una vista editorial cinematográfica con lanzamientos, proyectos, reels y notas técnicas."
+    ),
   },
+
+  // ============================================================================
+  // SECCIÓN DE MARCA / PERFIL
+  // ============================================================================
   brand: {
-    dossier: {
-      en: "Editorial Dossier",
-      es: "Dossier Editorial",
-    },
-    heading: {
-      en: "Who Is The Asset Hero?",
-      es: "Quien es The Asset Hero?",
-    },
-    teaser: {
-      en: "Creative technology behind cinematic systems.",
-      es: "Tecnologia creativa detras de sistemas cinematograficos.",
-    },
-    enter: {
-      en: "Enter",
-      es: "Entrar",
-    },
-    creativeTechnology: {
-      en: "Creative Technology",
-      es: "Tecnologia Creativa",
-    },
-    statement: {
-      en: "Creating high-end visuals, realtime experiences and cinematic technology for modern production.",
-      es: "Creando visuales de alto nivel, experiencias en tiempo real y tecnologia cinematografica para la produccion moderna.",
-    },
-    note: {
-      en: "Studio-focused direction across realtime visuals, cinematic tooling, and modern production systems. This profile panel stays intentionally restrained so the work remains the lead signal.",
-      es: "Direccion enfocada en estudio a traves de visuales en tiempo real, herramientas cinematograficas y sistemas de produccion modernos. Este panel se mantiene intencionalmente sobrio para que el trabajo siga siendo la senal principal.",
-    },
-    closeAria: {
-      en: "Close brand profile modal",
-      es: "Cerrar modal de perfil de marca",
-    },
+    dossier: s("Dossier editorial"),
+    heading: s("¿Quién es The Asset Hero?"),
+    teaser: s("Tecnología creativa detrás de sistemas cinematográficos."),
+    enter: s("Entrar"),
+    creativeTechnology: s("Tecnología creativa"),
+    statement: s(
+      "Creando visuales de alto nivel, experiencias en tiempo real y tecnología cinematográfica para la producción moderna."
+    ),
+    note: s(
+      "Dirección enfocada en estudio a través de visuales en tiempo real, herramientas cinematográficas y sistemas de producción modernos. Este panel se mantiene intencionalmente sobrio para que el trabajo siga siendo la señal principal."
+    ),
+    closeAria: s("Cerrar modal de perfil de marca"),
   },
+
+  // ============================================================================
+  // MODAL DE CONTACTO
+  // ============================================================================
   contact: {
-    label: {
-      en: "Contact",
-      es: "Contacto",
-    },
-    title: {
-      en: "Start a cinematic collaboration.",
-      es: "Inicia una colaboracion cinematografica.",
-    },
-    description: {
-      en: "Share the shape of your project and I'll follow up with the next step.",
-      es: "Comparte la forma de tu proyecto y te dare seguimiento con el siguiente paso.",
-    },
-    namePlaceholder: {
-      en: "Your name",
-      es: "Tu nombre",
-    },
-    emailPlaceholder: {
-      en: "Email address",
-      es: "Correo electronico",
-    },
-    messagePlaceholder: {
-      en: "Tell me about the world you want to build",
-      es: "Cuentame sobre el mundo que quieres construir",
-    },
-    send: {
-      en: "Send",
-      es: "Enviar",
-    },
-    subjectPrefix: {
-      en: "Portfolio inquiry from",
-      es: "Consulta de portafolio de",
-    },
-    nameLabel: {
-      en: "Name",
-      es: "Nombre",
-    },
-    emailLabel: {
-      en: "Email",
-      es: "Correo",
-    },
-    messageLabel: {
-      en: "Message",
-      es: "Mensaje",
-    },
-    closeAria: {
-      en: "Close contact modal",
-      es: "Cerrar modal de contacto",
-    },
+    label: s("Contacto"),
+    title: s("Inicia una colaboración cinematográfica."),
+    description: s(
+      "Comparte la forma de tu proyecto y te daré seguimiento con el siguiente paso."
+    ),
+    namePlaceholder: s("Tu nombre"),
+    emailPlaceholder: s("Correo electrónico"),
+    messagePlaceholder: s("Cuéntame sobre el mundo que quieres construir"),
+    send: s("Enviar"),
+    subjectPrefix: s("Consulta de portafolio de"),
+    nameLabel: s("Nombre"),
+    emailLabel: s("Correo"),
+    messageLabel: s("Mensaje"),
+    closeAria: s("Cerrar modal de contacto"),
   },
+
+  // ============================================================================
+  // MODALES DE CATEGORÍA / DETALLES
+  // ============================================================================
   categoryModal: {
-    editorialFeature: {
-      en: "Editorial Feature",
-      es: "Destacado editorial",
-    },
-    featuredProject: {
-      en: "Featured Project",
-      es: "Proyecto destacado",
-    },
-    featuredProjects: {
-      en: "Featured Projects",
-      es: "Proyectos destacados",
-    },
-    editorialNote: {
-      en: "Editorial Note",
-      es: "Nota editorial",
-    },
-    featuredDirection: {
-      en: "Featured direction",
-      es: "Direccion destacada",
-    },
-    editorialSuffix: {
-      en: "Each category opens like a digital feature spread, combining reels, article-style notes, and launch-ready previews inside a focused cinematic overlay.",
-      es: "Cada categoria se abre como un despliegue editorial digital, combinando reels, notas de estilo articulo y avances listos para lanzamiento dentro de una vista cinematografica enfocada.",
-    },
-    closeAria: {
-      en: "Close category modal",
-      es: "Cerrar modal de categoria",
-    },
-    closeDetailAria: {
-      en: "Close featured detail panel",
-      es: "Cerrar panel de detalle destacado",
-    },
-    detailLabel: {
-      en: "Featured Detail",
-      es: "Detalle destacado",
-    },
-    detailInfo: {
-      en: "Project Overview",
-      es: "Resumen del proyecto",
-    },
-    play: {
-      en: "Play",
-      es: "Ver",
-    },
-    open: {
-      en: "Open",
-      es: "Abrir",
-    },
-    video: {
-      en: "Video",
-      es: "Video",
-    },
-    reel: {
-      en: "Reel",
-      es: "Reel",
-    },
-    preview: {
-      en: "Preview",
-      es: "Preview",
-    },
+    editorialFeature: s("Destacado editorial"),
+    featuredProject: s("Proyecto destacado"),
+    featuredProjects: s("Proyectos destacados"),
+    editorialNote: s("Nota editorial"),
+    featuredDirection: s("Dirección destacada"),
+    editorialSuffix: s(
+      "Cada categoría se abre como un despliegue editorial digital, combinando reels, notas de estilo artículo y avances listos para lanzamiento dentro de una vista cinematográfica enfocada."
+    ),
+    closeAria: s("Cerrar modal de categoría"),
+    closeDetailAria: s("Cerrar panel de detalle destacado"),
+    detailLabel: s("Detalle destacado"),
+    detailInfo: s("Resumen del proyecto"),
+    play: s("Ver"),
+    open: s("Abrir"),
+    video: s("Video"),
+    reel: s("Reel"),
+    preview: s("Vista previa"),
   },
+
+  // ============================================================================
+  // SELECTOR DE IDIOMA
+  // - Se conserva la estructura por si se reactiva visualmente más adelante.
+  // ============================================================================
   language: {
-    label: {
-      en: "Language",
-      es: "Idioma",
-    },
+    label: s("Idioma"),
   },
 } satisfies Record<string, Record<string, LocalizedText>>;
