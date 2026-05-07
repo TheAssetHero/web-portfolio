@@ -75,20 +75,20 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
     feature: {
       eyebrow: t("Featured Case Study", "Caso destacado"),
       headline: t(
-        "First commercial in LATAM made completely with AI",
-        "Primer comercial en LATAM completamente en IA"
+        "El Primer comercial producido en IA",
+        "El Primer comercial producido en IA"
       ),
-      title: t("The Echelon AI Project", "The Echelon AI Project"),
+      title: t("The Echelon", "The Echelon"),
       subtitle: t(
-        "Voice, image, and audio generated with artificial intelligence.",
-        "Voz, imagen y audio generados con inteligencia artificial."
+        "Junto a Arx Studio",
+        "Junto a Arx Studio"
       ),
       description: t(
         "A premium achievement marker positioned as the lead AI case study inside the editorial viewer, highlighting a fully AI-driven commercial production.",
         "Un marcador de logro premium colocado como el caso principal de AI dentro de la vista editorial, destacando una produccion comercial impulsada completamente por inteligencia artificial."
       ),
-      href: "https://www.behance.net/gallery/245574455/The-Echelon-AI-Project",
-      cta: t("VIEW PROJECT", "VER PROYECTO"),
+      href: "https://vimeo.com/1190250981?share=copy&fl=sv&fe=ci",
+      cta: t("VER VIDEO", "VER VIDEO"),
     },
     announcements: [
       {

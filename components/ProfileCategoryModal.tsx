@@ -279,37 +279,48 @@ export default function ProfileCategoryModal({
             {isAiCategory && category.feature && (
               <article className="relative overflow-hidden rounded-[1.6rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_35%,rgba(125,211,252,0.04))]" />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_32%,rgba(74,222,128,0.06))]" />
+                <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/45 to-transparent" />
+                <div className="pointer-events-none absolute bottom-0 left-8 h-px w-32 bg-gradient-to-r from-emerald-300/50 to-transparent" />
 
-                <div className="relative z-10 max-w-4xl">
-                  <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/36">
-                    {resolveText(category.feature.eyebrow, language)}
-                  </p>
-                  <h4 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.4rem]">
-                    {resolveText(category.feature.headline, language)}
-                  </h4>
-                  <p className="mt-3 max-w-3xl text-base leading-7 text-white/64 sm:text-lg">
-                    {resolveText(category.feature.subtitle, language)}
-                  </p>
-                  <p className="mt-5 max-w-3xl text-sm leading-7 text-white/46 sm:text-base">
-                    {resolveText(category.feature.description, language)}
-                  </p>
+                <div className="relative z-10 lg:grid lg:grid-cols-[minmax(0,0.62fr)_minmax(220px,0.38fr)] lg:gap-10">
+                  <div className="min-w-0">
+                    <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/38">
+                      {resolveText(category.feature.eyebrow, language)}
+                    </p>
+                    <h4 className="mt-4 max-w-none text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[3rem] lg:leading-[1.02] xl:text-[3.25rem]">
+                      {resolveText(category.feature.headline, language)}
+                    </h4>
+                    <p className="mt-4 max-w-none text-base leading-7 text-white/68 sm:text-lg sm:leading-8 lg:max-w-[52rem]">
+                      {resolveText(category.feature.subtitle, language)}
+                    </p>
+                    <p className="mt-5 max-w-none text-sm leading-7 text-white/46 sm:text-base lg:max-w-[50rem]">
+                      {resolveText(category.feature.description, language)}
+                    </p>
+                  </div>
 
-                  {category.feature.href && category.feature.cta ? (
-                    <div className="mt-6">
+                  <div className="mt-6 flex flex-col items-start justify-between gap-6 lg:mt-0 lg:items-end lg:text-right">
+                    <div className="w-full rounded-[1.2rem] border border-white/10 bg-white/[0.03] px-4 py-4 lg:max-w-[18rem]">
+                      <div className="h-px w-full bg-gradient-to-r from-emerald-300/55 via-emerald-200/18 to-transparent lg:ml-auto" />
+                      <p className="mt-4 text-[0.64rem] uppercase tracking-[0.28em] text-white/34">
+                        {resolveText(category.feature.title, language)}
+                      </p>
+                    </div>
+
+                    {category.feature.href && category.feature.cta ? (
                       <a
                         href={category.feature.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/78 transition hover:border-white/22 hover:bg-white/[0.1] hover:text-white"
+                        className="inline-flex items-center gap-2 rounded-full border border-emerald-300/18 bg-white/[0.06] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/78 transition hover:border-emerald-300/32 hover:bg-white/[0.1] hover:text-white"
                       >
                         {resolveText(category.feature.cta, language)}
-                        <span className="text-white/34">
+                        <span className="text-emerald-200/46">
                           {resolveText(uiCopy.categoryModal.open, language)}
                         </span>
                       </a>
-                    </div>
-                  ) : null}
+                    ) : null}
+                  </div>
                 </div>
               </article>
             )}
