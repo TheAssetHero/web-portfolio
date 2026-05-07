@@ -23,6 +23,67 @@ type ProfileCategoryModalProps = {
   onSelectItem: (categoryKey: CategoryKey, itemId: string) => void;
 };
 
+function getEmbeddedMediaUrl(videoUrl: string) {
+  if (videoUrl.includes("player.vimeo.com/video/")) {
+    return videoUrl;
+  }
+
+  const vimeoMatch = videoUrl.match(/vimeo\.com\/(\d+)/);
+  if (vimeoMatch) {
+    return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+  }
+
+  if (videoUrl.includes("youtube.com/embed/")) {
+    return videoUrl;
+  }
+
+  const youtubeShortMatch = videoUrl.match(/youtu\.be\/([^?&]+)/);
+  if (youtubeShortMatch) {
+    return `https://www.youtube-nocookie.com/embed/${youtubeShortMatch[1]}?rel=0`;
+  }
+
+  const youtubeLongMatch = videoUrl.match(/[?&]v=([^?&]+)/);
+  if (youtubeLongMatch) {
+    return `https://www.youtube-nocookie.com/embed/${youtubeLongMatch[1]}?rel=0`;
+  }
+
+  return null;
+}
+
+function EmbeddedVideoPreview({
+  title,
+  videoUrl,
+}: {
+  title: string;
+  videoUrl: string;
+}) {
+  const embeddedUrl = getEmbeddedMediaUrl(videoUrl);
+
+  return (
+    <div className="overflow-hidden rounded-[1.45rem] border border-white/10 bg-black/80 shadow-[0_0_28px_rgba(74,222,128,0.07)]">
+      <div className="relative aspect-video w-full">
+        {embeddedUrl ? (
+          <iframe
+            src={embeddedUrl}
+            title={`${title} preview`}
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            className="relative z-10 h-full w-full"
+          />
+        ) : (
+          <video
+            src={videoUrl}
+            controls
+            playsInline
+            className="relative z-10 h-full w-full object-cover"
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
 function HubAction({
   item,
   language,
@@ -198,18 +259,10 @@ function AiCampaignBanner({
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-[1.45rem] border border-white/10 bg-black/80 shadow-[0_0_28px_rgba(74,222,128,0.07)]">
-          <div className="relative aspect-video w-full">
-            <iframe
-              src={videoUrl}
-              title={`${resolveText(title, language)} preview`}
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className="h-full w-full"
-            />
-          </div>
-        </div>
+        <EmbeddedVideoPreview
+          title={resolveText(title, language)}
+          videoUrl={videoUrl}
+        />
       </div>
     </article>
   );
@@ -223,6 +276,7 @@ function AiCompactFeatureCard({
   cta,
   href,
   badge,
+  previewVideoUrl,
 }: {
   eyebrow: string;
   title: string;
@@ -231,6 +285,7 @@ function AiCompactFeatureCard({
   cta: string;
   href: string;
   badge?: string;
+  previewVideoUrl?: string;
 }) {
   return (
     <article className="relative overflow-hidden rounded-[1.55rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_28px_rgba(255,255,255,0.04)] sm:p-6">
@@ -238,8 +293,8 @@ function AiCompactFeatureCard({
       <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
       <div className="pointer-events-none absolute bottom-0 left-8 h-px w-32 bg-gradient-to-r from-emerald-300/42 to-transparent" />
 
-      <div className="relative z-10 flex h-full min-h-[18rem] flex-col justify-between">
-        <div className="max-w-3xl">
+      <div className={`relative z-10 ${previewVideoUrl ? "grid gap-5 xl:grid-cols-[minmax(0,0.94fr)_minmax(220px,0.86fr)] xl:items-center" : "flex h-full min-h-[18rem] flex-col justify-between"}`}>
+        <div className={previewVideoUrl ? "min-w-0" : "max-w-3xl"}>
           <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
             {eyebrow}
           </p>
@@ -259,18 +314,22 @@ function AiCompactFeatureCard({
           <p className="mt-5 max-w-3xl text-sm leading-7 text-white/48 sm:text-base">
             {description}
           </p>
+
+          <div className="mt-6">
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
+            >
+              {cta}
+            </a>
+          </div>
         </div>
 
-        <div className="mt-6">
-          <a
-            href={href}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
-          >
-            {cta}
-          </a>
-        </div>
+        {previewVideoUrl ? (
+          <EmbeddedVideoPreview title={title} videoUrl={previewVideoUrl} />
+        ) : null}
       </div>
     </article>
   );
@@ -350,6 +409,7 @@ function AiCategoryContent({
               language
             )}
             href={bmwFeature.externalUrl ?? bmwFeature.videoUrl}
+            previewVideoUrl={bmwFeature.videoUrl}
           />
         ) : null}
       </div>
