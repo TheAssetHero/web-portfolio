@@ -44,6 +44,8 @@ export type ProfileHubCategory = {
     title: LocalizedText;
     subtitle: LocalizedText;
     description: LocalizedText;
+    href?: string;
+    cta?: LocalizedText;
   };
   announcements?: Array<{
     id: string;
@@ -71,14 +73,22 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       "Una mezcla cinematografica de herramientas de AI, prototipos de flujo de trabajo y experimentos guiados por interfaz para la produccion moderna."
     ),
     feature: {
-      eyebrow: t("Featured Release", "Lanzamiento destacado"),
-      headline: t("NOW AVAILABLE", "YA ESTA DISPONIBLE"),
-      title: t("PART ONE - RUNAWAY 2150", "PRIMERA PARTE - RUNAWAY 2150"),
-      subtitle: t("ALL AI PRODUCTION", "PRODUCCION TOTALMENTE AI"),
-      description: t(
-        "A premium project announcement framed like a mysterious cinematic drop, positioned as the lead AI release inside the editorial viewer.",
-        "Un anuncio premium de proyecto presentado como un misterioso estreno cinematografico, colocado como el lanzamiento principal de AI dentro de la vista editorial."
+      eyebrow: t("Featured Case Study", "Caso destacado"),
+      headline: t(
+        "First commercial in LATAM made completely with AI",
+        "Primer comercial en LATAM completamente en IA"
       ),
+      title: t("The Echelon AI Project", "The Echelon AI Project"),
+      subtitle: t(
+        "Voice, image, and audio generated with artificial intelligence.",
+        "Voz, imagen y audio generados con inteligencia artificial."
+      ),
+      description: t(
+        "A premium achievement marker positioned as the lead AI case study inside the editorial viewer, highlighting a fully AI-driven commercial production.",
+        "Un marcador de logro premium colocado como el caso principal de AI dentro de la vista editorial, destacando una produccion comercial impulsada completamente por inteligencia artificial."
+      ),
+      href: "https://www.behance.net/gallery/245574455/The-Echelon-AI-Project",
+      cta: t("VIEW PROJECT", "VER PROYECTO"),
     },
     announcements: [
       {
@@ -104,7 +114,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       {
         id: "ai-youtube",
         eyebrow: t("AI / Featured", "AI / Destacado"),
-        title: t("Anatomía al límite", "Anatomía al límite"),
+        title: t("Anatom\u00eda al l\u00edmite", "Anatom\u00eda al l\u00edmite"),
         description: t(
           "A compact AI release marker for worldbuilding experiments and launch-minded visual storytelling.",
           "Una senal compacta de lanzamiento AI para experimentos de worldbuilding y narrativa visual orientada a estrenos."
