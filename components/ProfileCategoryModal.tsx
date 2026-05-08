@@ -136,14 +136,16 @@ function AiEditorialBanner({
   const title = resolveText(item.title, language);
   const description = resolveText(item.description, language);
   const cta =
-    item.id === "ai-youtube"
+    item.id === "ai-youtube" || item.id === "ai-tooling" || item.id === "ai-reel"
       ? resolveText(item.cta, language)
       : language === "es"
         ? "Próximamente"
         : "Coming soon";
   const className =
     "group relative overflow-hidden rounded-[1.55rem] border border-white/12 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] text-left shadow-[0_0_28px_rgba(255,255,255,0.04)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_0_34px_rgba(255,255,255,0.06)]";
-  const isInteractive = item.id === "ai-youtube" && Boolean(item.detail);
+  const isInteractive =
+    (item.id === "ai-youtube" || item.id === "ai-tooling" || item.id === "ai-reel") &&
+    Boolean(item.detail);
 
   const content = (
     <>
@@ -288,13 +290,13 @@ function AiCompactFeatureCard({
   previewVideoUrl?: string;
 }) {
   return (
-    <article className="relative overflow-hidden rounded-[1.55rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_28px_rgba(255,255,255,0.04)] sm:p-6">
+    <article className="relative h-full overflow-hidden rounded-[1.55rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_28px_rgba(255,255,255,0.04)] sm:p-6">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_45%)]" />
       <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
       <div className="pointer-events-none absolute bottom-0 left-8 h-px w-32 bg-gradient-to-r from-emerald-300/42 to-transparent" />
 
-      <div className={`relative z-10 ${previewVideoUrl ? "grid gap-5 xl:grid-cols-[minmax(0,0.94fr)_minmax(220px,0.86fr)] xl:items-center" : "flex h-full min-h-[18rem] flex-col justify-between"}`}>
-        <div className={previewVideoUrl ? "min-w-0" : "max-w-3xl"}>
+      <div className="relative z-10 flex h-full min-h-[21rem] flex-col">
+        <div className="max-w-3xl">
           <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
             {eyebrow}
           </p>
@@ -314,43 +316,45 @@ function AiCompactFeatureCard({
           <p className="mt-5 max-w-3xl text-sm leading-7 text-white/48 sm:text-base">
             {description}
           </p>
-
-          <div className="mt-6">
-            <a
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
-            >
-              {cta}
-            </a>
-          </div>
         </div>
 
         {previewVideoUrl ? (
-          <EmbeddedVideoPreview title={title} videoUrl={previewVideoUrl} />
+          <div className="mt-6">
+            <EmbeddedVideoPreview title={title} videoUrl={previewVideoUrl} />
+          </div>
         ) : null}
+
+        <div className="mt-6">
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
+          >
+            {cta}
+          </a>
+        </div>
       </div>
     </article>
   );
 }
 
 function AiCategoryContent({
-  announcements,
+  feature,
   campaignBanner,
   secondaryFeatures,
   items,
   language,
 }: {
-  announcements?: Array<{
-    id: string;
-    projectTitle: { en: string; es: string };
-    headline: { en: string; es: string };
-    releaseInfo: { en: string; es: string };
+  feature?: {
+    eyebrow: { en: string; es: string };
+    title: { en: string; es: string };
+    subtitle: { en: string; es: string };
     description: { en: string; es: string };
-    href: string;
-    cta: { en: string; es: string };
-  }>;
+    videoUrl: string;
+    buttonLabel?: { en: string; es: string };
+    externalUrl?: string;
+  };
   campaignBanner?: {
     title: { en: string; es: string };
     description: { en: string; es: string };
@@ -377,7 +381,6 @@ function AiCategoryContent({
     detailItemId == null
       ? null
       : items.find((item) => item.id === detailItemId && item.detail);
-  const mainFeature = announcements?.[0];
   const bmwFeature = secondaryFeatures?.[0];
   const anatomyItem = items.find((item) => item.id === "ai-youtube");
   const theriansItem = items.find((item) => item.id === "ai-tooling");
@@ -386,15 +389,18 @@ function AiCategoryContent({
   return (
     <>
       <div className="grid gap-4 lg:grid-cols-2">
-        {mainFeature ? (
+        {feature ? (
           <AiCompactFeatureCard
-            eyebrow={resolveText(uiCopy.categoryModal.featuredProject, language)}
-            title={resolveText(mainFeature.projectTitle, language)}
-            headline={resolveText(mainFeature.headline, language)}
-            badge={resolveText(mainFeature.releaseInfo, language)}
-            description={resolveText(mainFeature.description, language)}
-            cta={resolveText(mainFeature.cta, language)}
-            href={mainFeature.href}
+            eyebrow={resolveText(feature.eyebrow, language)}
+            title={resolveText(feature.title, language)}
+            headline={resolveText(feature.subtitle, language)}
+            description={resolveText(feature.description, language)}
+            cta={resolveText(
+              feature.buttonLabel ?? { en: "VER PROYECTO", es: "VER PROYECTO" },
+              language
+            )}
+            href={feature.externalUrl ?? "#"}
+            previewVideoUrl={feature.videoUrl}
           />
         ) : null}
 
@@ -457,6 +463,11 @@ function AiCategoryContent({
           subtitle={resolveText(detailItem.detail.subtitle, language)}
           description={resolveText(detailItem.detail.description, language)}
           videoUrl={detailItem.detail.videoUrl}
+          embedTitle={
+            detailItem.detail.embedTitle
+              ? resolveText(detailItem.detail.embedTitle, language)
+              : undefined
+          }
           extraInfo={
             detailItem.detail.extraInfo
               ? resolveText(detailItem.detail.extraInfo, language)
@@ -655,7 +666,7 @@ export default function ProfileCategoryModal({
 
             {isAiCategory ? (
               <AiCategoryContent
-                announcements={category.announcements}
+                feature={category.feature}
                 campaignBanner={category.campaignBanner}
                 secondaryFeatures={category.secondaryFeatures}
                 items={category.items}

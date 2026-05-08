@@ -33,8 +33,10 @@ export const uiCopy = {
   // ============================================================================
   brand: {
     dossier: s("Dossier editorial"),
-    heading: s("¿Quién es The Asset Hero?"),
-    teaser: s("Tecnología creativa detrás de sistemas cinematográficos."),
+    heading: s("¿Quién está detrás de The Asset Hero?"),
+    teaser: s(
+      "Tecnología creativa, dirección visual y sistemas cinematográficos detrás de la marca."
+    ),
     enter: s("Entrar"),
     creativeTechnology: s("Tecnología creativa"),
     statement: s(

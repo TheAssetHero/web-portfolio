@@ -7,6 +7,7 @@ type ProfileItemDetailPanelProps = {
   subtitle: string;
   description: string;
   videoUrl: string;
+  embedTitle?: string;
   extraInfo?: string;
   externalUrl?: string;
   externalCta?: string;
@@ -18,6 +19,14 @@ type ProfileItemDetailPanelProps = {
 };
 
 function getYoutubeEmbedUrl(videoUrl: string) {
+  if (videoUrl.includes("player.vimeo.com/video/")) {
+    return videoUrl;
+  }
+
+  if (videoUrl.includes("behance.net/embed/project/")) {
+    return videoUrl;
+  }
+
   if (videoUrl.includes("youtube.com/embed/")) {
     return videoUrl;
   }
@@ -45,6 +54,7 @@ export default function ProfileItemDetailPanel({
   subtitle,
   description,
   videoUrl,
+  embedTitle,
   extraInfo,
   externalUrl,
   externalCta,
@@ -54,7 +64,7 @@ export default function ProfileItemDetailPanel({
   detailLabel,
   detailInfoLabel,
 }: ProfileItemDetailPanelProps) {
-  const youtubeEmbedUrl = getYoutubeEmbedUrl(videoUrl);
+  const embeddedUrl = getYoutubeEmbedUrl(videoUrl);
 
   useEffect(() => {
     if (!isOpen) {
@@ -73,7 +83,7 @@ export default function ProfileItemDetailPanel({
 
   return (
     <div
-      className={`absolute inset-0 z-30 flex items-center justify-center bg-black/82 p-4 backdrop-blur-md transition duration-300 ${
+      className={`fixed inset-0 z-[110] flex items-center justify-center bg-black/84 p-4 backdrop-blur-md transition duration-300 sm:p-6 ${
         isOpen ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
       onClick={onClose}
@@ -83,7 +93,7 @@ export default function ProfileItemDetailPanel({
         role="dialog"
         aria-modal="true"
         aria-labelledby="profile-item-detail-title"
-        className={`relative w-full max-w-5xl overflow-hidden rounded-[1.75rem] border border-white/12 bg-[linear-gradient(180deg,rgba(9,9,12,0.98),rgba(4,4,6,0.98))] shadow-[0_0_50px_rgba(0,0,0,0.52)] transition duration-300 ${
+        className={`relative flex max-h-[88vh] w-full max-w-[1100px] flex-col overflow-hidden rounded-[1.75rem] border border-white/12 bg-[linear-gradient(180deg,rgba(9,9,12,0.98),rgba(4,4,6,0.98))] shadow-[0_0_50px_rgba(0,0,0,0.52)] transition duration-300 ${
           isOpen ? "scale-100 opacity-100" : "scale-[0.98] opacity-0"
         }`}
         onClick={(event) => event.stopPropagation()}
@@ -101,8 +111,8 @@ export default function ProfileItemDetailPanel({
           X
         </button>
 
-        <div className="relative z-10 flex max-h-[calc(100vh-6rem)] flex-col overflow-y-auto p-5 sm:p-6 lg:p-8">
-          <div className="border-b border-white/10 pb-5">
+        <div className="relative z-10 flex flex-1 flex-col overflow-y-auto p-5 sm:p-6 lg:p-8">
+          <div className="border-b border-white/10 pb-5 pr-14">
             <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
               {detailLabel}
             </p>
@@ -118,24 +128,28 @@ export default function ProfileItemDetailPanel({
           </div>
 
           <div className="mt-5 overflow-hidden rounded-[1.4rem] border border-white/10 bg-black">
-            <div className="relative aspect-video w-full">
-              {youtubeEmbedUrl ? (
+            <div className="mx-auto w-full max-w-[960px]">
+              <div className="relative w-full overflow-hidden rounded-[1.15rem] bg-black [aspect-ratio:16/9] max-h-[42vh] sm:max-h-[48vh] lg:max-h-[55vh]">
+                {embeddedUrl ? (
                 <iframe
-                  src={youtubeEmbedUrl}
-                  title={title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  src={embeddedUrl}
+                  title={embedTitle ?? title}
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
-                  className="h-full w-full"
+                  loading="lazy"
+                  frameBorder="0"
+                  className="absolute inset-0 h-full w-full"
                 />
               ) : (
                 <video
                   src={videoUrl}
                   controls
                   playsInline
-                  className="h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
               )}
+              </div>
             </div>
           </div>
 

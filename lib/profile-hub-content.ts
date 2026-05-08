@@ -38,6 +38,7 @@ export type ProfileHubItem = {
     subtitle: LocalizedText;
     description: LocalizedText;
     videoUrl: string;
+    embedTitle?: LocalizedText;
     externalUrl?: string;
     externalCta?: LocalizedText;
     extraInfo?: LocalizedText;
@@ -133,27 +134,29 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
     ),
 
     feature: {
-      eyebrow: s("IA / Proyecto destacado"),
-      title: s("The Echelon AI Project"),
-      subtitle: s("Primer comercial en Latam completamente creado con IA."),
+      eyebrow: s("AI / CASE STUDY"),
+      title: s("The Echelon"),
+      subtitle: s("Primer comercial en LATAM completamente en IA"),
       description: s(
-        "Una pieza experimental donde imagen, voz, edición y audio fueron desarrollados con inteligencia artificial para explorar nuevas formas de producción audiovisual, narrativa comercial y dirección visual."
+        "Voz, imagen y audio generados con inteligencia artificial."
       ),
-      videoUrl: "https://vimeo.com/1190250981?share=copy&fl=sv&fe=ci",
-      buttonLabel: s("Ver proyecto completo"),
-      externalUrl: "https://vimeo.com/1190250981?share=copy&fl=sv&fe=ci",
+      videoUrl:
+        "https://player.vimeo.com/video/1190250981?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479",
+      buttonLabel: s("VER PROYECTO"),
+      externalUrl:
+        "https://www.behance.net/gallery/245574455/The-Echelon-AI-Project",
     },
     secondaryFeatures: [
       {
-        eyebrow: s("AI / Proyecto destacado"),
+        eyebrow: s("AI / AUTOMOTIVE"),
         title: s("BMW M2 Racing 2026"),
         subtitle: s("M2 Racing Full IA Production"),
         description: s(
           "Pieza audiovisual de producción IA enfocada en visualización automotriz, performance y estética cinematográfica."
         ),
-        videoUrl: "https://youtu.be/AaqX9k6b0Gw",
-        buttonLabel: s("VER VIDEO"),
-        externalUrl: "https://youtu.be/AaqX9k6b0Gw",
+        videoUrl: "https://www.youtube.com/embed/AaqX9k6b0Gw?rel=0",
+        buttonLabel: s("VER PROYECTO"),
+        externalUrl: "https://www.behance.net/emmanuelblancas",
       },
     ],
     campaignBanner: {
@@ -239,12 +242,9 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         detail: {
           subtitle: s("AI / Proyecto"),
           description: s(
-            "Superficie editorial interna para lanzamientos de concepto, pruebas visuales y piezas narrativas relacionadas con producción asistida por inteligencia artificial."
+            "Tarjeta editorial de formato pequeño para conceptos AI, experimentos visuales y lanzamientos narrativos dentro del portafolio."
           ),
-          videoUrl: "/videos/ai2.mp4",
-          extraInfo: s(
-            "Puedes editar aquí el video, el texto principal, los enlaces externos y cualquier información adicional del proyecto."
-          ),
+          videoUrl: "https://www.youtube.com/embed/CuoNMN1EhIk?rel=0",
         },
       },
       {
@@ -269,13 +269,9 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         },
         detail: {
           subtitle: s("AI / Proyecto"),
-          description: s(
-            "Vista interna cinematográfica para storytelling corto en AI, contexto editorial y futuras extensiones del proyecto dentro del portafolio."
-          ),
-          videoUrl: "/videos/ai3.mp4",
-          extraInfo: s(
-            "Este espacio también puede alojar trailers, notas técnicas, imágenes complementarias o enlaces externos cuando el proyecto lo necesite."
-          ),
+          description: s("Proyecto temporal embebido desde Behance."),
+          videoUrl: "https://www.behance.net/embed/project/152862489?ilo0=1",
+          embedTitle: s("Don Bigotes Behance Embed"),
         },
       },
     ],
