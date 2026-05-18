@@ -48,7 +48,7 @@ export default function Hero({
 
         <div className="mt-6 flex flex-wrap gap-4">
           <a
-            href="https://www.youtube.com/@TheAssetHero"
+            href="https://https://www.youtube.com/@TheRango333"
             target="_blank"
             rel="noreferrer"
             className="rounded-full bg-white px-8 py-3 font-semibold text-black transition hover:bg-zinc-200"
