@@ -116,6 +116,7 @@ export type ProfileHubCategory = {
     headline: LocalizedText;
     releaseInfo: LocalizedText;
     description: LocalizedText;
+    videoUrl?: string;
     href: string;
     cta: LocalizedText;
   }>;
@@ -164,7 +165,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       description: s(
         "Se producirá este 2026 la primera temporada de Runaway 2150, totalmente producida por The Asset Hero."
       ),
-      videoUrl: "https://www.youtube.com/embed/AaqX9k6b0Gw?rel=0",
+      videoUrl: "https://www.youtube.com/embed/sLEJaIPUmeU?si=rizr7-X0Tn0vIo_4",
       actions: [
         {
           label: s("VER TRAILER"),
@@ -186,18 +187,9 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         description: s(
           "Cortometraje que muestra las estadísticas de fallas de vehículos extranjeros en el año 2025, sin tirarle a nadie en específico."
         ),
+        videoUrl:
+          "https://www.youtube.com/embed/Qpo0jaKJuyE?si=Cotw9RY43-nVQQbw",
         href: "https://youtu.be/Y1UbzPnqJPo",
-        cta: s("VER VIDEO"),
-      },
-      {
-        id: "bmw-spain-note",
-        projectTitle: s("M2 Racing 2026 probando España"),
-        headline: s("BMW M2 Racing V6 2026"),
-        releaseInfo: s("AI / AUTOMOTIVE"),
-        description: s(
-          "Esta imponente fiera alemana se agarra a la pista con su tracción trasera en la pista F1 de Barcelona."
-        ),
-        href: "https://youtu.be/AaqX9k6b0Gw",
         cta: s("VER VIDEO"),
       },
     ],

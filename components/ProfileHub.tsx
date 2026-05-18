@@ -212,6 +212,60 @@ function AiFeatureCard({
   );
 }
 
+function ExpandedEditorialFeature({
+  eyebrow,
+  title,
+  headline,
+  description,
+  videoUrl,
+  cta,
+  href,
+}: {
+  eyebrow: string;
+  title: string;
+  headline: string;
+  description: string;
+  videoUrl: string;
+  cta: string;
+  href: string;
+}) {
+  return (
+    <article className="relative overflow-hidden rounded-[1.7rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-5 shadow-[0_0_30px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_45%)]" />
+      <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+      <div className="absolute bottom-0 left-8 h-px w-40 bg-gradient-to-r from-emerald-300/45 to-transparent" />
+
+      <div className="relative z-10 grid gap-6 xl:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.85fr)] xl:items-center">
+        <div className="min-w-0">
+          <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
+            {eyebrow}
+          </p>
+          <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.3rem]">
+            {title}
+          </h3>
+          <p className="mt-3 text-lg leading-7 text-white/84">{headline}</p>
+          <p className="mt-5 max-w-3xl text-sm leading-7 text-white/48 sm:text-base">
+            {description}
+          </p>
+
+          <div className="mt-6">
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
+            >
+              {cta}
+            </a>
+          </div>
+        </div>
+
+        <EmbeddedVideoPreview title={title} videoUrl={videoUrl} />
+      </div>
+    </article>
+  );
+}
+
 function MainEditorialFeed() {
   const { language } = useLanguage();
   const { activeCategory, selectOverlayCategory } = useOverlayController();
@@ -227,47 +281,10 @@ function MainEditorialFeed() {
     const theriansItem = category.items.find((item) => item.id === "ai-tooling");
     const donBigotesItem = category.items.find((item) => item.id === "ai-reel");
     const bmwFeature = category.secondaryFeatures?.[0];
+    const rangoBravoFeature = category.announcements?.[0];
 
     return (
       <>
-        <div className="grid gap-4 lg:grid-cols-2">
-          {category.feature ? (
-            <AiFeatureCard
-              eyebrow={resolveText(category.feature.eyebrow, language)}
-              title={resolveText(category.feature.title, language)}
-              headline={resolveText(category.feature.subtitle, language)}
-              description={resolveText(category.feature.description, language)}
-              cta={resolveText(
-                category.feature.buttonLabel ?? {
-                  en: "VER PROYECTO",
-                  es: "VER PROYECTO",
-                },
-                language
-              )}
-              href={category.feature.externalUrl ?? "#"}
-              videoUrl={category.feature.videoUrl}
-            />
-          ) : null}
-
-          {bmwFeature ? (
-            <AiFeatureCard
-              eyebrow={resolveText(bmwFeature.eyebrow, language)}
-              title={resolveText(bmwFeature.title, language)}
-              headline={resolveText(bmwFeature.subtitle, language)}
-              description={resolveText(bmwFeature.description, language)}
-              cta={resolveText(
-                bmwFeature.buttonLabel ?? {
-                  en: "VER PROYECTO",
-                  es: "VER PROYECTO",
-                },
-                language
-              )}
-              href={bmwFeature.externalUrl ?? bmwFeature.videoUrl}
-              videoUrl={bmwFeature.videoUrl}
-            />
-          ) : null}
-        </div>
-
         {category.campaignBanner ? (
           <article className="relative overflow-hidden rounded-[1.7rem] border border-white/12 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5 shadow-[0_0_32px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_48%)]" />
@@ -320,46 +337,54 @@ function MainEditorialFeed() {
           </article>
         ) : null}
 
-        {category.announcements && category.announcements.length > 0 ? (
-          <div className="grid gap-4 lg:grid-cols-2">
-            {category.announcements.map((announcement) => (
-              <article
-                key={announcement.id}
-                className="relative overflow-hidden rounded-[1.45rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 shadow-[0_0_24px_rgba(255,255,255,0.03)] sm:p-6"
-              >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.07),transparent_44%)]" />
-                <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+        <div className="grid gap-4 lg:grid-cols-2">
+          {category.feature ? (
+            <AiFeatureCard
+              eyebrow={resolveText(category.feature.eyebrow, language)}
+              title={resolveText(category.feature.title, language)}
+              headline={resolveText(category.feature.subtitle, language)}
+              description={resolveText(category.feature.description, language)}
+              cta={resolveText(
+                category.feature.buttonLabel ?? {
+                  en: "VER PROYECTO",
+                  es: "VER PROYECTO",
+                },
+                language
+              )}
+              href={category.feature.externalUrl ?? "#"}
+              videoUrl={category.feature.videoUrl}
+            />
+          ) : null}
 
-                <div className="relative z-10 flex h-full min-h-[15rem] flex-col justify-between">
-                  <div>
-                    <p className="text-[0.62rem] uppercase tracking-[0.28em] text-white/34">
-                      {resolveText(announcement.releaseInfo, language)}
-                    </p>
-                    <h4 className="mt-3 text-[1.55rem] font-semibold tracking-[-0.04em] text-white sm:text-[1.8rem]">
-                      {resolveText(announcement.projectTitle, language)}
-                    </h4>
-                    <p className="mt-3 text-base leading-7 text-white/78">
-                      {resolveText(announcement.headline, language)}
-                    </p>
-                    <p className="mt-4 max-w-3xl text-sm leading-7 text-white/46 sm:text-base">
-                      {resolveText(announcement.description, language)}
-                    </p>
-                  </div>
+          {bmwFeature ? (
+            <AiFeatureCard
+              eyebrow={resolveText(bmwFeature.eyebrow, language)}
+              title={resolveText(bmwFeature.title, language)}
+              headline={resolveText(bmwFeature.subtitle, language)}
+              description={resolveText(bmwFeature.description, language)}
+              cta={resolveText(
+                bmwFeature.buttonLabel ?? {
+                  en: "VER PROYECTO",
+                  es: "VER PROYECTO",
+                },
+                language
+              )}
+              href={bmwFeature.externalUrl ?? bmwFeature.videoUrl}
+              videoUrl={bmwFeature.videoUrl}
+            />
+          ) : null}
+        </div>
 
-                  <div className="mt-6">
-                    <a
-                      href={announcement.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
-                    >
-                      {resolveText(announcement.cta, language)}
-                    </a>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+        {rangoBravoFeature?.videoUrl ? (
+          <ExpandedEditorialFeature
+            eyebrow={resolveText(rangoBravoFeature.releaseInfo, language)}
+            title={resolveText(rangoBravoFeature.projectTitle, language)}
+            headline={resolveText(rangoBravoFeature.headline, language)}
+            description={resolveText(rangoBravoFeature.description, language)}
+            videoUrl={rangoBravoFeature.videoUrl}
+            cta={resolveText(rangoBravoFeature.cta, language)}
+            href={rangoBravoFeature.href}
+          />
         ) : null}
 
         <div className="grid gap-4 lg:grid-cols-2">
