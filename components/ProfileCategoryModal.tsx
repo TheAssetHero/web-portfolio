@@ -343,6 +343,7 @@ function AiCategoryContent({
   feature,
   campaignBanner,
   secondaryFeatures,
+  announcements,
   items,
   language,
 }: {
@@ -372,6 +373,15 @@ function AiCategoryContent({
     videoUrl: string;
     buttonLabel?: { en: string; es: string };
     externalUrl?: string;
+  }>;
+  announcements?: Array<{
+    id: string;
+    projectTitle: { en: string; es: string };
+    headline: { en: string; es: string };
+    releaseInfo: { en: string; es: string };
+    description: { en: string; es: string };
+    href: string;
+    cta: { en: string; es: string };
   }>;
   items: ProfileHubItem[];
   language: Language;
@@ -428,6 +438,48 @@ function AiCategoryContent({
           actions={campaignBanner.actions}
           language={language}
         />
+      ) : null}
+
+      {announcements && announcements.length > 0 ? (
+        <div className="grid gap-4 lg:grid-cols-2">
+          {announcements.map((announcement) => (
+            <article
+              key={announcement.id}
+              className="relative overflow-hidden rounded-[1.45rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 shadow-[0_0_24px_rgba(255,255,255,0.03)] sm:p-6"
+            >
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.07),transparent_44%)]" />
+              <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+
+              <div className="relative z-10 flex h-full min-h-[15rem] flex-col justify-between">
+                <div>
+                  <p className="text-[0.62rem] uppercase tracking-[0.28em] text-white/34">
+                    {resolveText(announcement.releaseInfo, language)}
+                  </p>
+                  <h4 className="mt-3 text-[1.55rem] font-semibold tracking-[-0.04em] text-white sm:text-[1.8rem]">
+                    {resolveText(announcement.projectTitle, language)}
+                  </h4>
+                  <p className="mt-3 text-base leading-7 text-white/78">
+                    {resolveText(announcement.headline, language)}
+                  </p>
+                  <p className="mt-4 max-w-3xl text-sm leading-7 text-white/46 sm:text-base">
+                    {resolveText(announcement.description, language)}
+                  </p>
+                </div>
+
+                <div className="mt-6">
+                  <a
+                    href={announcement.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
+                  >
+                    {resolveText(announcement.cta, language)}
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       ) : null}
 
       <div className="grid gap-4 lg:grid-cols-2">
@@ -669,6 +721,7 @@ export default function ProfileCategoryModal({
                 feature={category.feature}
                 campaignBanner={category.campaignBanner}
                 secondaryFeatures={category.secondaryFeatures}
+                announcements={category.announcements}
                 items={category.items}
                 language={language}
               />

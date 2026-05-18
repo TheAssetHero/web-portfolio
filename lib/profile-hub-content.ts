@@ -189,6 +189,17 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         href: "https://youtu.be/Y1UbzPnqJPo",
         cta: s("VER VIDEO"),
       },
+      {
+        id: "bmw-spain-note",
+        projectTitle: s("M2 Racing 2026 probando España"),
+        headline: s("BMW M2 Racing V6 2026"),
+        releaseInfo: s("AI / AUTOMOTIVE"),
+        description: s(
+          "Esta imponente fiera alemana se agarra a la pista con su tracción trasera en la pista F1 de Barcelona."
+        ),
+        href: "https://youtu.be/AaqX9k6b0Gw",
+        cta: s("VER VIDEO"),
+      },
     ],
 
     items: [
