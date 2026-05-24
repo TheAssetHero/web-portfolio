@@ -423,12 +423,26 @@ export default async function Runaway2150Page(
           </div>
         </div>
 
+        <section className="overflow-hidden rounded-[1.7rem] border border-white/10 bg-black/70 shadow-[0_0_28px_rgba(74,222,128,0.08)]">
+          <div className="aspect-video w-full">
+            <iframe
+              src="https://www.youtube.com/embed/sLEJaIPUmeU?si=rizr7-X0Tn0vIo_4"
+              title="Runaway 2150"
+              className="h-full w-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+        </section>
+
         <header className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-6 shadow-[0_0_34px_rgba(255,255,255,0.04)] sm:p-8 lg:p-10">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(74,222,128,0.09),transparent_42%),radial-gradient(circle_at_78%_18%,rgba(251,191,36,0.08),transparent_26%)]" />
           <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/38 to-transparent" />
           <div className="pointer-events-none absolute bottom-0 left-8 h-px w-36 bg-gradient-to-r from-amber-200/40 to-transparent" />
 
-          <div className="relative z-10 grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(360px,0.92fr)] xl:items-start">
+          <div className="relative z-10 grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(420px,0.92fr)] xl:items-stretch">
             <div className="min-w-0">
               <p className="text-[0.68rem] uppercase tracking-[0.34em] text-white/42">
                 {page.hero.eyebrow}
@@ -450,27 +464,12 @@ export default async function Runaway2150Page(
               </p>
             </div>
 
-            <div className="space-y-4">
-              <MediaPanel
-                src="/images/runaway/hero.png"
-                alt="Runaway 2150 hero artwork"
-                className="min-h-[280px] sm:min-h-[360px]"
-                sizes="(max-width: 1280px) 100vw, 560px"
-              />
-              <div className="overflow-hidden rounded-[1.55rem] border border-white/10 bg-black/70 shadow-[0_0_26px_rgba(74,222,128,0.08)]">
-                <div className="aspect-video w-full">
-                  <iframe
-                    src="https://www.youtube.com/embed/sLEJaIPUmeU?si=rizr7-X0Tn0vIo_4"
-                    title="Runaway 2150"
-                    className="h-full w-full"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            </div>
+            <MediaPanel
+              src="/images/runaway/hero.png"
+              alt="Runaway 2150 hero artwork"
+              className="min-h-[320px] sm:min-h-[420px] xl:min-h-full"
+              sizes="(max-width: 1280px) 100vw, 560px"
+            />
           </div>
         </header>
 
