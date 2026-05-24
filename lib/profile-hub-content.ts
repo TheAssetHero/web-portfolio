@@ -169,11 +169,11 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       actions: [
         {
           label: s("VER TRAILER"),
-          href: "#",
+          href: "https://youtu.be/sLEJaIPUmeU",
         },
         {
           label: s("VER PROYECTO"),
-          href: "#",
+          href: "/runaway-2150",
         },
       ],
     },

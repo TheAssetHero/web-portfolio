@@ -246,6 +246,14 @@ function AiCampaignBanner({
                 >
                   {resolveText(action.label, language)}
                 </button>
+              ) : action.href.startsWith("/") ? (
+                <Link
+                  key={`${action.href}-${index}`}
+                  href={action.href}
+                  className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/76 transition hover:border-emerald-300/28 hover:bg-white/[0.08] hover:text-white"
+                >
+                  {resolveText(action.label, language)}
+                </Link>
               ) : (
                 <a
                   key={`${action.href}-${index}`}
