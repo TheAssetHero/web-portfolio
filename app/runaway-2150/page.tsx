@@ -398,7 +398,7 @@ export default async function Runaway2150Page(
   props: PageProps<"/runaway-2150">
 ) {
   const searchParams = await props.searchParams;
-  const language: Locale = searchParams?.lang === "en" ? "en" : "es";
+  const language: Locale = searchParams?.lang === "es" ? "es" : "en";
   const page = content[language];
 
   return (

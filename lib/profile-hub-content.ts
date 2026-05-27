@@ -151,9 +151,9 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       {
         eyebrow: s("AI / AUTOMOTIVE"),
         title: s("BMW M2 Racing 2026"),
-        subtitle: s("M2 Racing Full IA Production"),
+        subtitle: s("M2 Racing Full AI Production"),
         description: s(
-          "Pieza audiovisual de producciÃ³n IA enfocada en visualizaciÃ³n automotriz, performance y estÃ©tica cinematogrÃ¡fica."
+          "Pieza audiovisual desarrollada con inteligencia artificial, enfocada en visualización automotriz, performance y estética cinematográfica."
         ),
         videoUrl: "https://www.youtube.com/embed/AaqX9k6b0Gw?rel=0",
         buttonLabel: s("VER PROYECTO"),
