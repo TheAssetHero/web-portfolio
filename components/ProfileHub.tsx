@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -295,7 +295,7 @@ function MainEditorialFeed() {
             <div className="relative z-10 grid gap-6 xl:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.85fr)] xl:items-center">
               <div className="min-w-0">
                 <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/36">
-                  Serie cinematográfica / Anuncio
+                  Proyecto original / Serie sci-fi
                 </p>
                 <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.6rem] lg:leading-[1.04]">
                   {resolveText(category.campaignBanner.title, language)}
@@ -595,3 +595,4 @@ export default function ProfileHub() {
     </div>
   );
 }
+

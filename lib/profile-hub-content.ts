@@ -1,4 +1,4 @@
-import { LocalizedText } from "@/lib/localization";
+﻿import { LocalizedText } from "@/lib/localization";
 import { CategoryKey } from "@/lib/portfolio-categories";
 
 const s = (text: string): LocalizedText => ({ en: text, es: text });
@@ -29,8 +29,8 @@ export type ProfileHubItem = {
   detail?: {
     // --------------------------------------------------------------------------
     // DETALLE INTERNO DE TARJETA
-    // - Subtítulo / categoría
-    // - Descripción principal
+    // - SubtÃ­tulo / categorÃ­a
+    // - DescripciÃ³n principal
     // - Video embebido o video local
     // - Link externo opcional
     // - Texto adicional opcional
@@ -53,11 +53,11 @@ export type ProfileHubCategory = {
     // --------------------------------------------------------------------------
     // PROYECTO DESTACADO / NOTICIA PRINCIPAL
     // - Eyebrow
-    // - Título principal
-    // - Subtítulo
-    // - Descripción
+    // - TÃ­tulo principal
+    // - SubtÃ­tulo
+    // - DescripciÃ³n
     // - Video embebido
-    // - Botón
+    // - BotÃ³n
     // - Link externo
     // --------------------------------------------------------------------------
     eyebrow: LocalizedText;
@@ -71,11 +71,11 @@ export type ProfileHubCategory = {
   secondaryFeatures?: Array<{
     // --------------------------------------------------------------------------
     // PROYECTO DESTACADO ADICIONAL
-    // - Título principal
+    // - TÃ­tulo principal
     // - Headline / texto secundario
-    // - Descripción
+    // - DescripciÃ³n
     // - Video embebido
-    // - Botón
+    // - BotÃ³n
     // - Link externo
     // --------------------------------------------------------------------------
     eyebrow: LocalizedText;
@@ -89,7 +89,7 @@ export type ProfileHubCategory = {
   campaignBanner?: {
     // --------------------------------------------------------------------------
     // BANNER EDITORIAL INTERMEDIO
-    // - Título
+    // - TÃ­tulo
     // - Texto principal
     // - Video embebido / preview
     // - Botones
@@ -105,11 +105,11 @@ export type ProfileHubCategory = {
   announcements?: Array<{
     // --------------------------------------------------------------------------
     // TARJETA EDITORIAL SECUNDARIA
-    // - Título del proyecto
+    // - TÃ­tulo del proyecto
     // - Headline
     // - Badge de lanzamiento
-    // - Descripción
-    // - Botón / link
+    // - DescripciÃ³n
+    // - BotÃ³n / link
     // --------------------------------------------------------------------------
     id: string;
     projectTitle: LocalizedText;
@@ -129,9 +129,9 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   // ============================================================================
   ai: {
     label: "AI",
-    title: s("Producción, exploración y sistemas creativos con inteligencia artificial"),
+    title: s("ProducciÃ³n, exploraciÃ³n y sistemas creativos con inteligencia artificial"),
     description: s(
-      "Una mezcla cinematográfica de herramientas de AI, prototipos de flujo de trabajo y experimentos guiados por interfaz para la producción moderna."
+      "Una mezcla cinematogrÃ¡fica de herramientas de AI, prototipos de flujo de trabajo y experimentos guiados por interfaz para la producciÃ³n moderna."
     ),
 
     feature: {
@@ -153,7 +153,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         title: s("BMW M2 Racing 2026"),
         subtitle: s("M2 Racing Full IA Production"),
         description: s(
-          "Pieza audiovisual de producción IA enfocada en visualización automotriz, performance y estética cinematográfica."
+          "Pieza audiovisual de producciÃ³n IA enfocada en visualizaciÃ³n automotriz, performance y estÃ©tica cinematogrÃ¡fica."
         ),
         videoUrl: "https://www.youtube.com/embed/AaqX9k6b0Gw?rel=0",
         buttonLabel: s("VER PROYECTO"),
@@ -163,7 +163,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
     campaignBanner: {
       title: s("Runaway 2150"),
       description: s(
-        "Se producirá este 2026 la primera temporada de Runaway 2150, totalmente producida por The Asset Hero."
+        "La primera temporada de Runaway 2150 llegará en 2026: una producción cinematográfica de The Asset Hero construida con IA, mundos conectados y una guerra que no debe comenzar."
       ),
       videoUrl: "https://www.youtube.com/embed/StHnkr4zFgs?rel=0",
       actions: [
@@ -182,10 +182,10 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       {
         id: "rango-bravo-release",
         projectTitle: s("The Rango Bravo"),
-        headline: s('Estreno de "Una Más al Kilo"'),
+        headline: s('Estreno de "Una MÃ¡s al Kilo"'),
         releaseInfo: s("Estreno hoy a la 1:00 PM"),
         description: s(
-          "Cortometraje que muestra las estadísticas de fallas de vehículos extranjeros en el año 2025, sin tirarle a nadie en específico."
+          "Cortometraje que muestra las estadÃ­sticas de fallas de vehÃ­culos extranjeros en el aÃ±o 2025, sin tirarle a nadie en especÃ­fico."
         ),
         videoUrl:
           "https://www.youtube.com/embed/Qpo0jaKJuyE?si=Cotw9RY43-nVQQbw",
@@ -198,9 +198,9 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       {
         id: "ai-youtube",
         eyebrow: s("AI / Destacado"),
-        title: s("Anatomía al límite"),
+        title: s("AnatomÃ­a al lÃ­mite"),
         description: s(
-          "Pieza editorial compacta para experimentación audiovisual, tono de lanzamiento y narrativa visual dentro del área de AI."
+          "Pieza editorial compacta para experimentaciÃ³n audiovisual, tono de lanzamiento y narrativa visual dentro del Ã¡rea de AI."
         ),
         href: "#",
         cta: s("Abrir detalle"),
@@ -208,7 +208,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         accent: "from-zinc-100/12 via-black/10 to-cyan-300/14",
         thumbnail: {
           src: "/images/img1.jpeg",
-          alt: "Imagen destacada de Anatomía al límite",
+          alt: "Imagen destacada de AnatomÃ­a al lÃ­mite",
         },
         media: {
           type: "youtube",
@@ -217,7 +217,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         detail: {
           subtitle: s("AI / Destacado"),
           description: s(
-            "Pieza experimental desarrollada dentro del área de AI Production."
+            "Pieza experimental desarrollada dentro del Ã¡rea de AI Production."
           ),
           videoUrl: "https://youtube.com/shorts/uwMm0Wl1b7s",
         },
@@ -227,7 +227,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("AI / Proyecto"),
         title: s("The Therians"),
         description: s(
-          "Tarjeta editorial de formato pequeño para conceptos AI, experimentos visuales y lanzamientos narrativos dentro del portafolio."
+          "Tarjeta editorial de formato pequeÃ±o para conceptos AI, experimentos visuales y lanzamientos narrativos dentro del portafolio."
         ),
         href: "#",
         cta: s("Abrir detalle"),
@@ -245,7 +245,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         detail: {
           subtitle: s("AI / Proyecto"),
           description: s(
-            "Tarjeta editorial de formato pequeño para conceptos AI, experimentos visuales y lanzamientos narrativos dentro del portafolio."
+            "Tarjeta editorial de formato pequeÃ±o para conceptos AI, experimentos visuales y lanzamientos narrativos dentro del portafolio."
           ),
           videoUrl: "https://www.youtube.com/embed/CuoNMN1EhIk?rel=0",
         },
@@ -255,7 +255,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("AI / Proyecto"),
         title: s("Don Bigotes"),
         description: s(
-          "Tarjeta sobria para trabajo corto en AI, presentación conceptual y empaquetado editorial listo para mostrarse dentro del sitio."
+          "Tarjeta sobria para trabajo corto en AI, presentaciÃ³n conceptual y empaquetado editorial listo para mostrarse dentro del sitio."
         ),
         href: "#",
         cta: s("Abrir detalle"),
@@ -281,21 +281,21 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   },
 
   // ============================================================================
-  // PRODUCCIÓN VIRTUAL
+  // PRODUCCIÃ“N VIRTUAL
   // ============================================================================
   vp: {
     label: "VP",
-    title: s("Reels de producción virtual y entornos en tiempo real"),
+    title: s("Reels de producciÃ³n virtual y entornos en tiempo real"),
     description: s(
-      "Stagecraft, desarrollo de entornos y lenguaje de cámara en tiempo real reunidos en una superficie creativa limpia."
+      "Stagecraft, desarrollo de entornos y lenguaje de cÃ¡mara en tiempo real reunidos en una superficie creativa limpia."
     ),
     items: [
       {
         id: "vp-youtube",
         eyebrow: s("YouTube / Destacado"),
-        title: s("Reel de escenario de producción virtual"),
+        title: s("Reel de escenario de producciÃ³n virtual"),
         description: s(
-          "Espacio destacado para movimiento de escenario en tiempo real, previs y estudios de producción centrados en Unreal."
+          "Espacio destacado para movimiento de escenario en tiempo real, previs y estudios de producciÃ³n centrados en Unreal."
         ),
         href: "https://www.youtube.com/@TheAssetHero",
         cta: s("Ver breakdowns"),
@@ -303,7 +303,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         accent: "from-violet-300/18 via-white/7 to-cyan-300/18",
         thumbnail: {
           src: "/images/img3.jpeg",
-          alt: "Miniatura de reel de producción virtual",
+          alt: "Miniatura de reel de producciÃ³n virtual",
         },
         media: {
           type: "youtube",
@@ -315,7 +315,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("Entorno / Vista previa"),
         title: s("Deck de entorno en tiempo real"),
         description: s(
-          "Lenguaje de escena escalable, ritmos de iluminación y claves visuales para pipelines de producción virtual."
+          "Lenguaje de escena escalable, ritmos de iluminaciÃ³n y claves visuales para pipelines de producciÃ³n virtual."
         ),
         href: "/#showcase",
         cta: s("Abrir vista previa"),
@@ -336,7 +336,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("Reel / Movimiento"),
         title: s("Reel de movimiento de escenario"),
         description: s(
-          "Movimiento de cámara, bloqueo cinematográfico y flujo visual guiado por escenario para presentación lista para producción."
+          "Movimiento de cÃ¡mara, bloqueo cinematogrÃ¡fico y flujo visual guiado por escenario para presentaciÃ³n lista para producciÃ³n."
         ),
         href: "/videos/vp1.mp4",
         cta: s("Ver reel"),
@@ -360,25 +360,25 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   // ============================================================================
   "3d": {
     label: "3D",
-    title: s("Renders automotrices y tomas 3D cinematográficas"),
+    title: s("Renders automotrices y tomas 3D cinematogrÃ¡ficas"),
     description: s(
-      "Formas de alta fidelidad, estudios de producto y desarrollo visual cinematográfico presentados como una galería interactiva premium."
+      "Formas de alta fidelidad, estudios de producto y desarrollo visual cinematogrÃ¡fico presentados como una galerÃ­a interactiva premium."
     ),
     items: [
       {
         id: "3d-youtube",
         eyebrow: s("YouTube / Destacado"),
-        title: s("Presentación 3D cinematográfica"),
+        title: s("PresentaciÃ³n 3D cinematogrÃ¡fica"),
         description: s(
-          "Espacio destacado para historias de render, estudios de iluminación y presentación de assets hero."
+          "Espacio destacado para historias de render, estudios de iluminaciÃ³n y presentaciÃ³n de assets hero."
         ),
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: s("Abrir galería"),
+        cta: s("Abrir galerÃ­a"),
         linkKind: "external",
         accent: "from-zinc-200/14 via-white/7 to-amber-200/12",
         thumbnail: {
           src: "/images/img2.png",
-          alt: "Miniatura de presentación 3D",
+          alt: "Miniatura de presentaciÃ³n 3D",
         },
         media: {
           type: "youtube",
@@ -390,7 +390,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("Lookdev / Vista previa"),
         title: s("Lanzador de estudio de materiales"),
         description: s(
-          "Superficies, sistemas de pintura y dirección de iluminación organizados como un configurador cinematográfico."
+          "Superficies, sistemas de pintura y direcciÃ³n de iluminaciÃ³n organizados como un configurador cinematogrÃ¡fico."
         ),
         href: "/#profile-journal",
         cta: s("Abrir vista previa"),
@@ -411,7 +411,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("Reel / Movimiento"),
         title: s("Reel de render automotriz"),
         description: s(
-          "Pieza pulida enfocada en superficies duras, ritmo de cámara y presentación premium de render."
+          "Pieza pulida enfocada en superficies duras, ritmo de cÃ¡mara y presentaciÃ³n premium de render."
         ),
         href: "/videos/3d1.mp4",
         cta: s("Ver reel"),
@@ -435,9 +435,9 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   // ============================================================================
   vfx: {
     label: "VFX",
-    title: s("Niagara, simulaciones y lanzadores de composición"),
+    title: s("Niagara, simulaciones y lanzadores de composiciÃ³n"),
     description: s(
-      "Efectos en tiempo real, movimiento por capas y avances de composición orientados al shot dentro de un hub cinematográfico ligero."
+      "Efectos en tiempo real, movimiento por capas y avances de composiciÃ³n orientados al shot dentro de un hub cinematogrÃ¡fico ligero."
     ),
     items: [
       {
@@ -445,7 +445,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("YouTube / Destacado"),
         title: s("Breakdown de efectos en tiempo real"),
         description: s(
-          "Área destacada para timing en Niagara, estudios de simulación y breakdowns VFX en tiempo real."
+          "Ãrea destacada para timing en Niagara, estudios de simulaciÃ³n y breakdowns VFX en tiempo real."
         ),
         href: "https://www.youtube.com/@TheAssetHero",
         cta: s("Ver feed"),
@@ -465,7 +465,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("Toolkit / Vista previa"),
         title: s("Vista previa de paquete FX"),
         description: s(
-          "Sistemas reutilizables de efectos, atmósfera cinematográfica y detalles de implementación para shots premium."
+          "Sistemas reutilizables de efectos, atmÃ³sfera cinematogrÃ¡fica y detalles de implementaciÃ³n para shots premium."
         ),
         href: "/#profile-journal",
         cta: s("Abrir vista previa"),
@@ -486,7 +486,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("Reel / Movimiento"),
         title: s("Reel de secuencia Niagara"),
         description: s(
-          "Reel cinematográfico para efectos por capas, movimiento atmosférico y timing en tiempo real de alto impacto."
+          "Reel cinematogrÃ¡fico para efectos por capas, movimiento atmosfÃ©rico y timing en tiempo real de alto impacto."
         ),
         href: "/videos/vfx1.mp4",
         cta: s("Ver reel"),
@@ -510,17 +510,17 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
   // ============================================================================
   dev: {
     label: "DEV",
-    title: s("Sistemas en Unreal, plugins y herramientas técnicas"),
+    title: s("Sistemas en Unreal, plugins y herramientas tÃ©cnicas"),
     description: s(
-      "Pensamiento de sistemas, lanzamientos de plugins y herramientas técnicas presentadas a través de una interfaz premium con estilo de estudio."
+      "Pensamiento de sistemas, lanzamientos de plugins y herramientas tÃ©cnicas presentadas a travÃ©s de una interfaz premium con estilo de estudio."
     ),
     items: [
       {
         id: "dev-youtube",
         eyebrow: s("YouTube / Destacado"),
-        title: s("Broadcast de toolchain técnica"),
+        title: s("Broadcast de toolchain tÃ©cnica"),
         description: s(
-          "Embed destacado para sistemas en Unreal, herramientas de flujo y demos técnicas presentadas con claridad cinematográfica."
+          "Embed destacado para sistemas en Unreal, herramientas de flujo y demos tÃ©cnicas presentadas con claridad cinematogrÃ¡fica."
         ),
         href: "https://www.youtube.com/@TheAssetHero",
         cta: s("Abrir canal"),
@@ -528,7 +528,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         accent: "from-emerald-300/16 via-white/8 to-cyan-300/16",
         thumbnail: {
           src: "/images/img2.png",
-          alt: "Miniatura de toolchain técnica",
+          alt: "Miniatura de toolchain tÃ©cnica",
         },
         media: {
           type: "youtube",
@@ -540,10 +540,10 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("Plugins / Vista previa"),
         title: s("Vitrina de plugins"),
         description: s(
-          "Superficie limpia para herramientas en Unreal, sistemas de plugins y futuros lanzamientos técnicos."
+          "Superficie limpia para herramientas en Unreal, sistemas de plugins y futuros lanzamientos tÃ©cnicos."
         ),
         href: "/#profile-journal",
-        cta: s("Abrir sección"),
+        cta: s("Abrir secciÃ³n"),
         linkKind: "internal",
         accent: "from-white/18 via-transparent to-emerald-300/10",
         thumbnail: {
@@ -561,7 +561,7 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
         eyebrow: s("Reel / Movimiento"),
         title: s("Reel de sistemas"),
         description: s(
-          "Reel técnico para sistemas de flujo, herramientas orientadas al creador y trabajo de ingeniería guiado por interfaz."
+          "Reel tÃ©cnico para sistemas de flujo, herramientas orientadas al creador y trabajo de ingenierÃ­a guiado por interfaz."
         ),
         href: "/videos/dev1.mp4",
         cta: s("Ver reel"),
@@ -580,3 +580,4 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
     ],
   },
 };
+
