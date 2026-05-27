@@ -165,11 +165,11 @@ export const profileHubContent: Record<CategoryKey, ProfileHubCategory> = {
       description: s(
         "Se producirá este 2026 la primera temporada de Runaway 2150, totalmente producida por The Asset Hero."
       ),
-      videoUrl: "https://www.youtube.com/embed/sLEJaIPUmeU?si=rizr7-X0Tn0vIo_4",
+      videoUrl: "https://www.youtube.com/embed/StHnkr4zFgs?rel=0",
       actions: [
         {
           label: s("VER TRAILER"),
-          href: "https://youtu.be/sLEJaIPUmeU",
+          href: "https://youtu.be/StHnkr4zFgs",
         },
         {
           label: s("VER PROYECTO"),

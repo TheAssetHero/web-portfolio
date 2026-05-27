@@ -426,7 +426,7 @@ export default async function Runaway2150Page(
         <section className="overflow-hidden rounded-[1.7rem] border border-white/10 bg-black/70 shadow-[0_0_28px_rgba(74,222,128,0.08)]">
           <div className="aspect-video w-full">
             <iframe
-              src="https://www.youtube.com/embed/sLEJaIPUmeU?si=rizr7-X0Tn0vIo_4"
+              src="https://www.youtube.com/embed/StHnkr4zFgs?rel=0"
               title="Runaway 2150"
               className="h-full w-full"
               frameBorder="0"
