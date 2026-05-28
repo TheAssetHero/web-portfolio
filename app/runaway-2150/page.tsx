@@ -51,23 +51,17 @@ type ResourceButton = {
 type RunawayContent = {
   backToHome: string;
   languageLabel: string;
-  festivalKit: SectionText;
+  projectDossier: SectionText;
   hero: {
     eyebrow: string;
-    logoLabel: string;
     title: string;
     subtitle: string;
     description: string;
-    buttons: {
-      watchFilm: string;
-      pressKit: string;
-      productionJournal: string;
-    };
   };
   synopsis: SectionText & {
     body: string;
   };
-  festivalInfo: SectionText & {
+  projectInfo: SectionText & {
     rows: InfoRow[];
   };
   pipeline: SectionText & {
@@ -86,6 +80,9 @@ type RunawayContent = {
   directorBio: SectionText & {
     body: string;
   };
+  documentDownloads: SectionText & {
+    buttons: ResourceButton[];
+  };
   resources: SectionText & {
     buttons: ResourceButton[];
   };
@@ -95,37 +92,31 @@ const content: Record<Locale, RunawayContent> = {
   es: {
     backToHome: "<- VOLVER AL INICIO",
     languageLabel: "Idioma",
-    festivalKit: {
-      eyebrow: "OFFICIAL FESTIVAL KIT",
-      title: "WAIFF Submission Package",
+    projectDossier: {
+      eyebrow: "OFFICIAL PROJECT DOSSIER",
+      title: "Runaway 2150 Submission Hub",
       description:
-        "Hub editorial oficial para festival, dossier de producción y presentación cinematográfica de Runaway 2150.",
+        "Hub editorial oficial para el dossier de producción, materiales del proyecto y presentación cinematográfica de Runaway 2150.",
     },
     hero: {
       eyebrow: "THE ASSET HERO ORIGINAL",
-      logoLabel: "Official Festival Submission",
       title: "RUNAWAY 2150",
       subtitle: "Serie cinematográfica producida por The Asset Hero.",
       description:
         "Una producción cinematográfica sci-fi construida con IA, mundos conectados y una guerra que no debe comenzar.",
-      buttons: {
-        watchFilm: "Watch Film",
-        pressKit: "Download Press Kit",
-        productionJournal: "Production Journal",
-      },
     },
     synopsis: {
       eyebrow: "SINOPSIS",
       title: "Short synopsis",
       body: "Runaway 2150 is a dystopian sci-fi short film set in CA Ciudad Azteca, a futuristic Latin city under robotic occupation. Danniel and Alexis must recover a series of powerful Stones scattered across planets, black markets, and hostile territories before an unstoppable war begins.",
     },
-    festivalInfo: {
-      eyebrow: "FESTIVAL INFORMATION",
-      title: "Estado de festival y ficha del proyecto",
+    projectInfo: {
+      eyebrow: "PROJECT INFORMATION",
+      title: "Ficha oficial del proyecto",
       rows: [
         {
-          label: "Festival Status",
-          value: "Submitted to WAIFF — World AI Film Festival",
+          label: "Project Status",
+          value: "Original AI-assisted cinematic short film in development",
         },
         {
           label: "Category",
@@ -285,11 +276,31 @@ const content: Record<Locale, RunawayContent> = {
       title: "Emmanuel Blancas",
       body: "Emmanuel Blancas is a 3D artist and AI-assisted filmmaker with experience in visual production for film, television, commercials, social media, virtual sets, and cinematic 3D workflows. His background includes hard-surface modeling, texturing, lighting, rendering, VFX, Unreal Engine, 3ds Max, post-production tools, and emerging AI production pipelines. Through projects like Runaway 2150, he combines worldbuilding, cinematic visual direction, science fiction, and AI-assisted storytelling to create ambitious independent films with a strong visual identity.",
     },
+    documentDownloads: {
+      eyebrow: "PROJECT DOCUMENTS",
+      title: "Descargas principales del dossier",
+      description:
+        "Accesos inmediatos a materiales editoriales y documentos de producción del proyecto.",
+      buttons: [
+        {
+          label: "DOWNLOAD PROJECT BIBLE",
+          href: "#",
+        },
+        {
+          label: "DOWNLOAD DOSSIER",
+          href: "#",
+        },
+        {
+          label: "VIEW PDF",
+          href: "#",
+        },
+      ],
+    },
     resources: {
       eyebrow: "DOWNLOADS / RESOURCES",
       title: "Materiales de presentación y consulta",
       description:
-        "Paquete de recursos para seguimiento del proyecto, presentación editorial y revisión de festival.",
+        "Paquete de recursos para seguimiento del proyecto, presentación editorial y consulta general.",
       buttons: [
         {
           label: "Download Production Journal PDF",
@@ -318,37 +329,31 @@ const content: Record<Locale, RunawayContent> = {
   en: {
     backToHome: "<- BACK TO HOME",
     languageLabel: "Language",
-    festivalKit: {
-      eyebrow: "OFFICIAL FESTIVAL KIT",
-      title: "WAIFF Submission Package",
+    projectDossier: {
+      eyebrow: "OFFICIAL PROJECT DOSSIER",
+      title: "Runaway 2150 Submission Hub",
       description:
-        "Official editorial hub for festival submission, production dossier, and cinematic presentation of Runaway 2150.",
+        "Official editorial hub for the production dossier, project materials, and cinematic presentation of Runaway 2150.",
     },
     hero: {
       eyebrow: "THE ASSET HERO ORIGINAL",
-      logoLabel: "Official Festival Submission",
       title: "RUNAWAY 2150",
       subtitle: "A cinematic series produced by The Asset Hero.",
       description:
-        "A sci-fi cinematic production built with AI, connected worlds, and a war that must never begin.",
-      buttons: {
-        watchFilm: "Watch Film",
-        pressKit: "Download Press Kit",
-        productionJournal: "Production Journal",
-      },
+        "A multi-planet sci-fi cinematic project built around the recovery of the Stones, the guilt of one mistake, and a war that cannot be allowed to begin.",
     },
     synopsis: {
       eyebrow: "SYNOPSIS",
       title: "Short synopsis",
       body: "Runaway 2150 is a dystopian sci-fi short film set in CA Ciudad Azteca, a futuristic Latin city under robotic occupation. Danniel and Alexis must recover a series of powerful Stones scattered across planets, black markets, and hostile territories before an unstoppable war begins.",
     },
-    festivalInfo: {
-      eyebrow: "FESTIVAL INFORMATION",
-      title: "Festival status and project profile",
+    projectInfo: {
+      eyebrow: "PROJECT INFORMATION",
+      title: "Official project profile",
       rows: [
         {
-          label: "Festival Status",
-          value: "Submitted to WAIFF — World AI Film Festival",
+          label: "Project Status",
+          value: "Original AI-assisted cinematic short film in development",
         },
         {
           label: "Category",
@@ -508,11 +513,31 @@ const content: Record<Locale, RunawayContent> = {
       title: "Emmanuel Blancas",
       body: "Emmanuel Blancas is a 3D artist and AI-assisted filmmaker with experience in visual production for film, television, commercials, social media, virtual sets, and cinematic 3D workflows. His background includes hard-surface modeling, texturing, lighting, rendering, VFX, Unreal Engine, 3ds Max, post-production tools, and emerging AI production pipelines. Through projects like Runaway 2150, he combines worldbuilding, cinematic visual direction, science fiction, and AI-assisted storytelling to create ambitious independent films with a strong visual identity.",
     },
+    documentDownloads: {
+      eyebrow: "PROJECT DOCUMENTS",
+      title: "Primary dossier downloads",
+      description:
+        "Immediate access to editorial materials and production documents for the project.",
+      buttons: [
+        {
+          label: "DOWNLOAD PROJECT BIBLE",
+          href: "#",
+        },
+        {
+          label: "DOWNLOAD DOSSIER",
+          href: "#",
+        },
+        {
+          label: "VIEW PDF",
+          href: "#",
+        },
+      ],
+    },
     resources: {
       eyebrow: "DOWNLOADS / RESOURCES",
       title: "Submission resources and supporting material",
       description:
-        "A resource package for project review, editorial follow-up, and festival-facing presentation.",
+        "A resource package for project review, editorial follow-up, and general project presentation.",
       buttons: [
         {
           label: "Download Production Journal PDF",
@@ -707,12 +732,12 @@ export default async function Runaway2150Page(
         </div>
 
         <SectionLabel
-          eyebrow={page.festivalKit.eyebrow}
-          title={page.festivalKit.title}
-          description={page.festivalKit.description}
+          eyebrow={page.projectDossier.eyebrow}
+          title={page.projectDossier.title}
+          description={page.projectDossier.description}
         />
 
-        <section className="grid gap-8 xl:grid-cols-[minmax(0,0.92fr)_minmax(360px,0.88fr)] xl:items-start">
+        <section className="space-y-5">
           <Panel className="overflow-hidden">
             <div className="aspect-video w-full" id="main-trailer">
               <iframe
@@ -727,12 +752,21 @@ export default async function Runaway2150Page(
             </div>
           </Panel>
 
+          <div className="grid gap-4 md:grid-cols-3" id="resources">
+            {page.documentDownloads.buttons.map((button) => (
+              <Panel key={button.label} className="p-4">
+                <ActionButton href={button.href} external={button.external}>
+                  {button.label}
+                </ActionButton>
+              </Panel>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid gap-8 xl:grid-cols-[minmax(0,0.92fr)_minmax(360px,0.88fr)] xl:items-stretch">
           <Panel className="p-6 sm:p-8">
             <p className="text-[0.68rem] uppercase tracking-[0.34em] text-red-200/56">
               {page.hero.eyebrow}
-            </p>
-            <p className="mt-3 text-[0.62rem] uppercase tracking-[0.28em] text-white/42">
-              {page.hero.logoLabel}
             </p>
             <h1 className="mt-5 text-[2.9rem] font-semibold tracking-[-0.05em] text-white sm:text-[3.8rem] lg:text-[4.8rem] lg:leading-[0.94]">
               {page.hero.title}
@@ -743,28 +777,14 @@ export default async function Runaway2150Page(
             <p className="mt-5 max-w-2xl text-sm leading-7 text-white/56 sm:text-base">
               {page.hero.description}
             </p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <ActionButton href="#main-trailer">
-                {page.hero.buttons.watchFilm}
-              </ActionButton>
-              <ActionButton href="#resources">
-                {page.hero.buttons.pressKit}
-              </ActionButton>
-              <ActionButton href="#production-journal">
-                {page.hero.buttons.productionJournal}
-              </ActionButton>
-            </div>
-
-            <div className="mt-8">
-              <MediaPanel
-                src="/images/runaway/hero.png"
-                alt="Runaway 2150 hero artwork"
-                className="min-h-[240px]"
-                sizes="(max-width: 1280px) 100vw, 420px"
-              />
-            </div>
           </Panel>
+
+          <MediaPanel
+            src="/images/runaway/hero.png"
+            alt="Runaway 2150 hero artwork"
+            className="min-h-[300px] sm:min-h-[420px]"
+            sizes="(max-width: 1280px) 100vw, 420px"
+          />
         </section>
 
         <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.8fr)]">
@@ -772,9 +792,9 @@ export default async function Runaway2150Page(
             <p className="text-white/76">{page.synopsis.body}</p>
           </InfoCard>
 
-          <InfoCard title={page.festivalInfo.eyebrow}>
+          <InfoCard title={page.projectInfo.eyebrow}>
             <div className="space-y-4">
-              {page.festivalInfo.rows.map((row) => (
+              {page.projectInfo.rows.map((row) => (
                 <div
                   key={row.label}
                   className="border-b border-white/8 pb-4 last:border-b-0 last:pb-0"
