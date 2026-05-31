@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
 import { useOverlayController } from "@/components/OverlayController";
 import ProfileItemDetailPanel from "@/components/ProfileItemDetailPanel";
+import Tour360Embed from "@/components/Tour360Embed";
 import { Language, resolveText } from "@/lib/localization";
 import {
   profileHubContent,
@@ -16,6 +17,10 @@ import { CategoryKey } from "@/lib/portfolio-categories";
 import { uiCopy } from "@/lib/ui-copy";
 
 const mainCategoryOrder: CategoryKey[] = ["ai", "3d", "vfx", "dev", "vp"];
+const GLASS_LINK_TOUR_URL =
+  "https://kuula.co/share/collection/7KnpF?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1";
+const GLASS_LINK_PROJECT_URL =
+  "https://www.behance.net/gallery/152984169/Glass-Link-House-Pt-I-Vray";
 
 function getEmbeddedMediaUrl(videoUrl: string) {
   if (
@@ -456,7 +461,124 @@ function MainEditorialFeed() {
             )}
           />
         ) : null}
-      </>
+    </>
+  );
+  }
+
+  if (activeCategory === "3d") {
+    return (
+      <div className="space-y-6">
+        <article className="relative overflow-hidden rounded-[1.7rem] border border-white/12 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5 shadow-[0_0_32px_rgba(255,255,255,0.04)] sm:p-6 lg:p-7">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_48%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.02),transparent_35%,rgba(251,191,36,0.06))]" />
+          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-amber-200/36 to-transparent" />
+          <div className="absolute bottom-0 left-8 h-px w-40 bg-gradient-to-r from-amber-200/45 to-transparent" />
+
+          <div className="relative z-10 grid gap-8 xl:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] xl:items-start">
+            <div className="min-w-0">
+              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/36">
+                3D / ARCHVIZ FEATURE
+              </p>
+              <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.6rem] lg:leading-[1.04]">
+                Glass Link House Project
+              </h3>
+              <p className="mt-5 max-w-3xl text-xl leading-8 text-white/82 sm:text-2xl sm:leading-9">
+                Casa modelada de 0 a 100% por The Asset Hero, excepto
+                mobiliario.
+              </p>
+              <p className="mt-5 max-w-3xl text-sm leading-7 text-white/52 sm:text-base">
+                Proyecto de visualización arquitectónica desarrollado con
+                modelado, iluminación, render y recorrido 360.
+              </p>
+
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a
+                  href={GLASS_LINK_PROJECT_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/80 transition hover:-translate-y-0.5 hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
+                >
+                  VER PROYECTO
+                </a>
+                <a
+                  href="#glass-link-house-tour"
+                  className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/64 transition hover:-translate-y-0.5 hover:border-white/18 hover:bg-white/[0.06] hover:text-white"
+                >
+                  VER TOUR 360
+                </a>
+              </div>
+            </div>
+
+            <div id="glass-link-house-tour">
+              <Tour360Embed
+                src={GLASS_LINK_TOUR_URL}
+                title="Glass Link House 360 Tour"
+              />
+            </div>
+          </div>
+        </article>
+
+        <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-6 sm:p-7 lg:p-8">
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),transparent_28%)]" />
+          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <div className="absolute bottom-0 left-8 right-24 h-px bg-gradient-to-r from-emerald-300/40 via-white/10 to-transparent" />
+
+          <div className="relative z-10 max-w-4xl">
+            <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
+              {resolveText(uiCopy.profileHub.editorialContent, language)}
+            </p>
+            <p className="mt-4 text-[0.7rem] uppercase tracking-[0.28em] text-white/46">
+              {category.label}
+            </p>
+            <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-[2.1rem]">
+              {resolveText(category.title, language)}
+            </h3>
+            <p className="mt-5 max-w-4xl text-sm leading-7 text-white/48 sm:text-base">
+              {resolveText(category.description, language)}
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {category.items.map((item) => {
+            const actionText =
+              item.linkKind === "external"
+                ? resolveText(uiCopy.categoryModal.open, language)
+                : item.linkKind === "reel"
+                  ? resolveText(uiCopy.categoryModal.play, language)
+                  : resolveText(item.cta, language);
+
+            return (
+              <article
+                key={item.id}
+                className="relative overflow-hidden rounded-[1.45rem] border border-white/10 bg-[linear-gradient(160deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 shadow-[0_0_22px_rgba(255,255,255,0.03)] sm:p-6"
+              >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_46%)]" />
+                <div className="relative z-10">
+                  <p className="text-[0.62rem] uppercase tracking-[0.28em] text-white/34">
+                    {resolveText(item.eyebrow, language)}
+                  </p>
+                  <h4 className="mt-3 text-[1.45rem] font-semibold tracking-[-0.04em] text-white">
+                    {resolveText(item.title, language)}
+                  </h4>
+                  <p className="mt-4 text-sm leading-7 text-white/46 sm:text-base">
+                    {resolveText(item.description, language)}
+                  </p>
+                  <div className="mt-6">
+                    <button
+                      type="button"
+                      onClick={() => selectOverlayCategory(activeCategory)}
+                      className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/72 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
+                    >
+                      {actionText}
+                    </button>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
     );
   }
 
