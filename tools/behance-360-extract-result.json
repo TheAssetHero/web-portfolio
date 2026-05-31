@@ -1,0 +1,117 @@
+{
+  "pageUrl": "https://www.behance.net/gallery/152984169/Glass-Link-House-Pt-I-Vray",
+  "projectTitle": "Glass Link House Pt. I Vray",
+  "foundIframes": [
+    {
+      "src": "https://kuula.co/share/collection/7KnpF?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1",
+      "title": "Project Embed Content",
+      "className": "embed-content"
+    }
+  ],
+  "foundEmbeds": [],
+  "foundLinks": [],
+  "foundNetworkRequests": [
+    {
+      "url": "https://kuula.co/share/collection/7KnpF?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1",
+      "kind": "document",
+      "method": "GET"
+    },
+    {
+      "url": "https://kuula.co/share/collection/7KnpF?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1",
+      "kind": "response",
+      "status": 200
+    },
+    {
+      "url": "https://static.kuula.io/prod/css/viewer-866r53.css",
+      "kind": "stylesheet",
+      "method": "GET"
+    },
+    {
+      "url": "https://static.kuula.io/prod/viewer-866r53.js",
+      "kind": "script",
+      "method": "GET"
+    },
+    {
+      "url": "https://static.kuula.io/prod/viewer-866r53.js",
+      "kind": "response",
+      "status": 200
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-c178/01-4096.jpg",
+      "kind": "fetch",
+      "method": "GET"
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-c178/01-4096.jpg",
+      "kind": "response",
+      "status": 200
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-b763/01-4096.jpg",
+      "kind": "fetch",
+      "method": "GET"
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-b763/01-4096.jpg",
+      "kind": "response",
+      "status": 200
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-7194/01-4096.jpg",
+      "kind": "fetch",
+      "method": "GET"
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-7194/01-4096.jpg",
+      "kind": "response",
+      "status": 200
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-a126/01-4096.jpg",
+      "kind": "fetch",
+      "method": "GET"
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-a126/01-4096.jpg",
+      "kind": "response",
+      "status": 200
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-8210/01-4096.jpg",
+      "kind": "fetch",
+      "method": "GET"
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-8210/01-4096.jpg",
+      "kind": "response",
+      "status": 200
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-3118/01-4096.jpg",
+      "kind": "fetch",
+      "method": "GET"
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-3118/01-4096.jpg",
+      "kind": "response",
+      "status": 200
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-9587/01-4096.jpg",
+      "kind": "fetch",
+      "method": "GET"
+    },
+    {
+      "url": "https://files.kuula.io/66a7-e83d-d073-9587/01-4096.jpg",
+      "kind": "response",
+      "status": 200
+    }
+  ],
+  "bestCandidateUrl": "https://kuula.co/share/collection/7KnpF?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1",
+  "notes": [
+    "Behance renderiza un iframe público de Kuula dentro del proyecto.",
+    "El mejor candidato es la URL compartible de Kuula y parece ser embebible tal cual.",
+    "No se detectó durante la automatización un botón visible de Behance con texto 'Share & Embed This Project'.",
+    "El tour 360 parece vivir en Kuula, no directamente en un viewer propietario de Behance."
+  ]
+}

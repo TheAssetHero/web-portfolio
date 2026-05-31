@@ -2,6 +2,7 @@
 
 import BrandDiscoverySection from "@/components/BrandDiscoverySection";
 import Footer from "@/components/Footer";
+import GlassLinkHouseFeature from "@/components/GlassLinkHouseFeature";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { OverlayControllerProvider } from "@/components/OverlayController";
 import ProfileSection from "@/components/ProfileSection";
@@ -14,6 +15,7 @@ export default function HomeExperience() {
         <main className="relative min-h-screen w-screen scroll-smooth bg-black text-white">
           <Showcase />
           <ProfileSection />
+          <GlassLinkHouseFeature />
           <BrandDiscoverySection />
           <Footer />
         </main>
