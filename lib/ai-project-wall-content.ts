@@ -50,9 +50,9 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "wide",
     type: s("AI / ORIGINAL SERIES"),
     title: s("Runaway 2150"),
-    shortDescription: s("Serie sci-fi original construida con IA y mundos conectados."),
+    shortDescription: s("An original sci-fi series built with AI-assisted production."),
     description: s(
-      "La primera temporada de Runaway 2150 llegará en 2026: una producción cinematográfica de The Asset Hero construida con IA, mundos conectados y una guerra que no debe comenzar."
+      "An original sci-fi series developed through AI-assisted cinematic production, connected worlds and a war that cannot begin."
     ),
     preview: {
       kind: "embed",
@@ -62,7 +62,7 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     modalVideoUrl: "https://www.youtube.com/embed/StHnkr4zFgs?rel=0",
     actions: [
       {
-        label: s("VER PROYECTO"),
+        label: s("VIEW PROJECT"),
         href: "/runaway-2150",
         kind: "internal",
       },
@@ -74,9 +74,9 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "large",
     type: s("AI / CASE STUDY"),
     title: s("The Echelon"),
-    shortDescription: s("Primer comercial en LATAM completamente en IA."),
+    shortDescription: s("The first fully AI-produced commercial project in LATAM."),
     description: s(
-      "Primer comercial en LATAM completamente en IA. Voz, imagen y audio generados con inteligencia artificial."
+      "The first fully AI-produced commercial project in LATAM. Voice, image and audio generated with artificial intelligence."
     ),
     preview: {
       kind: "embed",
@@ -85,10 +85,10 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     },
     modalVideoUrl:
       "https://player.vimeo.com/video/1190250981?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479",
-    modalEmbedTitle: s("The Echelon ES"),
+    modalEmbedTitle: s("The Echelon"),
     actions: [
       {
-        label: s("VER PROYECTO"),
+        label: s("VIEW PROJECT"),
         href: "https://www.behance.net/gallery/245574455/The-Echelon-AI-Project",
         kind: "external",
       },
@@ -100,9 +100,9 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "medium",
     type: s("AI / AUTOMOTIVE"),
     title: s("BMW M2 Racing 2026"),
-    shortDescription: s("Visualización automotriz con performance cinematográfica."),
+    shortDescription: s("AI-assisted automotive film with high-end motion."),
     description: s(
-      "Pieza audiovisual desarrollada con inteligencia artificial, enfocada en visualización automotriz, performance y estética cinematográfica."
+      "AI-assisted automotive film focused on performance, cinematic motion and high-end vehicle visualization."
     ),
     preview: {
       kind: "embed",
@@ -112,7 +112,7 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     modalVideoUrl: "https://www.youtube.com/embed/AaqX9k6b0Gw?rel=0",
     actions: [
       {
-        label: s("VER PROYECTO"),
+        label: s("VIEW PROJECT"),
         href: "https://www.behance.net/emmanuelblancas",
         kind: "external",
       },
@@ -124,9 +124,9 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "wide",
     type: s("AI / CHARACTER PROJECT"),
     title: s("Don Bigotes"),
-    shortDescription: s("Proyecto de personaje con presentación editorial."),
+    shortDescription: s("Character-driven AI project with a cinematic editorial presentation."),
     description: s(
-      "Proyecto de personaje presentado como pieza destacada dentro del muro de producción AI."
+      "Character-driven AI project with a cinematic editorial presentation."
     ),
     preview: {
       kind: "embed",
@@ -136,7 +136,7 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     modalVideoUrl: "https://www.youtube.com/embed/kYFfOKDUtRc?rel=0",
     actions: [
       {
-        label: s("VER VIDEO"),
+        label: s("WATCH VIDEO"),
         href: "https://youtu.be/kYFfOKDUtRc",
         kind: "external",
       },
@@ -148,14 +148,14 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "small",
     type: s("AI / EXPERIMENT"),
     title: s("Anatomía al límite"),
-    shortDescription: s("Experimento audiovisual dentro de AI Production."),
+    shortDescription: s("Experimental AI short exploring distorted reality."),
     description: s(
-      "Pieza experimental desarrollada dentro del área de AI Production."
+      "Experimental AI short exploring perception, exhaustion and distorted reality."
     ),
     preview: {
       kind: "image",
       src: "/images/img1.jpeg",
-      alt: "Preview de Anatomía al límite",
+      alt: "Anatomía al límite preview",
     },
     modalVideoUrl: "https://youtu.be/ZFUxo69JAAM",
   },
@@ -165,14 +165,14 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "small",
     type: s("AI / SHORT"),
     title: s("The Therians"),
-    shortDescription: s("Concepto AI de formato corto y tono narrativo."),
+    shortDescription: s("Short-form AI concept piece with narrative atmosphere."),
     description: s(
-      "Tarjeta editorial de formato pequeño para conceptos AI, experimentos visuales y lanzamientos narrativos dentro del portafolio."
+      "Short-form AI concept piece built around character experimentation and narrative atmosphere."
     ),
     preview: {
       kind: "image",
       src: "/images/img2.png",
-      alt: "Preview de The Therians",
+      alt: "The Therians preview",
     },
     modalVideoUrl: "https://youtube.com/shorts/CuoNMN1EhIk",
   },
@@ -182,20 +182,20 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "small",
     type: s("AI / RELEASE"),
     title: s("The Rango Bravo"),
-    shortDescription: s('Estreno de "Una Más al Kilo".'),
+    shortDescription: s("A satirical automotive short."),
     description: s(
-      'Estreno de "Una Más al Kilo". Cortometraje que muestra las estadísticas de fallas de vehículos extranjeros en el año 2025, sin tirarle a nadie en específico.'
+      "A satirical automotive short exploring vehicle failure statistics without targeting any specific brand."
     ),
     preview: {
       kind: "image",
       src: "/images/img4.jpeg",
-      alt: "Preview de The Rango Bravo",
+      alt: "The Rango Bravo preview",
     },
     modalVideoUrl:
       "https://www.youtube.com/embed/Qpo0jaKJuyE?si=Cotw9RY43-nVQQbw",
     actions: [
       {
-        label: s("VER VIDEO"),
+        label: s("WATCH VIDEO"),
         href: "https://youtu.be/Y1UbzPnqJPo",
         kind: "external",
       },

@@ -3,99 +3,78 @@ import { LocalizedText } from "@/lib/localization";
 const s = (text: string): LocalizedText => ({ en: text, es: text });
 
 export const uiCopy = {
-  // ============================================================================
-  // HERO
-  // - Botón principal
-  // - Botón de contacto
-  // ============================================================================
   hero: {
-    viewChannel: s("VER CANAL"),
-    contact: s("CONTACTO"),
+    viewChannel: s("VIEW CHANNEL"),
+    contact: s("CONTACT"),
   },
 
-  // ============================================================================
-  // SECCIÓN EDITORIAL / CATEGORÍAS
-  // ============================================================================
   profileHub: {
-    categoryIndex: s("Índice de categorías"),
-    fieldsTitle: s("Campos cinematográficos y dirección técnica."),
+    categoryIndex: s("Category Index"),
+    fieldsTitle: s("Cinematic fields and technical direction."),
     fieldsDescription: s(
-      "Abre vistas de categoría para notas editoriales, lanzamientos, reels y avances técnicos sin salir de la experiencia actual."
+      "Open category views for editorial notes, releases, reels and technical previews without leaving the current experience."
     ),
-    editorialContent: s("Contenido editorial"),
+    editorialContent: s("Editorial Content"),
     editorialDescription: s(
-      "Selecciona una categoría para abrir una vista editorial cinematográfica con lanzamientos, proyectos, reels y notas técnicas."
+      "Select a category to open a cinematic editorial view with releases, project cards, reels and technical notes."
     ),
   },
 
-  // ============================================================================
-  // SECCIÓN DE MARCA / PERFIL
-  // ============================================================================
   brand: {
-    dossier: s("Dossier editorial"),
-    heading: s("¿Quién está detrás de The Asset Hero?"),
+    dossier: s("Editorial Dossier"),
+    heading: s("Who is behind The Asset Hero?"),
     teaser: s(
-      "Tecnología creativa, dirección visual y sistemas cinematográficos detrás de la marca."
+      "Creative technology, visual direction and cinematic systems behind the brand."
     ),
-    enter: s("Entrar"),
-    creativeTechnology: s("Tecnología creativa"),
+    enter: s("Enter"),
+    creativeTechnology: s("Creative Technology"),
     statement: s(
-      "Creando visuales de alto nivel, experiencias en tiempo real y tecnología cinematográfica para la producción moderna."
+      "Creating high-end visuals, realtime experiences and cinematic technology for modern production."
     ),
     note: s(
-      "Dirección enfocada en estudio a través de visuales en tiempo real, herramientas cinematográficas y sistemas de producción modernos. Este panel se mantiene intencionalmente sobrio para que el trabajo siga siendo la señal principal."
+      "Studio-focused direction across realtime visuals, cinematic tools and modern production systems. This panel stays intentionally minimal so the work remains the primary signal."
     ),
-    closeAria: s("Cerrar modal de perfil de marca"),
+    closeAria: s("Close brand profile modal"),
   },
 
-  // ============================================================================
-  // MODAL DE CONTACTO
-  // ============================================================================
   contact: {
-    label: s("Contacto"),
-    title: s("Inicia una colaboración cinematográfica."),
+    label: s("Contact"),
+    title: s("Start a cinematic collaboration."),
     description: s(
-      "Comparte la forma de tu proyecto y te daré seguimiento con el siguiente paso."
+      "Share the shape of your project and I will follow up with the next step."
     ),
-    namePlaceholder: s("Tu nombre"),
-    emailPlaceholder: s("Correo electrónico"),
-    messagePlaceholder: s("Cuéntame sobre el mundo que quieres construir"),
-    send: s("Enviar"),
-    subjectPrefix: s("Consulta de portafolio de"),
-    nameLabel: s("Nombre"),
-    emailLabel: s("Correo"),
-    messageLabel: s("Mensaje"),
-    closeAria: s("Cerrar modal de contacto"),
+    namePlaceholder: s("Your name"),
+    emailPlaceholder: s("Email address"),
+    messagePlaceholder: s("Tell me about the world you want to build"),
+    send: s("Send"),
+    subjectPrefix: s("Portfolio inquiry from"),
+    nameLabel: s("Name"),
+    emailLabel: s("Email"),
+    messageLabel: s("Message"),
+    closeAria: s("Close contact modal"),
   },
 
-  // ============================================================================
-  // MODALES DE CATEGORÍA / DETALLES
-  // ============================================================================
   categoryModal: {
-    editorialFeature: s("Destacado editorial"),
-    featuredProject: s("Proyecto destacado"),
-    featuredProjects: s("Proyectos destacados"),
-    editorialNote: s("Nota editorial"),
-    featuredDirection: s("Dirección destacada"),
+    editorialFeature: s("Editorial Feature"),
+    featuredProject: s("Featured Project"),
+    featuredProjects: s("Featured Projects"),
+    editorialNote: s("Editorial Note"),
+    featuredDirection: s("Featured Direction"),
     editorialSuffix: s(
-      "Cada categoría se abre como un despliegue editorial digital, combinando reels, notas de estilo artículo y avances listos para lanzamiento dentro de una vista cinematográfica enfocada."
+      "Each category opens as a focused digital editorial view, combining reels, article-style notes and release-ready previews."
     ),
-    closeAria: s("Cerrar modal de categoría"),
-    closeDetailAria: s("Cerrar panel de detalle destacado"),
-    detailLabel: s("Detalle destacado"),
-    detailInfo: s("Resumen del proyecto"),
-    play: s("Ver"),
-    open: s("Abrir"),
+    closeAria: s("Close category modal"),
+    closeDetailAria: s("Close featured detail panel"),
+    detailLabel: s("Featured Detail"),
+    detailInfo: s("Project Summary"),
+    play: s("Watch"),
+    open: s("Open"),
     video: s("Video"),
     reel: s("Reel"),
-    preview: s("Vista previa"),
+    preview: s("Preview"),
   },
 
-  // ============================================================================
-  // SELECTOR DE IDIOMA
-  // - Se conserva la estructura por si se reactiva visualmente más adelante.
-  // ============================================================================
   language: {
-    label: s("Idioma"),
+    label: s("Language"),
   },
 } satisfies Record<string, Record<string, LocalizedText>>;

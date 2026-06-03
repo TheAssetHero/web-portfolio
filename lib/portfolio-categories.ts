@@ -33,245 +33,233 @@ export type PortfolioCategory = {
 export const categoryOrder: CategoryKey[] = ["ai", "3d", "vfx", "dev"];
 
 export const portfolioCategories: Record<CategoryKey, PortfolioCategory> = {
-  // ============================================================================
-  // IA
-  // ============================================================================
   ai: {
     key: "ai",
     label: "AI",
-    heroTitle: s("PRODUCCIÃ“N AI"),
-    heroDescription: s("Flujos de trabajo asistidos por inteligencia artificial."),
+    heroTitle: s("AI PRODUCTION"),
+    heroDescription: s("AI-assisted workflows for cinematic production."),
     modalDescription:
-      "AutomatizaciÃ³n, experimentaciÃ³n rÃ¡pida y herramientas creativas nativas de AI orientadas a producciÃ³n.",
+      "Automation, rapid experimentation and AI-native creative tools for production-ready work.",
     textareaPlaceholder:
-      "Describe el flujo de AI, el reto de automatizaciÃ³n o el prototipo que quieres lanzar",
-    panelTitle: "Sistemas, herramientas y experimentos de AI",
+      "Describe the AI workflow, automation challenge or prototype you want to launch.",
+    panelTitle: "AI systems, tools and experiments",
     panelDescription:
-      "Una plataforma modular para agentes, pipelines y conceptos cinematogrÃ¡ficos de AI que puede crecer con el laboratorio.",
+      "A modular platform for agents, pipelines and AI cinematic concepts built to grow with the studio.",
     cards: [
       {
-        title: "Reel de flujo asistido",
-        subtitle: "AutomatizaciÃ³n / Reel",
+        title: "Assisted Workflow Reel",
+        subtitle: "Automation / Reel",
         description:
-          "Un recorrido cinematogrÃ¡fico por flujos asistidos, iteraciÃ³n rÃ¡pida y puntos de contacto de producciÃ³n con AI.",
+          "A cinematic look at assisted workflows, rapid iteration and AI production touchpoints.",
         href: "/videos/ai1.mp4",
-        cta: "Ver reel",
+        cta: "Watch reel",
         accent: "from-cyan-400/25 via-white/8 to-sky-300/20",
         linkKind: "reel",
         media: {
           src: "/images/img1.jpeg",
-          alt: "Vista previa de producciÃ³n con AI",
+          alt: "AI production preview",
         },
       },
       {
-        title: "Laboratorio de interfaces",
-        subtitle: "Vista previa / Interno",
+        title: "Interface Lab",
+        subtitle: "Preview / Internal",
         description:
-          "Interfaces conceptuales para prompting, orquestaciÃ³n y sistemas de automatizaciÃ³n enfocados al creador.",
+          "Concept interfaces for prompting, orchestration and creator-focused automation systems.",
         href: "/#showcase",
-        cta: "Abrir vista previa",
+        cta: "Open preview",
         accent: "from-white/18 via-transparent to-cyan-300/10",
         linkKind: "internal",
         media: {
           src: "/images/img2.png",
-          alt: "Vista previa de interfaz experimental de AI",
+          alt: "Experimental AI interface preview",
         },
       },
       {
-        title: "Canal de investigaciÃ³n",
-        subtitle: "Externo / Canal",
+        title: "Research Channel",
+        subtitle: "External / Channel",
         description:
-          "Reels, breakdowns y procesos conectados con flujos emergentes de inteligencia artificial.",
+          "Reels, breakdowns and process notes connected to emerging AI workflows.",
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Visitar canal",
+        cta: "Visit channel",
         accent: "from-sky-400/16 via-transparent to-white/8",
         linkKind: "external",
         media: {
           src: "/images/img4.jpeg",
-          alt: "Vista previa del canal de AI",
+          alt: "AI channel preview",
         },
       },
     ],
   },
 
-  // ============================================================================
-  // 3D
-  // ============================================================================
   "3d": {
     key: "3d",
     label: "3D",
-    heroTitle: s("PRODUCCIÃ“N 3D"),
-    heroDescription: s("Del modelado a la salida cinematogrÃ¡fica."),
+    heroTitle: s("3D PRODUCTION"),
+    heroDescription: s("From modeling to cinematic output."),
     modalDescription:
-      "Modelado, materiales, detalle automotriz y render cinematogrÃ¡fico dentro de pipelines 3D pulidos.",
+      "Modeling, materials, automotive detail and cinematic rendering inside polished 3D pipelines.",
     textareaPlaceholder:
-      "Comparte el modelo, producto o sistema de render que quieres desarrollar en 3D",
-    panelTitle: "Modelado, automotriz y estudios de render",
+      "Share the model, product or render system you want to develop in 3D.",
+    panelTitle: "Modeling, automotive and render studies",
     panelDescription:
-      "Formas de alta fidelidad, estudios de materiales y salidas cinematogrÃ¡ficas para narrativa visual premium.",
+      "High-fidelity forms, material studies and cinematic output for premium visual storytelling.",
     cards: [
       {
-        title: "Reel de render automotriz",
+        title: "Automotive Render Reel",
         subtitle: "3D / Reel",
         description:
-          "Lenguaje de forma, superficies duras y presentaciÃ³n guiada por render para assets hero.",
+          "Hard-surface form language and render-led presentation for hero assets.",
         href: "/videos/3d1.mp4",
-        cta: "Ver reel",
+        cta: "Watch reel",
         accent: "from-zinc-200/14 via-white/7 to-amber-200/12",
         linkKind: "reel",
         media: {
           src: "/images/img2.png",
-          alt: "Vista previa de render automotriz en 3D",
+          alt: "3D automotive render preview",
         },
       },
       {
-        title: "Vista previa de materiales",
-        subtitle: "Vista previa / Interno",
+        title: "Material Study Preview",
+        subtitle: "Preview / Internal",
         description:
-          "Estudios de superficie, pintura e iluminaciÃ³n presentados como un configurador cinematogrÃ¡fico.",
+          "Surface, paint and lighting studies presented as a cinematic configurator.",
         href: "/#showcase",
-        cta: "Abrir vista previa",
+        cta: "Open preview",
         accent: "from-white/18 via-transparent to-zinc-300/10",
         linkKind: "internal",
         media: {
           src: "/images/img3.jpeg",
-          alt: "Vista previa de desarrollo de materiales",
+          alt: "Material development preview",
         },
       },
       {
-        title: "GalerÃ­a de producciÃ³n",
-        subtitle: "Externo / Showcase",
+        title: "Production Gallery",
+        subtitle: "External / Showcase",
         description:
-          "Punto de partida para estudios visuales, renders y breakdowns con presentaciÃ³n cinematogrÃ¡fica.",
+          "A starting point for visual studies, renders and cinematic breakdowns.",
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Abrir galerÃ­a",
+        cta: "Open gallery",
         accent: "from-amber-200/12 via-transparent to-white/8",
         linkKind: "external",
         media: {
           src: "/images/img4.jpeg",
-          alt: "Vista previa de galerÃ­a de producciÃ³n",
+          alt: "Production gallery preview",
         },
       },
     ],
   },
 
-  // ============================================================================
-  // VFX
-  // ============================================================================
   vfx: {
     key: "vfx",
     label: "VFX",
     heroTitle: s("VFX"),
-    heroDescription: s("Efectos en tiempo real y lenguaje cinematogrÃ¡fico."),
+    heroDescription: s("Realtime effects and cinematic motion language."),
     modalDescription:
-      "Niagara, simulaciones, composiciÃ³n y efectos en tiempo real con control cinematogrÃ¡fico.",
+      "Niagara, simulations, compositing and realtime effects with cinematic control.",
     textareaPlaceholder:
-      "Describe el efecto, la simulaciÃ³n o la secuencia en tiempo real que quieres desarrollar",
-    panelTitle: "Simulaciones, Niagara y composiciÃ³n",
+      "Describe the effect, simulation or realtime sequence you want to develop.",
+    panelTitle: "Simulations, Niagara and compositing",
     panelDescription:
-      "Estudios de efectos en tiempo real, atmÃ³sferas y lanzadores VFX pensados para shots premium.",
+      "Realtime effects studies, atmospheres and VFX launchers designed for premium shots.",
     cards: [
       {
-        title: "Reel de secuencia Niagara",
+        title: "Niagara Sequence Reel",
         subtitle: "VFX / Reel",
         description:
-          "Efectos en tiempo real, movimiento por capas y timing cinematogrÃ¡fico para shots de alto impacto.",
+          "Realtime effects, layered motion and cinematic timing for high-impact shots.",
         href: "/videos/vfx1.mp4",
-        cta: "Ver reel",
+        cta: "Watch reel",
         accent: "from-fuchsia-300/18 via-white/8 to-cyan-300/18",
         linkKind: "reel",
         media: {
           src: "/images/img1.jpeg",
-          alt: "Vista previa de reel VFX",
+          alt: "VFX reel preview",
         },
       },
       {
-        title: "Vista previa de FX Pack",
-        subtitle: "Vista previa / Interno",
+        title: "FX Pack Preview",
+        subtitle: "Preview / Internal",
         description:
-          "Una mirada mÃ¡s cercana a sistemas reutilizables de efectos y detalles de implementaciÃ³n cinematogrÃ¡fica.",
+          "A closer look at reusable effect systems and cinematic implementation details.",
         href: "/#profile-journal",
-        cta: "Abrir vista previa",
+        cta: "Open preview",
         accent: "from-white/18 via-transparent to-fuchsia-300/10",
         linkKind: "internal",
         media: {
           src: "/images/img4.jpeg",
-          alt: "Vista previa de paquete de efectos",
+          alt: "FX pack preview",
         },
       },
       {
-        title: "Feed de breakdowns",
-        subtitle: "Externo / Canal",
+        title: "Breakdown Feed",
+        subtitle: "External / Channel",
         description:
-          "Estudios continuos de efectos, composiciÃ³n por capas y experimentos de movimiento en tiempo real.",
+          "Ongoing studies in effects, layered compositing and realtime motion experiments.",
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Ver feed",
+        cta: "View feed",
         accent: "from-cyan-300/12 via-transparent to-white/8",
         linkKind: "external",
         media: {
           src: "/images/img3.jpeg",
-          alt: "Vista previa de breakdown en tiempo real",
+          alt: "Realtime breakdown preview",
         },
       },
     ],
   },
 
-  // ============================================================================
-  // DESARROLLO
-  // ============================================================================
   dev: {
     key: "dev",
     label: "DEV",
     heroTitle: s("DEV / UI / UX"),
-    heroDescription: s("Sistemas interactivos y herramientas tÃ©cnicas."),
+    heroDescription: s("Interactive systems and technical tools."),
     modalDescription:
-      "Plugins, sistemas, herramientas de UI y experiencias de desarrollo orientadas a Unreal con presentaciÃ³n premium.",
+      "Plugins, systems, UI tools and Unreal-focused development experiences with premium presentation.",
     textareaPlaceholder:
-      "CuÃ©ntame sobre el plugin, sistema, interfaz o herramienta de Unreal que quieres lanzar",
-    panelTitle: "Plugins, sistemas y herramientas para Unreal",
+      "Tell me about the plugin, system, interface or Unreal tool you want to launch.",
+    panelTitle: "Plugins, systems and Unreal tools",
     panelDescription:
-      "Sistemas modulares, plugins listos para lanzamiento e interfaces orientadas al creador.",
+      "Modular systems, launch-ready plugins and creator-focused interfaces.",
     cards: [
       {
-        title: "Reel de sistemas",
+        title: "Systems Reel",
         subtitle: "DEV / Reel",
         description:
-          "Sistemas interactivos, herramientas de flujo y momentos de UI premium capturados en movimiento.",
+          "Interactive systems, workflow tools and premium UI moments captured in motion.",
         href: "/videos/dev1.mp4",
-        cta: "Ver reel",
+        cta: "Watch reel",
         accent: "from-emerald-300/16 via-white/8 to-cyan-300/16",
         linkKind: "reel",
         media: {
           src: "/images/img2.png",
-          alt: "Vista previa de reel de sistemas",
+          alt: "Systems reel preview",
         },
       },
       {
-        title: "Vitrina de plugins",
-        subtitle: "Interno / Biblioteca",
+        title: "Plugin Showcase",
+        subtitle: "Internal / Library",
         description:
-          "Acceso a herramientas, sistemas y productos tÃ©cnicos a medida que la biblioteca siga creciendo.",
+          "Access to tools, systems and technical products as the library continues to grow.",
         href: "/#profile-journal",
-        cta: "Abrir biblioteca",
+        cta: "Open library",
         accent: "from-white/18 via-transparent to-emerald-300/10",
         linkKind: "internal",
         media: {
           src: "/images/img1.jpeg",
-          alt: "Vista previa de vitrina de plugins",
+          alt: "Plugin showcase preview",
         },
       },
       {
-        title: "Broadcast tÃ©cnico",
-        subtitle: "Externo / Canal",
+        title: "Technical Broadcast",
+        subtitle: "External / Channel",
         description:
-          "BitÃ¡coras de desarrollo, demos de herramientas y sistemas presentados con una mirada cinematogrÃ¡fica.",
+          "Development logs, tool demos and systems presented with a cinematic eye.",
         href: "https://www.youtube.com/@TheAssetHero",
-        cta: "Abrir canal",
+        cta: "Open channel",
         accent: "from-cyan-300/12 via-transparent to-white/8",
         linkKind: "external",
         media: {
           src: "/images/img4.jpeg",
-          alt: "Vista previa de broadcast tÃ©cnico",
+          alt: "Technical broadcast preview",
         },
       },
     ],

@@ -139,7 +139,7 @@ function AiEditorialBanner({
     item.id === "ai-youtube" || item.id === "ai-tooling" || item.id === "ai-reel"
       ? resolveText(item.cta, language)
       : language === "es"
-        ? "PrÃ³ximamente"
+        ? "Coming soon"
         : "Coming soon";
   const className =
     "group relative overflow-hidden rounded-[1.55rem] border border-white/12 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] text-left shadow-[0_0_28px_rgba(255,255,255,0.04)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_0_34px_rgba(255,255,255,0.06)]";
@@ -227,7 +227,7 @@ function AiCampaignBanner({
       <div className="relative z-10 grid gap-6 xl:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.85fr)] xl:items-center">
         <div className="min-w-0">
           <p className="text-[0.62rem] uppercase tracking-[0.32em] text-white/36">
-            Proyecto original / Serie sci-fi
+            Original Project / Sci-Fi Series
           </p>
           <h4 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl lg:text-[2.6rem] lg:leading-[1.04]">
             {resolveText(title, language)}
@@ -414,7 +414,7 @@ function AiCategoryContent({
             headline={resolveText(feature.subtitle, language)}
             description={resolveText(feature.description, language)}
             cta={resolveText(
-              feature.buttonLabel ?? { en: "VER PROYECTO", es: "VER PROYECTO" },
+              feature.buttonLabel ?? { en: "VIEW PROJECT", es: "VIEW PROJECT" },
               language
             )}
             href={feature.externalUrl ?? "#"}
@@ -429,7 +429,7 @@ function AiCategoryContent({
             headline={resolveText(bmwFeature.subtitle, language)}
             description={resolveText(bmwFeature.description, language)}
             cta={resolveText(
-              bmwFeature.buttonLabel ?? { en: "VER VIDEO", es: "VER VIDEO" },
+              bmwFeature.buttonLabel ?? { en: "WATCH VIDEO", es: "WATCH VIDEO" },
               language
             )}
             href={bmwFeature.externalUrl ?? bmwFeature.videoUrl}

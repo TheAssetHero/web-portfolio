@@ -42,12 +42,12 @@ function MainEditorialFeed() {
                 Glass Link House Project
               </h3>
               <p className="mt-5 max-w-3xl text-xl leading-8 text-white/82 sm:text-2xl sm:leading-9">
-                Casa modelada de 0 a 100% por The Asset Hero, excepto
-                mobiliario.
+                House modeled from 0 to 100% by The Asset Hero, except for
+                furniture.
               </p>
               <p className="mt-5 max-w-3xl text-sm leading-7 text-white/52 sm:text-base">
-                Proyecto de visualización arquitectónica desarrollado con
-                modelado, iluminación, render y recorrido 360.
+                Architectural visualization project developed through modeling,
+                lighting, rendering and a 360 tour.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -57,13 +57,13 @@ function MainEditorialFeed() {
                   rel="noreferrer"
                   className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/80 transition hover:-translate-y-0.5 hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
                 >
-                  VER PROYECTO
+                  VIEW PROJECT
                 </a>
                 <a
                   href="#glass-link-house-tour"
                   className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/64 transition hover:-translate-y-0.5 hover:border-white/18 hover:bg-white/[0.06] hover:text-white"
                 >
-                  VER TOUR 360
+                  VIEW 360 TOUR
                 </a>
               </div>
             </div>
@@ -268,7 +268,7 @@ export default function ProfileHub() {
 
           <div className="pt-4">
             <p className="text-[0.72rem] uppercase tracking-[0.34em] text-white/34">
-              DOSSIER EDITORIAL
+              EDITORIAL DOSSIER
             </p>
           </div>
         </div>
