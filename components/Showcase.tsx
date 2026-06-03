@@ -15,7 +15,6 @@ import {
 
 const videoBank: Record<CategoryKey, readonly string[]> = {
   ai: ["/videos/ai1.mp4", "/videos/ai2.mp4", "/videos/ai3.mp4"],
-  vp: ["/videos/vp1.mp4", "/videos/vp2.mp4"],
   "3d": ["/videos/3d1.mp4", "/videos/3d2.mp4"],
   vfx: ["/videos/vfx1.mp4", "/videos/vfx2.mp4"],
   dev: ["/videos/dev1.mp4", "/videos/dev2.mp4"],

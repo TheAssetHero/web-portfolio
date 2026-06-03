@@ -37,7 +37,6 @@ const OverlayControllerContext = createContext<OverlayControllerValue | null>(
 function getInitialSelection() {
   return {
     ai: profileHubContent.ai.items[0].id,
-    vp: profileHubContent.vp.items[0].id,
     "3d": profileHubContent["3d"].items[0].id,
     vfx: profileHubContent.vfx.items[0].id,
     dev: profileHubContent.dev.items[0].id,
