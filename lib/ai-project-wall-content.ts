@@ -119,26 +119,25 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     ],
   },
   {
-    id: "the-rango-bravo",
+    id: "don-bigotes",
     enabled: true,
     size: "wide",
-    type: s("AI / RELEASE"),
-    title: s("The Rango Bravo"),
-    shortDescription: s('Estreno de "Una Más al Kilo".'),
+    type: s("AI / CHARACTER PROJECT"),
+    title: s("Don Bigotes"),
+    shortDescription: s("Proyecto de personaje con presentación editorial."),
     description: s(
-      'Estreno de "Una Más al Kilo". Cortometraje que muestra las estadísticas de fallas de vehículos extranjeros en el año 2025, sin tirarle a nadie en específico.'
+      "Proyecto de personaje presentado como pieza destacada dentro del muro de producción AI."
     ),
     preview: {
       kind: "embed",
-      src: "https://www.youtube.com/embed/Qpo0jaKJuyE?si=Cotw9RY43-nVQQbw",
-      title: "The Rango Bravo preview",
+      src: "https://www.youtube.com/embed/kYFfOKDUtRc?rel=0",
+      title: "Don Bigotes preview",
     },
-    modalVideoUrl:
-      "https://www.youtube.com/embed/Qpo0jaKJuyE?si=Cotw9RY43-nVQQbw",
+    modalVideoUrl: "https://www.youtube.com/embed/kYFfOKDUtRc?rel=0",
     actions: [
       {
         label: s("VER VIDEO"),
-        href: "https://youtu.be/Y1UbzPnqJPo",
+        href: "https://youtu.be/kYFfOKDUtRc",
         kind: "external",
       },
     ],
@@ -158,7 +157,7 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
       src: "/images/img1.jpeg",
       alt: "Preview de Anatomía al límite",
     },
-    modalVideoUrl: "https://youtube.com/shorts/uwMm0Wl1b7s",
+    modalVideoUrl: "https://youtu.be/ZFUxo69JAAM",
   },
   {
     id: "the-therians",
@@ -175,22 +174,31 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
       src: "/images/img2.png",
       alt: "Preview de The Therians",
     },
-    modalVideoUrl: "https://www.youtube.com/embed/CuoNMN1EhIk?rel=0",
+    modalVideoUrl: "https://youtube.com/shorts/CuoNMN1EhIk",
   },
   {
-    id: "don-bigotes",
+    id: "the-rango-bravo",
     enabled: true,
     size: "small",
-    type: s("AI / CHARACTER PROJECT"),
-    title: s("Don Bigotes"),
-    shortDescription: s("Proyecto de personaje con presentación editorial."),
-    description: s("Proyecto temporal embebido desde Behance."),
+    type: s("AI / RELEASE"),
+    title: s("The Rango Bravo"),
+    shortDescription: s('Estreno de "Una Más al Kilo".'),
+    description: s(
+      'Estreno de "Una Más al Kilo". Cortometraje que muestra las estadísticas de fallas de vehículos extranjeros en el año 2025, sin tirarle a nadie en específico.'
+    ),
     preview: {
       kind: "image",
       src: "/images/img4.jpeg",
-      alt: "Preview de Don Bigotes",
+      alt: "Preview de The Rango Bravo",
     },
-    modalVideoUrl: "https://www.behance.net/embed/project/152862489?ilo0=1",
-    modalEmbedTitle: s("Don Bigotes Behance Embed"),
+    modalVideoUrl:
+      "https://www.youtube.com/embed/Qpo0jaKJuyE?si=Cotw9RY43-nVQQbw",
+    actions: [
+      {
+        label: s("VER VIDEO"),
+        href: "https://youtu.be/Y1UbzPnqJPo",
+        kind: "external",
+      },
+    ],
   },
 ];
