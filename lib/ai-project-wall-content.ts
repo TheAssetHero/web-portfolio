@@ -28,6 +28,7 @@ export type AIProjectWallItem = {
   size: AIProjectTileSize;
   type: LocalizedText;
   title: LocalizedText;
+  shortDescription: LocalizedText;
   description: LocalizedText;
   preview: AIProjectPreview;
   modalVideoUrl: string;
@@ -49,6 +50,7 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "wide",
     type: s("AI / ORIGINAL SERIES"),
     title: s("Runaway 2150"),
+    shortDescription: s("Serie sci-fi original construida con IA y mundos conectados."),
     description: s(
       "La primera temporada de Runaway 2150 llegará en 2026: una producción cinematográfica de The Asset Hero construida con IA, mundos conectados y una guerra que no debe comenzar."
     ),
@@ -72,6 +74,7 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "large",
     type: s("AI / CASE STUDY"),
     title: s("The Echelon"),
+    shortDescription: s("Primer comercial en LATAM completamente en IA."),
     description: s(
       "Primer comercial en LATAM completamente en IA. Voz, imagen y audio generados con inteligencia artificial."
     ),
@@ -97,6 +100,7 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "medium",
     type: s("AI / AUTOMOTIVE"),
     title: s("BMW M2 Racing 2026"),
+    shortDescription: s("Visualización automotriz con performance cinematográfica."),
     description: s(
       "Pieza audiovisual desarrollada con inteligencia artificial, enfocada en visualización automotriz, performance y estética cinematográfica."
     ),
@@ -117,9 +121,10 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
   {
     id: "the-rango-bravo",
     enabled: true,
-    size: "medium",
+    size: "wide",
     type: s("AI / RELEASE"),
     title: s("The Rango Bravo"),
+    shortDescription: s('Estreno de "Una Más al Kilo".'),
     description: s(
       'Estreno de "Una Más al Kilo". Cortometraje que muestra las estadísticas de fallas de vehículos extranjeros en el año 2025, sin tirarle a nadie en específico.'
     ),
@@ -144,6 +149,7 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "small",
     type: s("AI / EXPERIMENT"),
     title: s("Anatomía al límite"),
+    shortDescription: s("Experimento audiovisual dentro de AI Production."),
     description: s(
       "Pieza experimental desarrollada dentro del área de AI Production."
     ),
@@ -160,6 +166,7 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
     size: "small",
     type: s("AI / SHORT"),
     title: s("The Therians"),
+    shortDescription: s("Concepto AI de formato corto y tono narrativo."),
     description: s(
       "Tarjeta editorial de formato pequeño para conceptos AI, experimentos visuales y lanzamientos narrativos dentro del portafolio."
     ),
@@ -173,9 +180,10 @@ export const aiProjectWallItems: AIProjectWallItem[] = [
   {
     id: "don-bigotes",
     enabled: true,
-    size: "medium",
+    size: "small",
     type: s("AI / CHARACTER PROJECT"),
     title: s("Don Bigotes"),
+    shortDescription: s("Proyecto de personaje con presentación editorial."),
     description: s("Proyecto temporal embebido desde Behance."),
     preview: {
       kind: "image",

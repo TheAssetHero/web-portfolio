@@ -8,7 +8,6 @@ import ProjectMediaModal from "@/components/ProjectMediaModal";
 import {
   aiProjectWallIntro,
   aiProjectWallItems,
-  AIProjectWallItem,
 } from "@/lib/ai-project-wall-content";
 import { resolveText } from "@/lib/localization";
 import { uiCopy } from "@/lib/ui-copy";
@@ -35,7 +34,7 @@ export default function AIProjectWall({
 
   return (
     <>
-      <section className="space-y-6">
+      <section className="space-y-8">
         {showHeader ? (
           <div className="max-w-3xl">
             <p className="text-[0.64rem] uppercase tracking-[0.32em] text-white/34">
@@ -47,13 +46,13 @@ export default function AIProjectWall({
           </div>
         ) : null}
 
-        <div className="grid auto-rows-[220px] gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6 xl:gap-8">
           {projects.map((project) => (
             <AIProjectCard
               key={project.id}
               project={project}
               language={language}
-              onOpen={(selectedProject: AIProjectWallItem) =>
+              onOpen={(selectedProject) =>
                 setActiveProjectId(selectedProject.id)
               }
             />
