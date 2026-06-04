@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import VimeoEmbed from "@/components/VimeoEmbed";
-import VisualProductionWall from "@/components/VisualProductionWall";
 
 export const metadata: Metadata = {
   title: "Visual Production | The Asset Hero",
@@ -61,12 +60,6 @@ export default function VisualProductionPage() {
       </section>
 
       <section className="px-6 pb-24 sm:px-10 md:px-16 lg:px-24">
-        <div className="mx-auto max-w-7xl">
-          <VisualProductionWall />
-        </div>
-      </section>
-
-      <section className="px-6 pb-24 sm:px-10 md:px-16 lg:px-24">
         <div className="mx-auto max-w-7xl space-y-8">
           <div className="max-w-3xl">
             <p className="text-[0.64rem] uppercase tracking-[0.32em] text-white/34">
@@ -78,8 +71,23 @@ export default function VisualProductionPage() {
             </p>
           </div>
 
+          <article className="rounded-[1.85rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.025))] p-4 shadow-[0_0_36px_rgba(255,255,255,0.045)] sm:p-5 lg:p-7">
+            <VimeoEmbed
+              src={showcaseVideos[0].src}
+              title={showcaseVideos[0].title}
+            />
+            <div className="mt-6 max-w-4xl">
+              <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/34">
+                Featured Reel
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">
+                {showcaseVideos[0].title}
+              </h2>
+            </div>
+          </article>
+
           <div className="grid gap-6 lg:grid-cols-2 xl:gap-8">
-            {showcaseVideos.map((video) => (
+            {showcaseVideos.slice(1).map((video) => (
               <article
                 key={video.src}
                 className="rounded-[1.65rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.025))] p-4 shadow-[0_0_28px_rgba(255,255,255,0.035)] sm:p-5 lg:p-6"
