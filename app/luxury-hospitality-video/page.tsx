@@ -31,27 +31,27 @@ const positioningCards = [
 const services = [
   {
     title: "Brand Films",
-    text: "Editorial films for premium positioning.",
+    text: "Premium cinematic pieces for brand positioning.",
   },
   {
     title: "Resort Reels",
-    text: "Short-form visuals for campaigns and web.",
+    text: "Short-form visuals for campaigns, websites and social media.",
   },
   {
     title: "Concierge Videos",
-    text: "Trust-driven service storytelling.",
+    text: "Trust-driven storytelling for private service brands.",
   },
   {
     title: "Destination Campaigns",
-    text: "Atmosphere-led destination pieces.",
+    text: "Atmosphere-led videos that sell the feeling of place.",
   },
   {
     title: "AI Concepts",
-    text: "Fast visual exploration for pitches.",
+    text: "Fast visual exploration for pitches and pre-production.",
   },
   {
     title: "3D / Virtual Support",
-    text: "Previews, environments and production support.",
+    text: "Previews, environments and cinematic production support.",
   },
 ];
 
@@ -137,6 +137,7 @@ const processSteps = [
     number: "05",
     title: "Delivery",
     text: "Final files for website, social media, campaigns, presentation and sales use.",
+    image: "/images/luxurypage/05delivery.png",
   },
 ];
 
@@ -235,12 +236,10 @@ export default function LuxuryHospitalityVideoPage() {
       >
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {services.map((service) => (
-            <VisualCard
+            <ServiceCard
               key={service.title}
               title={service.title}
               text={service.text}
-              label="Service"
-              compact
             />
           ))}
         </div>
@@ -399,6 +398,16 @@ function VisualCard({
         <h3 className="text-lg font-semibold text-white sm:text-xl">{title}</h3>
         <p className="mt-2 text-sm leading-6 text-white/52">{text}</p>
       </div>
+    </article>
+  );
+}
+
+function ServiceCard({ title, text }: { title: string; text: string }) {
+  return (
+    <article className="group rounded-[1.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.052),rgba(255,255,255,0.018))] p-5 shadow-[0_0_22px_rgba(255,255,255,0.02)] transition duration-300 hover:-translate-y-0.5 hover:border-[#e8d7af]/24 hover:bg-white/[0.048] hover:shadow-[0_0_28px_rgba(232,215,175,0.055)]">
+      <div className="mb-4 h-px w-12 bg-[#e8d7af]/35 transition group-hover:w-16 group-hover:bg-[#e8d7af]/55" />
+      <h3 className="text-lg font-semibold text-white">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-white/52">{text}</p>
     </article>
   );
 }
