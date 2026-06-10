@@ -1,24 +1,26 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
-import { useLanguage } from "@/components/LanguageProvider";
+import { useOptionalLanguage } from "@/components/LanguageProvider";
 import { resolveText } from "@/lib/localization";
 import { uiCopy } from "@/lib/ui-copy";
 
 type FormFields = {
   name: string;
+  company: string;
   email: string;
   message: string;
 };
 
 const initialFields: FormFields = {
   name: "",
+  company: "",
   email: "",
   message: "",
 };
 
-const contactEmail = "contact@theassethero.com";
+const contactEmail = "nolo.blancas@gmail.com";
 
 type ContactModalProps = {
   isOpen: boolean;
@@ -26,14 +28,41 @@ type ContactModalProps = {
 };
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
-  const { language } = useLanguage();
+  const optionalLanguage = useOptionalLanguage();
+  const language = optionalLanguage?.language ?? "en";
   const [fields, setFields] = useState<FormFields>(initialFields);
+  const [error, setError] = useState("");
+  const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
 
+    setError("");
+    setStatus("");
     setFields((currentFields) => ({
       ...currentFields,
       [name]: value,
@@ -43,23 +72,45 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const subject = `${resolveText(uiCopy.contact.subjectPrefix, language)} ${fields.name}`;
+    const trimmedFields = {
+      name: fields.name.trim(),
+      company: fields.company.trim(),
+      email: fields.email.trim(),
+      message: fields.message.trim(),
+    };
+    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      trimmedFields.email
+    );
+
+    if (!trimmedFields.name || !trimmedFields.email || !trimmedFields.message) {
+      setError(resolveText(uiCopy.contact.errorRequired, language));
+      return;
+    }
+
+    if (!emailIsValid) {
+      setError(resolveText(uiCopy.contact.errorEmail, language));
+      return;
+    }
+
+    const subject = resolveText(uiCopy.contact.subjectPrefix, language);
     const body = [
-      `${resolveText(uiCopy.contact.nameLabel, language)}: ${fields.name}`,
-      `${resolveText(uiCopy.contact.emailLabel, language)}: ${fields.email}`,
+      `${resolveText(uiCopy.contact.nameLabel, language)}: ${trimmedFields.name}`,
+      `${resolveText(uiCopy.contact.companyLabel, language)}: ${trimmedFields.company}`,
+      `${resolveText(uiCopy.contact.emailLabel, language)}: ${trimmedFields.email}`,
       "",
-      fields.message,
+      `${resolveText(uiCopy.contact.messageLabel, language)}:`,
+      trimmedFields.message,
     ].join("\n");
 
     window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
+    setStatus(resolveText(uiCopy.contact.statusOpening, language));
     setFields(initialFields);
-    onClose();
   };
 
   return (
     <div
-      className={`fixed inset-0 z-[90] flex items-center justify-center bg-black/90 px-4 backdrop-blur-lg transition duration-300 sm:px-6 ${
+      className={`fixed inset-0 z-[90] flex items-center justify-center bg-black/90 px-4 py-6 backdrop-blur-lg transition duration-300 sm:px-6 ${
         isOpen ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
       aria-hidden={!isOpen}
@@ -69,7 +120,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="contact-modal-title"
-        className={`relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(8,8,10,0.99),rgba(3,3,5,0.97))] shadow-[0_0_40px_rgba(0,0,0,0.5)] transition duration-300 ${
+        className={`relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(8,8,10,0.99),rgba(3,3,5,0.97))] shadow-[0_0_40px_rgba(0,0,0,0.5)] transition duration-300 ${
           isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
         onClick={(event) => event.stopPropagation()}
@@ -126,6 +177,23 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
                 <label className="block">
                   <span className="sr-only">
+                    {resolveText(uiCopy.contact.companyLabel, language)}
+                  </span>
+                  <input
+                    type="text"
+                    name="company"
+                    value={fields.company}
+                    onChange={handleChange}
+                    placeholder={resolveText(
+                      uiCopy.contact.companyPlaceholder,
+                      language
+                    )}
+                    className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-white/25 focus:bg-white/[0.06] focus:ring-1 focus:ring-white/15"
+                  />
+                </label>
+
+                <label className="block md:col-span-2">
+                  <span className="sr-only">
                     {resolveText(uiCopy.contact.emailLabel, language)}
                   </span>
                   <input
@@ -161,10 +229,20 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 />
               </label>
 
+              {(error || status) && (
+                <p
+                  className={`text-sm ${
+                    error ? "text-amber-200/78" : "text-white/52"
+                  }`}
+                >
+                  {error || status}
+                </p>
+              )}
+
               <div className="flex justify-end pt-2">
                 <button
                   type="submit"
-                  className="rounded-full border border-white/12 bg-zinc-200 px-7 py-3 text-sm font-semibold text-black shadow-[0_0_22px_rgba(255,255,255,0.06)] transition duration-300 hover:scale-[1.01] hover:border-white/18 hover:bg-zinc-100 hover:shadow-[0_0_28px_rgba(255,255,255,0.11)]"
+                  className="w-full rounded-full border border-white/12 bg-zinc-200 px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-black shadow-[0_0_22px_rgba(255,255,255,0.06)] transition duration-300 hover:scale-[1.01] hover:border-white/18 hover:bg-zinc-100 hover:shadow-[0_0_28px_rgba(255,255,255,0.11)] sm:w-auto"
                 >
                   {resolveText(uiCopy.contact.send, language)}
                 </button>

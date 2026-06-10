@@ -39,18 +39,23 @@ export const uiCopy = {
 
   contact: {
     label: s("Contact"),
-    title: s("Start a cinematic collaboration."),
+    title: s("Start a cinematic collaboration"),
     description: s(
-      "Share the shape of your project and I will follow up with the next step."
+      "Share your project details and I'll follow up with the right next step."
     ),
     namePlaceholder: s("Your name"),
-    emailPlaceholder: s("Email address"),
-    messagePlaceholder: s("Tell me about the world you want to build"),
-    send: s("Send"),
-    subjectPrefix: s("Portfolio inquiry from"),
+    companyPlaceholder: s("Company, role or project type"),
+    emailPlaceholder: s("email@company.com"),
+    messagePlaceholder: s("Tell me what you need to produce"),
+    send: s("Send Message"),
+    subjectPrefix: s("New project inquiry from The Asset Hero website"),
     nameLabel: s("Name"),
+    companyLabel: s("Title / company / role"),
     emailLabel: s("Email"),
     messageLabel: s("Message"),
+    errorRequired: s("Please complete your name, email and message."),
+    errorEmail: s("Please enter a valid email address."),
+    statusOpening: s("Opening email client..."),
     closeAria: s("Close contact modal"),
   },
 

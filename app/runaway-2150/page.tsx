@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { ReactNode } from "react";
 
+import ContactTrigger from "@/components/ContactTrigger";
+
 export const metadata: Metadata = {
   title: "Runaway 2150 | The Asset Hero",
   description:
@@ -689,12 +691,9 @@ function ActionButton({
   children: ReactNode;
   external?: boolean;
 }) {
-  const className =
-    "inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/80 transition hover:-translate-y-0.5 hover:border-cyan-200/30 hover:bg-white/[0.08] hover:text-white";
-
   if (href.startsWith("/")) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={actionButtonClassName}>
         {children}
       </Link>
     );
@@ -705,12 +704,15 @@ function ActionButton({
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className={className}
+      className={actionButtonClassName}
     >
       {children}
     </a>
   );
 }
+
+const actionButtonClassName =
+  "inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-4 py-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-white/80 transition hover:-translate-y-0.5 hover:border-cyan-200/30 hover:bg-white/[0.08] hover:text-white";
 
 function LanguageToggle({ language }: { language: Locale }) {
   const baseClass =
@@ -790,9 +792,9 @@ export default async function Runaway2150Page({
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <ActionButton href="#trailer">{page.hero.ctaTrailer}</ActionButton>
               <ActionButton href="#dossier">{page.hero.ctaDossier}</ActionButton>
-              <ActionButton href="mailto:contact@theassethero.com">
+              <ContactTrigger className={actionButtonClassName}>
                 {page.hero.ctaContact}
-              </ActionButton>
+              </ContactTrigger>
             </div>
           </div>
 

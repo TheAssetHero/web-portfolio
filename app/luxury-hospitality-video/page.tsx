@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import ContactTrigger from "@/components/ContactTrigger";
+
 export const metadata: Metadata = {
   title: "Luxury Hospitality Video Production | The Asset Hero",
   description:
     "Premium cinematic video production for five-star hospitality, resorts, concierge brands and luxury experience companies.",
 };
-
-const contactHref = "mailto:contact@theassethero.com";
 
 const positioningCards = [
   {
@@ -160,12 +160,11 @@ export default function LuxuryHospitalityVideoPage() {
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={contactHref}
+                <ContactTrigger
                   className="inline-flex justify-center rounded-full border border-[#e8d7af]/30 bg-[#e8d7af]/14 px-6 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[#f6ead0] shadow-[0_0_28px_rgba(232,215,175,0.12)] transition hover:border-[#e8d7af]/55 hover:bg-[#e8d7af]/20 hover:text-white"
                 >
                   Start a Project
-                </a>
+                </ContactTrigger>
                 <a
                   href="#services"
                   className="inline-flex justify-center rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white/68 transition hover:border-white/20 hover:bg-white/[0.07] hover:text-white"
@@ -315,12 +314,11 @@ export default function LuxuryHospitalityVideoPage() {
               premium video helps them feel the experience before they ever
               arrive.
             </p>
-            <a
-              href={contactHref}
+            <ContactTrigger
               className="mt-8 inline-flex rounded-full border border-[#e8d7af]/30 bg-[#e8d7af]/14 px-6 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[#f6ead0] transition hover:border-[#e8d7af]/55 hover:bg-[#e8d7af]/20 hover:text-white"
             >
               Start a Project
-            </a>
+            </ContactTrigger>
           </div>
         </div>
       </section>

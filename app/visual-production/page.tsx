@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import ContactTrigger from "@/components/ContactTrigger";
 import VimeoEmbed from "@/components/VimeoEmbed";
 
 export const metadata: Metadata = {
@@ -116,12 +117,11 @@ export default function VisualProductionPage() {
               the goal is to build visuals with direction, technique and
               clarity.
             </p>
-            <a
-              href="mailto:contact@theassethero.com"
+            <ContactTrigger
               className="mt-7 inline-flex rounded-full border border-white/12 bg-white/[0.05] px-5 py-3 text-[0.7rem] uppercase tracking-[0.24em] text-white/74 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
             >
               CONTACT
-            </a>
+            </ContactTrigger>
           </div>
         </div>
       </section>
