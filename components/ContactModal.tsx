@@ -18,6 +18,8 @@ const initialFields: FormFields = {
   message: "",
 };
 
+const contactEmail = "contact@theassethero.com";
+
 type ContactModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -49,7 +51,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       fields.message,
     ].join("\n");
 
-    window.location.href = `mailto:nolo.blancas@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     setFields(initialFields);
     onClose();

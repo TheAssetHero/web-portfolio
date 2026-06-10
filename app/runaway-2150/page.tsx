@@ -790,7 +790,7 @@ export default async function Runaway2150Page({
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <ActionButton href="#trailer">{page.hero.ctaTrailer}</ActionButton>
               <ActionButton href="#dossier">{page.hero.ctaDossier}</ActionButton>
-              <ActionButton href="mailto:nolo.blancas@gmail.com">
+              <ActionButton href="mailto:contact@theassethero.com">
                 {page.hero.ctaContact}
               </ActionButton>
             </div>

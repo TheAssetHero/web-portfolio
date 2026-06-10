@@ -117,7 +117,7 @@ export default function VisualProductionPage() {
               clarity.
             </p>
             <a
-              href="mailto:nolo.blancas@gmail.com"
+              href="mailto:contact@theassethero.com"
               className="mt-7 inline-flex rounded-full border border-white/12 bg-white/[0.05] px-5 py-3 text-[0.7rem] uppercase tracking-[0.24em] text-white/74 transition hover:border-white/22 hover:bg-white/[0.08] hover:text-white"
             >
               CONTACT

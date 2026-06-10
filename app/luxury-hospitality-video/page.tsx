@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Premium cinematic video production for five-star hospitality, resorts, concierge brands and luxury experience companies.",
 };
 
-const contactHref = "mailto:nolo.blancas@gmail.com";
+const contactHref = "mailto:contact@theassethero.com";
 
 const positioningCards = [
   {
