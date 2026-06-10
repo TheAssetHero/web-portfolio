@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import ContactTrigger from "@/components/ContactTrigger";
@@ -13,24 +14,45 @@ const positioningCards = [
   {
     title: "Atmosphere First",
     text: "We build videos around mood, light, rhythm, texture and emotion, not generic travel footage.",
+    image: "/images/luxurypage/atmospherefirst.png",
   },
   {
     title: "Trust Before Booking",
     text: "The right visual language helps clients understand the level of care, discretion and service behind the experience.",
+    image: "/images/luxurypage/trustbeforebooking.png",
   },
   {
     title: "Built for Premium Brands",
     text: "Designed for resorts, hotels, concierge teams, executive travel services and luxury experience companies.",
+    image: "/images/luxurypage/buildforpremiumbrands.png",
   },
 ];
 
 const services = [
-  "Brand Films",
-  "Resort Reels",
-  "Concierge Videos",
-  "Destination Campaigns",
-  "AI Concepts",
-  "3D / Virtual Support",
+  {
+    title: "Brand Films",
+    text: "Editorial films for premium positioning.",
+  },
+  {
+    title: "Resort Reels",
+    text: "Short-form visuals for campaigns and web.",
+  },
+  {
+    title: "Concierge Videos",
+    text: "Trust-driven service storytelling.",
+  },
+  {
+    title: "Destination Campaigns",
+    text: "Atmosphere-led destination pieces.",
+  },
+  {
+    title: "AI Concepts",
+    text: "Fast visual exploration for pitches.",
+  },
+  {
+    title: "3D / Virtual Support",
+    text: "Previews, environments and production support.",
+  },
 ];
 
 const videoConcept = [
@@ -38,21 +60,25 @@ const videoConcept = [
     number: "01",
     label: "Arrival",
     text: "Private arrival, warm light, calm rhythm and no chaos.",
+    image: "/images/luxurypage/01arrival.png",
   },
   {
     number: "02",
     label: "Experience",
     text: "Rooms, architecture, dining, wellness and curated details.",
+    image: "/images/luxurypage/02experience.png",
   },
   {
     number: "03",
     label: "Human Touch",
     text: "Concierge, host, chef, driver or service team preparing the experience.",
+    image: "/images/luxurypage/03human%20touch.png",
   },
   {
     number: "04",
     label: "Emotional Close",
     text: "The client feels privacy, time, comfort and everything already handled.",
+    image: "/images/luxurypage/04emotional.png",
   },
 ];
 
@@ -87,21 +113,25 @@ const processSteps = [
     number: "01",
     title: "Discovery",
     text: "We define the brand, audience, destination, tone, service level and purpose of the video.",
+    image: "/images/luxurypage/01discovery.png",
   },
   {
     number: "02",
     title: "Visual Direction",
     text: "Mood, references, pacing, camera language, music direction and narrative structure.",
+    image: "/images/luxurypage/02direction.png",
   },
   {
     number: "03",
     title: "Production Plan",
     text: "Shot list, edit structure, required assets, AI/3D needs, locations, footage and delivery format.",
+    image: "/images/luxurypage/03productionPlan.png",
   },
   {
     number: "04",
     title: "Creation",
     text: "Editing, motion graphics, AI-assisted visuals, 3D support, sound, color and finishing.",
+    image: "/images/luxurypage/04creation.png",
   },
   {
     number: "05",
@@ -187,7 +217,13 @@ export default function LuxuryHospitalityVideoPage() {
         </p>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {positioningCards.map((card) => (
-            <EditorialCard key={card.title} title={card.title} text={card.text} />
+            <VisualCard
+              key={card.title}
+              title={card.title}
+              text={card.text}
+              image={card.image}
+              label="Positioning"
+            />
           ))}
         </div>
       </Section>
@@ -197,14 +233,15 @@ export default function LuxuryHospitalityVideoPage() {
         eyebrow="Services"
         title="Video services for luxury experience brands"
       >
-        <div className="flex flex-wrap gap-3">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {services.map((service) => (
-            <div
-              key={service}
-              className="rounded-full border border-white/10 bg-white/[0.035] px-5 py-3 text-center text-[0.7rem] uppercase tracking-[0.18em] text-white/64 transition hover:-translate-y-0.5 hover:border-[#e8d7af]/25 hover:bg-white/[0.055] hover:text-white"
-            >
-              {service}
-            </div>
+            <VisualCard
+              key={service.title}
+              title={service.title}
+              text={service.text}
+              label="Service"
+              compact
+            />
           ))}
         </div>
       </Section>
@@ -212,17 +249,14 @@ export default function LuxuryHospitalityVideoPage() {
       <Section eyebrow="Video Concept" title="The video we would create">
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {videoConcept.map((item) => (
-            <div
+            <VisualCard
               key={item.label}
-              className="rounded-[1.35rem] border border-white/10 bg-white/[0.035] p-5 transition hover:-translate-y-1 hover:border-[#e8d7af]/25 hover:bg-white/[0.055]"
-            >
-              <p className="text-[0.62rem] uppercase tracking-[0.24em] text-[#e8d7af]/60">
-                {item.number} / {item.label}
-              </p>
-              <p className="mt-3 text-sm leading-6 text-white/56">
-                {item.text}
-              </p>
-            </div>
+              title={item.label}
+              text={item.text}
+              image={item.image}
+              label={item.number}
+              compact
+            />
           ))}
         </div>
       </Section>
@@ -259,20 +293,14 @@ export default function LuxuryHospitalityVideoPage() {
       <Section eyebrow="Process" title="Production flow">
         <div className="grid gap-4 lg:grid-cols-5">
           {processSteps.map((step) => (
-            <div
+            <VisualCard
               key={step.number}
-              className="rounded-[1.55rem] border border-white/10 bg-white/[0.035] p-5"
-            >
-              <p className="text-[0.62rem] uppercase tracking-[0.24em] text-[#e8d7af]/58">
-                {step.number}
-              </p>
-              <h3 className="mt-4 text-xl font-semibold text-white">
-                {step.title}
-              </h3>
-              <p className="mt-3 text-sm leading-6 text-white/50">
-                {step.text}
-              </p>
-            </div>
+              title={step.title}
+              text={step.text}
+              image={step.image}
+              label={step.number}
+              compact
+            />
           ))}
         </div>
       </Section>
@@ -329,11 +357,48 @@ function Section({
   );
 }
 
-function EditorialCard({ title, text }: { title: string; text: string }) {
+function VisualCard({
+  title,
+  text,
+  image,
+  label,
+  compact = false,
+}: {
+  title: string;
+  text: string;
+  image?: string;
+  label?: string;
+  compact?: boolean;
+}) {
   return (
-    <article className="rounded-[1.55rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02))] p-5 shadow-[0_0_26px_rgba(255,255,255,0.025)] transition duration-300 hover:-translate-y-1 hover:border-[#e8d7af]/25 hover:bg-white/[0.05] hover:shadow-[0_0_34px_rgba(232,215,175,0.07)] sm:p-6">
-      <h3 className="text-xl font-semibold text-white">{title}</h3>
-      <p className="mt-3 text-sm leading-7 text-white/52">{text}</p>
+    <article className="group overflow-hidden rounded-[1.55rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02))] shadow-[0_0_26px_rgba(255,255,255,0.025)] transition duration-300 hover:-translate-y-1 hover:border-[#e8d7af]/25 hover:bg-white/[0.05] hover:shadow-[0_0_34px_rgba(232,215,175,0.07)]">
+      <div
+        className={`relative overflow-hidden bg-[radial-gradient(circle_at_70%_20%,rgba(232,215,175,0.16),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] ${
+          compact ? "aspect-[16/10]" : "aspect-[16/11]"
+        }`}
+      >
+        {image ? (
+          <Image
+            src={image}
+            alt={title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            className="object-cover transition duration-500 group-hover:scale-[1.04]"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(232,215,175,0.12),rgba(255,255,255,0.035)_42%,rgba(0,0,0,0.18))]" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+        {label ? (
+          <p className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/45 px-3 py-1.5 text-[0.56rem] uppercase tracking-[0.22em] text-[#e8d7af]/72 backdrop-blur-md">
+            {label}
+          </p>
+        ) : null}
+      </div>
+      <div className={compact ? "p-4" : "p-5 sm:p-6"}>
+        <h3 className="text-lg font-semibold text-white sm:text-xl">{title}</h3>
+        <p className="mt-2 text-sm leading-6 text-white/52">{text}</p>
+      </div>
     </article>
   );
 }
