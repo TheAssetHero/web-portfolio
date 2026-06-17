@@ -605,17 +605,25 @@ function ImagePanel({
   src,
   alt,
   className = "",
+  imageClassName = "object-cover",
   sizes = "(max-width: 1024px) 100vw, 50vw",
 }: {
   src: string;
   alt: string;
   className?: string;
+  imageClassName?: string;
   sizes?: string;
 }) {
   return (
     <Panel className={className}>
       <div className="relative h-full min-h-[260px]">
-        <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes={sizes}
+          className={imageClassName}
+        />
       </div>
     </Panel>
   );
@@ -907,7 +915,8 @@ export default async function Runaway2150Page({
           <ImagePanel
             src="/images/runaway/characters-wide.jpeg"
             alt="Runaway 2150 character ensemble"
-            className="min-h-[340px] sm:min-h-[430px]"
+            className="min-h-[320px] sm:min-h-[400px] lg:min-h-[500px]"
+            imageClassName="object-cover object-[center_18%]"
             sizes="100vw"
           />
           <div className="grid gap-6 lg:grid-cols-2">
