@@ -119,24 +119,28 @@ export function OverlayControllerProvider({
         onClose={() => setActiveOverlay("none")}
       />
 
-      <BrandProfileModal
-        isOpen={activeOverlay === "brand"}
-        onClose={() => setActiveOverlay("none")}
-      />
+      {activeOverlay === "brand" && (
+        <BrandProfileModal
+          isOpen
+          onClose={() => setActiveOverlay("none")}
+        />
+      )}
 
-      <ProfileCategoryModal
-        activeCategory={activeCategory}
-        activeItemId={selectedItemByCategory[activeCategory]}
-        isOpen={activeOverlay === "category"}
-        onClose={() => setActiveOverlay("none")}
-        onSelectCategory={setActiveCategory}
-        onSelectItem={(categoryKey, itemId) => {
-          setSelectedItemByCategory((current) => ({
-            ...current,
-            [categoryKey]: itemId,
-          }));
-        }}
-      />
+      {activeOverlay === "category" && (
+        <ProfileCategoryModal
+          activeCategory={activeCategory}
+          activeItemId={selectedItemByCategory[activeCategory]}
+          isOpen
+          onClose={() => setActiveOverlay("none")}
+          onSelectCategory={setActiveCategory}
+          onSelectItem={(categoryKey, itemId) => {
+            setSelectedItemByCategory((current) => ({
+              ...current,
+              [categoryKey]: itemId,
+            }));
+          }}
+        />
+      )}
     </OverlayControllerContext.Provider>
   );
 }
